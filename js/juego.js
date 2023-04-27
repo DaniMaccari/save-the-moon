@@ -24,15 +24,14 @@ function displayScreen(){
     btnLevelB = game.add.button(game.world.width / 2, (game.world.height / 6) * 3, 'levelB', onLevelBPressed);
     btnLevelC = game.add.button(game.world.width / 2, (game.world.height / 6) * 4, 'levelC', onLevelCPressed);
 
-    function onLevelAPressed(){
-        game.state.start("inicio");
-    };
-    function onLevelBPressed(){
-        game.state.start("inicio");
-    };
-    function onLevelCPressed(){
-        game.state.start("inicio");
-    };
-
-
 }
+
+function onLevelAPressed(){
+        game.state.start("inicio");
+    };
+function onLevelBPressed(){
+    game.state.start("inicio");
+};
+function onLevelCPressed(){
+    game.state.start("inicio");
+};
