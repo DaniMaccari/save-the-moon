@@ -5,6 +5,7 @@ const BG_COLOR = "#AA95FF";
 const GAME_AREA_WIDTH = 500;
 const GAME_AREA_HEIGHT = 400;
 let settingsText;
+let buttonMouse;
 
 // game instance
 let game = new Phaser.Game(GAME_AREA_WIDTH, GAME_AREA_HEIGHT,
@@ -34,13 +35,25 @@ function preloadAssets() {
 function initGame() {
 
     game.stage.backgroundColor = BG_COLOR;
-    settingsText = game.add.text(160,30, "SETTINGS", {fontSize: "35px", fill: "#000"});
+    settingsText = game.add.text(160,30, "SETTINGS", {fontSize: "35px", fill: "#000"});ç
+    game.add.buttonMouse(160, 70, buttonMouse);
+    game.add.buttonKeyboard(160, 70, buttonKeyboard);  
 
-    //Keyboard callback ESTO HABRÁ QUE PASARSELO A LA MAIN ESCENA CREO DE ALGUNA FORMA
+
+    //Keyboard callback ESTO HABRÁ QUE PASARSELO A LA MAIN ESCENA IGUAL QUE LO DE KEYBOARD INPUT
     game.input.keyboard.onDownCallback = getKeyboardInput;
-
+    game.input.mouse.onDownCallback = getMouseInput;
     
     }
+
+function buttonMouse() {
+    //disable Keyboard
+}
+
+function buttonKeyboard() {
+    //disable mouse
+
+}
     
 function updateGame() {}
 
