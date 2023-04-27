@@ -4,6 +4,7 @@ let initialState = {
 };
 
 let btnStart, btnInfo, btnCredits;
+let GAP = 120;
 
 function loadAssets(){
     
@@ -31,9 +32,9 @@ function displayScreen(){
 
     btnStart = game.add.button(game.world.width / 1.75, game.world.height / 3,
     'start', onStartButtonPressed);
-    btnInfo = game.add.button(game.world.width / 1.75, game.world.height / 3 + 120,
+    btnInfo = game.add.button(game.world.width / 1.75, game.world.height / 3 + GAP,
     'info', onInfoButtonPressed);
-    btnCredits = game.add.button(game.world.width / 1.75, game.world.height / 3 + 240,
+    btnCredits = game.add.button(game.world.width / 1.75, game.world.height / 3 + 2*GAP,
     'credits', onCreditsButtonPressed);
 
     function onStartButtonPressed(){
