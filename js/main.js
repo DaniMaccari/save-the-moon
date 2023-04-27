@@ -10,6 +10,7 @@ function startGame(){
     game.state.start("inicio");
     
     game.state.add("juego", juegoState);
-    game.state.add("info", infoState);
+    //game.state.add("info", infoState);
     game.state.add("credits", creditState);
+    game.state.add("settings", settingsState);
 }

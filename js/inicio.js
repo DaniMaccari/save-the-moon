@@ -41,7 +41,7 @@ function displayScreen(){
     }
 
     function onInfoButtonPressed(){
-        game.state.start("info");
+        game.state.start("settings");
     }
 
     function onCreditsButtonPressed(){

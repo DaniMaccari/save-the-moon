@@ -1,32 +1,14 @@
 
-
 const BG_COLOR = "#AA95FF";
 
-const GAME_AREA_WIDTH = 500;
-const GAME_AREA_HEIGHT = 400;
 let settingsText;
-let buttonMouse;
+let buttonMouse, buttonKeyboard;
 
-// game instance
-let game = new Phaser.Game(GAME_AREA_WIDTH, GAME_AREA_HEIGHT,
-    Phaser.CANVAS, "game");
-
-
-// Entry point
-window.onload = startGame;
-
-function startGame() {
-    game.state.add('settings', settingsState);
-    game.state.start('settings');
-    
-}
-
-//settings STATE phases
 let settingsState = {
     preload: preloadAssets,
-    create: initGame,
-    update: updateGame
+    create: initGame
 };
+
 
 // methods for each phase of the state
 function preloadAssets() {
@@ -34,10 +16,12 @@ function preloadAssets() {
 
 function initGame() {
 
+    game.input.enabled = true;
+    
     game.stage.backgroundColor = BG_COLOR;
     settingsText = game.add.text(160,30, "SETTINGS", {fontSize: "35px", fill: "#000"});ç
-    game.add.buttonMouse(160, 70, buttonMouse);
-    game.add.buttonKeyboard(160, 70, buttonKeyboard);  
+    buttonMouse = game.add.button(160, 70, "onButtonMouse");
+    buttonKeyboard = game.add.button(160, 70, "onButtonKeyboard");
 
 
     //Keyboard callback ESTO HABRÁ QUE PASARSELO A LA MAIN ESCENA IGUAL QUE LO DE KEYBOARD INPUT
@@ -46,16 +30,16 @@ function initGame() {
     
     }
 
-function buttonMouse() {
+function onButtonMouse() {
     //disable Keyboard
 }
 
-function buttonKeyboard() {
+function onButtonKeyboard() {
     //disable mouse
 
 }
     
-function updateGame() {}
+//function updateGame() {}
 
 function getKeyboardInput(e) {
 
