@@ -19,8 +19,9 @@ let infoState = {    preload: loadAssets,
         btnBack = game.add.button(game.world.width / 2.75, game.world.height / 3 + 240,
         'start', onBackButtonPressed);
 
-        function onBackButtonPressed(){
-            game.state.start("inicio");
-        };
-
     }
+    
+    function onBackButtonPressed(){
+        game.state.start("inicio");
+    };
+
