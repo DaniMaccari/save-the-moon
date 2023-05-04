@@ -37,16 +37,17 @@ function displayScreen(){
     btnCredits = game.add.button(game.world.width / 1.75, game.world.height / 3 + 2*GAP,
     'credits', onCreditsButtonPressed);
 
-    function onStartButtonPressed(){
-        game.state.start("juego");
-    }
+}
 
-    function onInfoButtonPressed(){
-        game.state.start("settings");
-    }
 
-    function onCreditsButtonPressed(){
-        game.state.start("credits");
-    }
+function onStartButtonPressed(){
+    game.state.start("juego");
+}
 
+function onInfoButtonPressed(){
+    game.state.start("settings");
+}
+
+function onCreditsButtonPressed(){
+    game.state.start("levelA");
 }
