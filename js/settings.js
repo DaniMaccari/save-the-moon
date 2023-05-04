@@ -30,12 +30,14 @@ function initGame() {
 
     
 function onButtonMouse() {
-    //disable Keyboard
+    this.input.keyboard.enabled = false
+    this.input.mouse.enabled = true
     game.state.start("inicio");
 }
 
 function onButtonKeyboard() {
-    //disable mouse
+    this.input.mouse.enabled = false
+    this.input.keyboard.enabled = true
     game.state.start("inicio");
 }
     
