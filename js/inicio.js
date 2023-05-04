@@ -9,7 +9,7 @@ let GAP = 120;
 function loadAssets(){
     
     game.load.image("start","assets/imgs/start.png");
-    game.load.image("info","assets/imgs/info.png");
+    game.load.image("settings","assets/imgs/info.png");
     game.load.image("credits","assets/imgs/credits.png");
     game.load.image("bg","assets/imgs/bg.jpg");
     
@@ -33,7 +33,7 @@ function displayScreen(){
     btnStart = game.add.button(game.world.width / 1.75, game.world.height / 3,
     'start', onStartButtonPressed);
     btnInfo = game.add.button(game.world.width / 1.75, game.world.height / 3 + GAP,
-    'info', onInfoButtonPressed);
+    'settings', onInfoButtonPressed);
     btnCredits = game.add.button(game.world.width / 1.75, game.world.height / 3 + 2*GAP,
     'credits', onCreditsButtonPressed);
 
@@ -49,5 +49,5 @@ function onInfoButtonPressed(){
 }
 
 function onCreditsButtonPressed(){
-    game.state.start("levelA");
+    game.state.start("credits");
 }
