@@ -27,5 +27,6 @@ function displayScreen(){
         threadPosition.push( ( game.world.width / (nThreads + 1) ) * i);
         game.add.image(threadPosition[i], game.world.height, "drawLine");
     }
+
 };
 
