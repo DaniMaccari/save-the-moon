@@ -5,6 +5,7 @@ let levelAState = {
 };
 
 let threadImg;
+
 const threadPosition = [];
 
 function loadAssets(){
