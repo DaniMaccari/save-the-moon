@@ -5,7 +5,7 @@ let levelAState = {
 };
 
 let threadImg;
-
+let line;
 const threadPosition = [];
 
 function loadAssets(){
@@ -13,7 +13,8 @@ function loadAssets(){
     game.load.image("drawLine", "assets/imgs/line.png");
     game.load.image("levelA", "assets/imgs/start.png");//cambiar la ruta de las imagenes levels A B C
     game.load.image("bg","assets/imgs/bg.jpg");
-    
+    line = game.add.sprite(-10,0,"drawLine")
+    console.log(line.width)
 };
 
 function displayScreen(){
@@ -25,7 +26,7 @@ function displayScreen(){
 
     for (let i = 0; i < nThreads; i++){
         
-        threadPosition.push( ( game.world.width / (nThreads + 1) ) * (i+1));
+        threadPosition.push( ( ( game.world.width / (nThreads + 1) ) * (i+1)) - (line.width /4));
         game.add.image(threadPosition[i], 0, "drawLine");
     }
 
