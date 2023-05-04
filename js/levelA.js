@@ -6,6 +6,13 @@ let levelAState = {
 
 let threadImg;
 let line;
+let score; 
+let scoreText;
+let level;
+let levelText;
+let lives;
+let livesText;
+
 const threadPosition = [];
 
 function loadAssets(){
@@ -21,6 +28,10 @@ function displayScreen(){
 
     game.input.enabled = true;
     game.add.image(0,0,"bg");
+    score = 0;
+    level = 1.1;
+    lives = 3;
+
 
     let nThreads = 4; //cambiar a un imput pasado desde Juego
 
@@ -30,5 +41,30 @@ function displayScreen(){
         game.add.image(threadPosition[i], 0, "drawLine");
     }
 
+    createHUD();
+    
 };
 
+
+function createHUD() {
+    let scoreX = 5;
+    let levelX = game.world.width / 2;
+    let livesX = game.world.width - 5;
+    let allY = game.world.height /2;
+    let styleHUD =
+    {fontSize: '18px', fill: '#FFFFFF'};
+
+    scoreText = game.add.text(
+    scoreX,allY,'Score: '+score,styleHUD);
+
+    levelText = game.add.text(
+    35,0,'Level: '+level,styleHUD);
+
+    levelText.anchor.setTo(0.5, 0);
+
+    livesText = game.add.text(
+    livesX,allY,'Lives: '+lives,styleHUD);
+
+    livesText.anchor.setTo(1, 0);
+    console.log("yeeee" + lives);
+};
