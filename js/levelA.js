@@ -29,7 +29,7 @@ function displayScreen(){
     game.input.enabled = true;
     game.add.image(0,0,"bg");
     score = 0;
-    level = 1.1;
+    level = 1.0;
     lives = 3;
 
 
