@@ -34,7 +34,7 @@ function displayScreen(){
     //timer.loop(1500, spawn);
     
 
-    nThreads = 4; //cambiar a un imput pasado desde Juego
+    nThreads = 8; //cambiar a un imput pasado desde Juego
     actualThread = nThreads/2;
     for (let i = 0; i < nThreads; i++){
         
