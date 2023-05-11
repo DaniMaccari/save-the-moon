@@ -9,7 +9,7 @@ let GAP = 120;
 function loadAssets(){
     
     game.load.image("start","assets/imgs/start.png");
-    game.load.image("settings","assets/imgs/info.png");
+    game.load.image("info","assets/imgs/info.png");
     game.load.image("credits","assets/imgs/credits.png");
     game.load.image("bg","assets/imgs/bg.jpg");
     
@@ -41,6 +41,7 @@ function displayScreen(){
 
 
 function onStartButtonPressed(){
+    console.log("HOLI")
     game.state.start("juego");
 }
 
