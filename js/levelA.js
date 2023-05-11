@@ -79,8 +79,10 @@ function spawn() {
     var randomBugPosition = game.rnd.integerInRange(0, nThreads -1);
 
     Bug = game.add.sprite(threadPosition[randomBugPosition], yBug, "mariquita");
-    bugs.add(Bug);
     Bug.scale.setTo(0.1,0.1);
+    Bug.x -= Bug.width /2;
+    bugs.add(Bug);
+    
 };
 
 
