@@ -14,7 +14,7 @@ let actualThread, nThreads, Ypos = 500;
 
 function loadAssets(){
 
-    game.load.image("mariquita","assets/imgs/mariquita.png")
+    game.load.image("mariquita","assets/imgs/shipYellow.png")
     game.load.image("drawLine", "assets/imgs/line.png");
     game.load.image("levelA", "assets/imgs/start.png");//cambiar la ruta de las imagenes levels A B C
     game.load.image("bg","assets/imgs/bg.jpg");
@@ -43,7 +43,7 @@ function displayScreen(){
     }
 
     marica = game.add.sprite(threadPosition[actualThread], Ypos, "mariquita");
-    marica.scale.setTo(0.2,0.25);
+    marica.scale.setTo(0.5,0.5);
 
     //timer.start();
 };
@@ -64,7 +64,7 @@ function getKeyboardInput(e) {
             actualThread = actualThread -1;
         }
         console.log("LEFT")
-        marica.x = threadPosition[actualThread]
+        marica.x = threadPosition[actualThread] - (marica.width /2)
 
     }
 
@@ -73,7 +73,7 @@ function getKeyboardInput(e) {
         if (actualThread != nThreads-1) {
             actualThread = actualThread +1;
         }
-        marica.x = threadPosition[actualThread]
+        marica.x = threadPosition[actualThread] - (marica.width /2)
     }
 ;
 }
