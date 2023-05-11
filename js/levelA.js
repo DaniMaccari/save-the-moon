@@ -11,6 +11,15 @@ let line, marica;
 const threadPosition = [];
 var timer;
 let actualThread, nThreads, Ypos = 500;
+let score; 
+let scoreText;
+let lives;
+let livesText;
+let level;
+let levelText;
+let time;
+let timeText;
+
 
 function loadAssets(){
 
@@ -35,6 +44,7 @@ function displayScreen(){
     level = 1.0;
     lives = 3;
 
+    createHUD();
 
 
     let nThreads = 4; //cambiar a un imput pasado desde Juego
@@ -85,3 +95,26 @@ function getKeyboardInput(e) {
     }
 ;
 }
+
+
+function createHUD(){
+    let scoreX = 5;
+    let levelX = game.world.width / 2;
+    let livesX = game.world.width - 5;
+    let allY = game.world.height - 25;
+    let styleHUD =
+        {fontSize: '18px', fill: '#FFFFFF'};
+        
+    scoreText = game.add.text(
+        scoreX,allY,'Score: '+score,styleHUD);
+
+    levelText = game.add.text(
+    levelX,allY,'Level: '+level,styleHUD);
+
+    levelText.anchor.setTo(0.5, 0);
+
+    livesText = game.add.text(
+        livesX,allY,'Lives: '+lives,styleHUD);
+        livesText.anchor.setTo(1, 0);
+
+    }

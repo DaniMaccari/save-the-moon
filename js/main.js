@@ -12,6 +12,7 @@ function startGame(){
     game.state.add("juego", juegoState);
     game.state.add("credits", creditState);
     game.state.add("settings", settingsState);
+    
     game.state.add("levelA", levelAState);
     
 }
