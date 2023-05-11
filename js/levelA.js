@@ -3,7 +3,8 @@
 let levelAState = {
      
     preload: loadAssets,
-    create : displayScreen
+    create : displayScreen,
+    update : updateGame
 };
 
 let threadImg;
@@ -19,7 +20,7 @@ let level;
 let levelText;
 let time;
 let timeText;
-let xBug; let yBug = 0;
+let Bug, yBug = 0;
 
 function loadAssets(){
 
@@ -68,12 +69,17 @@ function displayScreen(){
 
 function spawn() {
     var randomBugPosition = game.rnd.integerInRange(0, nThreads -1);
-    xBug = threadPosition[randomBugPosition];
-    game.add.sprite(xBug, yBug, "mariquita");
+    
+    Bug = game.add.sprite(threadPosition[randomBugPosition], yBug, "mariquita");
+    Bug.scale.setTo(0.1,0.1);
 };
 
 
-//function updateGame() {}
+function updateGame() {
+
+    
+
+}
 
 function getKeyboardInput(e) {
     console.log("AAAAAAAAAA")
