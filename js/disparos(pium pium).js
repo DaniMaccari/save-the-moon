@@ -1,8 +1,4 @@
-let levelAState = {
-     
-    preload: loadAssets,
-    create : displayScreen
-};
+
 
 const DISPARO_GROUP_SIZE = 40;
 const DISPARO_OFFSET_X = 10;

@@ -1,5 +1,3 @@
-
-
 let levelAState = {
      
     preload: loadAssets,
@@ -7,6 +5,11 @@ let levelAState = {
     update : updateGame
 };
 
+
+const DISPARO_GROUP_SIZE = 10;
+const DISPARO_OFFSET_X = 10;
+const DISPARO_OFFSET_Y = 10;
+const DISPARO_VEL = 500;
 let threadImg;
 let line, player;
 const threadPosition = [];
@@ -21,11 +24,14 @@ let levelText;
 let time;
 let timeText;
 let Bug, yBug = 0;
+let fireButton;
+let disparo;
 
 function loadAssets(){
 
     game.load.image("daniel","assets/imgs/shipYellow.png")
     game.load.image("mariquita","assets/imgs/mariquita.png")
+    game.load.image("disparo","assets/imgs/punto.png");
     game.load.image("drawLine", "assets/imgs/line.png");
     game.load.image("levelA", "assets/imgs/start.png");//cambiar la ruta de las imagenes levels A B C
     game.load.image("bg","assets/imgs/bg.jpg");
@@ -47,6 +53,7 @@ function displayScreen(){
     lives = 3;
 
     createHUD();
+    createDisparo(DISPARO_GROUP_SIZE);
 
     timer = game.time.create(false)
     timer.loop(1500,spawn);
@@ -62,7 +69,7 @@ function displayScreen(){
     player = game.add.sprite(threadPosition[actualThread], Ypos, "daniel");
     player.scale.setTo(0.6,0.6);
     player.x = threadPosition[actualThread] - (player.width /2);
-
+    fireButton = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
     timer.start();
 };
 
@@ -75,9 +82,7 @@ function spawn() {
 };
 
 
-function updateGame() {
-
-    
+function updateGame() {    
 
 }
 
@@ -105,6 +110,12 @@ function getKeyboardInput(e) {
         player.x = threadPosition[actualThread] - (player.width /2);
     }
 
+    if(fireButton)
+    {
+        fireDisparos();
+        console.log("Daniel Maricón")
+    }
+
 }
 
 
@@ -128,4 +139,41 @@ function createHUD(){
         livesX,allY,'Lives: '+ lives,styleHUD);
         livesText.anchor.setTo(1, 0);
 
+    }
+
+    function createDisparo(number)
+    {
+        disparo = game.add.group();
+        disparo.enableBody = true;
+        disparo.createMultiple(number, "disparo");
+        disparo.callAll("events.onOutOfBounds.add",
+        "events.onOutOfBounds", resetMember);
+        disparo.callAll("anchor.setTo","anchor",0.5, 1.0);
+        disparo.setAll("checkWorldBounds",true);
+    
+    }
+
+    function resetMember(item)
+    {
+    item.kill();
+    }
+
+    function fireDisparos() {
+
+        let x = player.x - DISPARO_OFFSET_X;
+        let y = player.y - DISPARO_OFFSET_Y;
+        let vd = -DISPARO_VEL;
+        let elDisparo = shootDisparo(x,y,vd);
+    
+    }
+    
+    function shootDisparo(x, y, vd)
+    {
+        let shot = disparo.getFirstExists(false);
+    
+        if (shot) {
+            shot.reset(x, y);
+            shot.body.velocity.y = vd;
+            }
+            return shot;
     }
