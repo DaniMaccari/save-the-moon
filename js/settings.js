@@ -42,16 +42,3 @@ function onButtonKeyboard() {
     game.state.start("inicio");
 }
     
-//function updateGame() {}
-
-function getKeyboardInput(e) {
-
-    if (e.KeyCode == Phaser.Keyboard.A || e.KeyCode == Phaser.Keyboard.LEFT) {
-        //Movimiento hacia la izquierda
-    }
-
-    else if (e.KeyCode == Phaser.Keyboard.D || e.KeyCode == Phaser.Keyboard.RIGHT) {
-        //Movimiento hacia la derecha
-    }
-
-}
