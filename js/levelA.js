@@ -8,7 +8,7 @@ let levelAState = {
 
 const DISPARO_GROUP_SIZE = 10;
 const DISPARO_OFFSET_X = 10;
-const DISPARO_OFFSET_Y = 10;
+const DISPARO_OFFSET_Y = -300;
 const DISPARO_VEL = 500;
 let threadImg;
 let line, player;
@@ -24,16 +24,15 @@ let levelText;
 let time;
 let timeText;
 let Bug, yBug = 0;
-let fireButton;
 let disparo;
 
 function loadAssets(){
 
     game.load.image("daniel","assets/imgs/shipYellow.png")
     game.load.image("mariquita","assets/imgs/mariquita.png")
-    game.load.image("disparo","assets/imgs/punto.png");
     game.load.image("drawLine", "assets/imgs/line.png");
     game.load.image("levelA", "assets/imgs/start.png");//cambiar la ruta de las imagenes levels A B C
+    game.load.image("disparo","assets/imgs/punto.png");
     game.load.image("bg","assets/imgs/bg.jpg");
     line = game.add.sprite(-10,0,"drawLine")
     console.log(line.width)
@@ -53,7 +52,7 @@ function displayScreen(){
     lives = 3;
 
     createHUD();
-    createDisparo(DISPARO_GROUP_SIZE);
+
 
     timer = game.time.create(false)
     timer.loop(1500,spawn);
@@ -69,7 +68,8 @@ function displayScreen(){
     player = game.add.sprite(threadPosition[actualThread], Ypos, "daniel");
     player.scale.setTo(0.6,0.6);
     player.x = threadPosition[actualThread] - (player.width /2);
-    fireButton = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+    createDisparo(DISPARO_GROUP_SIZE);
+    
     timer.start();
 };
 
@@ -110,7 +110,7 @@ function getKeyboardInput(e) {
         player.x = threadPosition[actualThread] - (player.width /2);
     }
 
-    if(fireButton)
+    if(e.keyCode == Phaser.Keyboard.SPACEBAR)
     {
         fireDisparos();
         console.log("Daniel Maricón")
@@ -150,6 +150,7 @@ function createHUD(){
         "events.onOutOfBounds", resetMember);
         disparo.callAll("anchor.setTo","anchor",0.5, 1.0);
         disparo.setAll("checkWorldBounds",true);
+        
     
     }
 
@@ -160,8 +161,8 @@ function createHUD(){
 
     function fireDisparos() {
 
-        let x = player.x - DISPARO_OFFSET_X;
-        let y = player.y - DISPARO_OFFSET_Y;
+        let x = player.x + player.width/2;
+        let y = player.y;
         let vd = -DISPARO_VEL;
         let elDisparo = shootDisparo(x,y,vd);
     
@@ -170,6 +171,7 @@ function createHUD(){
     function shootDisparo(x, y, vd)
     {
         let shot = disparo.getFirstExists(false);
+        shot.scale.setTo(0.05,0.05)
     
         if (shot) {
             shot.reset(x, y);
