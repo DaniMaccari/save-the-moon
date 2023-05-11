@@ -43,7 +43,7 @@ function displayScreen(){
     }
 
     marica = game.add.sprite(threadPosition[actualThread], Ypos, "mariquita");
-    marica.scale.setTo(0.5,0.5);
+    marica.scale.setTo(0.6,0.6);
 
     //timer.start();
 };
