@@ -6,10 +6,10 @@ let levelAState = {
 };
 
 
-const DISPARO_GROUP_SIZE = 10;
+const DISPARO_GROUP_SIZE = 7;
 const DISPARO_OFFSET_X = 10;
 const DISPARO_OFFSET_Y = -300;
-const DISPARO_VEL = 500;
+const DISPARO_VEL = 350;
 let threadImg;
 let line, player;
 const threadPosition = [];
