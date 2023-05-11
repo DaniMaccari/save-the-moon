@@ -24,6 +24,7 @@ let levelText;
 let time;
 let timeText;
 let Bug, yBug = 0;
+let bugs;
 let disparo;
 
 function loadAssets(){
@@ -44,7 +45,7 @@ function displayScreen(){
     game.input.keyboard.onDownCallback = getKeyboardInput;
 
     game.add.image(0,0,"bg");
-    
+    bugs = game.add.group();
 
 
     score = 0;
@@ -76,8 +77,9 @@ function displayScreen(){
 
 function spawn() {
     var randomBugPosition = game.rnd.integerInRange(0, nThreads -1);
-    
+
     Bug = game.add.sprite(threadPosition[randomBugPosition], yBug, "mariquita");
+    bugs.add(Bug);
     Bug.scale.setTo(0.1,0.1);
 };
 
@@ -179,3 +181,15 @@ function createHUD(){
             }
             return shot;
     }
+
+function moveBugs() {
+    for (const child of bugs.children) {
+        child.y += 2;
+    }
+}
+    
+function updateGame() {
+
+    moveBugs() 
+}
+
