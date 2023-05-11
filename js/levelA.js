@@ -82,16 +82,16 @@ function getKeyboardInput(e) {
             actualThread = actualThread -1;
         }
         console.log("LEFT")
-        marica.x = threadPosition[actualThread] - (marica.width /2)
+        player.x = threadPosition[actualThread] - (player.width /2)
 
     }
 
     else if (e.keyCode == Phaser.Keyboard.D || e.keyCode == Phaser.Keyboard.RIGHT) {
         
-        if (actualThread < nThreads-2) {
+        if (actualThread < nThreads-1) {
             actualThread = actualThread +1;
         }
-        marica.x = threadPosition[actualThread] - (marica.width /2)
+        player.x = threadPosition[actualThread] - (player.width /2)
     }
 ;
 }
