@@ -46,9 +46,6 @@ function displayScreen(){
 
     createHUD();
 
-
-    let nThreads = 4; //cambiar a un imput pasado desde Juego
-
     //timer = game.time.create(false)
     //timer.loop(1500, spawn);
     
@@ -62,6 +59,7 @@ function displayScreen(){
 
     player = game.add.sprite(threadPosition[actualThread], Ypos, "daniel");
     player.scale.setTo(0.6,0.6);
+    player.x = threadPosition[actualThread] - (player.width /2);
 
     //timer.start();
 };
@@ -81,8 +79,9 @@ function getKeyboardInput(e) {
         if (actualThread > 0) {
             actualThread = actualThread -1;
         }
-        console.log("LEFT")
-        player.x = threadPosition[actualThread] - (player.width /2)
+        console.log(actualThread);
+        console.log(nThreads);
+        player.x = threadPosition[actualThread] - (player.width /2);
 
     }
 
@@ -91,9 +90,12 @@ function getKeyboardInput(e) {
         if (actualThread < nThreads-1) {
             actualThread = actualThread +1;
         }
-        player.x = threadPosition[actualThread] - (player.width /2)
+        console.log(actualThread);
+        console.log(nThreads);
+
+        player.x = threadPosition[actualThread] - (player.width /2);
     }
-;
+
 }
 
 
@@ -114,7 +116,7 @@ function createHUD(){
     levelText.anchor.setTo(0.5, 0);
 
     livesText = game.add.text(
-        livesX,allY,'Lives: '+lives,styleHUD);
+        livesX,allY,'Lives: '+ lives,styleHUD);
         livesText.anchor.setTo(1, 0);
 
     }
