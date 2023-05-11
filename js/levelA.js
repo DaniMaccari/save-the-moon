@@ -7,7 +7,7 @@ let levelAState = {
 };
 
 let threadImg;
-let line, marica;
+let line, player;
 const threadPosition = [];
 var timer;
 let actualThread, nThreads, Ypos = 500;
@@ -23,7 +23,7 @@ let timeText;
 
 function loadAssets(){
 
-    game.load.image("mariquita","assets/imgs/shipYellow.png")
+    game.load.image("daniel","assets/imgs/shipYellow.png")
     game.load.image("drawLine", "assets/imgs/line.png");
     game.load.image("levelA", "assets/imgs/start.png");//cambiar la ruta de las imagenes levels A B C
     game.load.image("bg","assets/imgs/bg.jpg");
@@ -60,8 +60,8 @@ function displayScreen(){
         game.add.image(threadPosition[i], 0, "drawLine");
     }
 
-    marica = game.add.sprite(threadPosition[actualThread], Ypos, "mariquita");
-    marica.scale.setTo(0.6,0.6);
+    player = game.add.sprite(threadPosition[actualThread], Ypos, "daniel");
+    player.scale.setTo(0.6,0.6);
 
     //timer.start();
 };
