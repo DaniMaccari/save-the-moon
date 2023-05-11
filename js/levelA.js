@@ -19,11 +19,12 @@ let level;
 let levelText;
 let time;
 let timeText;
-
+let xBug; let yBug = 0;
 
 function loadAssets(){
 
     game.load.image("daniel","assets/imgs/shipYellow.png")
+    game.load.image("mariquita","assets/imgs/mariquita.png")
     game.load.image("drawLine", "assets/imgs/line.png");
     game.load.image("levelA", "assets/imgs/start.png");//cambiar la ruta de las imagenes levels A B C
     game.load.image("bg","assets/imgs/bg.jpg");
@@ -46,8 +47,8 @@ function displayScreen(){
 
     createHUD();
 
-    //timer = game.time.create(false)
-    //timer.loop(1500, spawn);
+    timer = game.time.create(false)
+    timer.loop(1500,spawn);
     
     nThreads = 8; //cambiar a un imput pasado desde Juego
     actualThread = nThreads/2;
@@ -61,14 +62,16 @@ function displayScreen(){
     player.scale.setTo(0.6,0.6);
     player.x = threadPosition[actualThread] - (player.width /2);
 
-    //timer.start();
+    timer.start();
 };
 
-/*
+
 function spawn() {
     var randomBugPosition = game.rnd.integerInRange(0, nThreads -1);
+    xBug = threadPosition[randomBugPosition];
+    game.add.sprite(xBug, yBug, "mariquita");
 };
-*/
+
 
 //function updateGame() {}
 
