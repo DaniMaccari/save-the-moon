@@ -1,10 +1,3 @@
-let levelBState = {
-     
-    preload: loadAssets,
-    create : displayScreen,
-    update : updateGame
-};
-
 
 const DISPARO_GROUP_SIZE = 7;
 const DISPARO_OFFSET_X = 10;
@@ -28,6 +21,73 @@ let Bug, yBug = 0;
 let bugs;
 let disparo;
 
+class BugEnemy {
+    constructor(initialThread) {
+        this.myThread = initialThread
+        this.xPos = threadPosition[initialThread]
+        this.yPos = yBug
+        this.img = game.add.sprite(this.xPos, this.Ypos, "mariquita");
+        console.log(this.myThread);
+        this.img.scale.setTo(0.1, 0.1);
+        this.myWidth = this.img.width / 2
+        this.img.x -= this.myWidth
+
+        this.isChangingThread = false;
+    }
+  
+    move() {
+        if(this.isChangingThread){
+            this.yPos += 1
+            //is moving RIGHT
+            if ( branchSide ){
+
+                this.xPos += 2
+                if( this.xPos > threadPosition[this.myThread]){
+                    this.xPos = threadPosition[this.myThread]
+                    this.isChangingThread = false
+                }
+                
+            }
+            //is moving LEFT
+            else{
+
+                this.xPos -= 2
+                if( this.xPos < threadPosition[this.myThread]){
+                    this.xPos = threadPosition[this.myThread]
+                    this.isChangingThread = false
+                }
+                
+            }
+        }
+        else{
+
+            //moves normally
+            this.yPos += 2
+
+            //si está en rango cojer branch --> luego hacer un random para solo coger un 30% de las veces
+            if( this.yPos < branchPosition[this.myThread] +5 && this.yPos > branchPosition[this.myThread]){
+                this.isChangingThread = true
+                if( branchSide) this.myThread += 1 //goes RIGHT else goes LEFT
+                else this.myThread -= 1
+            }
+
+            
+        }
+        
+        //move changes
+        this.img.x = this.xPos - this.myWidth
+        this.img.y = this-this.yPos
+    }
+  }
+
+//START LEVEL B --------------------------------------------
+let levelAState = {
+     
+    preload: loadAssets,
+    create : displayScreen,
+    update : updateGame
+};
+
 function loadAssets(){
 
     game.load.image("daniel","assets/imgs/shipYellow.png")
@@ -46,7 +106,7 @@ function displayScreen(){
     game.input.keyboard.onDownCallback = getKeyboardInput;
 
     game.add.image(0,0,"bg");
-    bugs = game.add.group();
+    //bugs = game.add.group();
 
 
     score = 0;
@@ -106,11 +166,6 @@ function spawn() {
     bugs.add(Bug);
     
 };
-
-
-function updateGame() {    
-
-}
 
 function getKeyboardInput(e) {
     console.log("AAAAAAAAAA")
@@ -207,11 +262,8 @@ function createHUD(){
     }
 
 function moveBugs() {
-    for (const child of bugs.children) {
-
-        //change later -> add myThread to Bug
-        
-        child.y += 2;
+    for (let i = 0; i < bugsArray.length; i++) {
+        bugsArray[i].move();
     }
 }
     
