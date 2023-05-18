@@ -33,7 +33,7 @@ function displayScreen(){
     btnStart = game.add.button(game.world.width / 1.75, game.world.height / 3,
     'start', onStartButtonPressed);
     btnInfo = game.add.button(game.world.width / 1.75, game.world.height / 3 + GAP,
-    'settings', onInfoButtonPressed);
+    'info', onInfoButtonPressed);
     btnCredits = game.add.button(game.world.width / 1.75, game.world.height / 3 + 2*GAP,
     'credits', onCreditsButtonPressed);
 
