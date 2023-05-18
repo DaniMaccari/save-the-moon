@@ -68,8 +68,9 @@ function displayScreen() {
     level = 1.0;
     lives = 4;
 
-    bugs = game.add.group();
     createHUD();
+    bugs = game.add.group();
+    
 
     timer = game.time.create(false);
     timer.loop(1500, spawn);
@@ -96,13 +97,13 @@ function displayScreen() {
 function spawn() {
     var randomBugPosition = game.rnd.integerInRange(0, nThreads - 1);
 
-    //Bug = new BugEnemy(randomBugPosition);
-    //bugsArray.push(Bug);
+    Bug = new BugEnemy(randomBugPosition);
+    bugsArray.push(Bug);
 
         
 
     
-    Bug = game.add.sprite(threadPosition[randomBugPosition],yBug,"mariquita")
+    /*Bug = game.add.sprite(threadPosition[randomBugPosition],yBug,"mariquita")
 
     Bug.scale.setTo(0.1,0.1);
     Bug.y -= Bug.width / 2
@@ -110,6 +111,7 @@ function spawn() {
     bugs.add(Bug)
 
     console.log(Bug.y)
+    */
 
 }
 
@@ -138,15 +140,15 @@ function getKeyboardInput(e) {
 }
 
 function createHUD() {
-    let scoreX = 5;
+
     let levelX = game.world.width / 2;
     let livesX = game.world.width - 5;
-    let allY = game.world.height - 25;
+    let allY = - 25;
     let styleHUD = { fontSize: "18px", fill: "#FFFFFF" };
 
-    scoreText = game.add.text(scoreX, allY, "Score: " + score, styleHUD);
+    scoreText = game.add.text(game.world.width/15,  game.world.height/15, "Score: " + score, styleHUD);
 
-    levelText = game.add.text(levelX, allY, "Level: " + level, styleHUD);
+    levelText = game.add.text(game.world.width/9, game.world.height/10, "Level: " + level, styleHUD);
 
     levelText.anchor.setTo(0.5, 0);
 
@@ -188,15 +190,15 @@ function shootDisparo(x, y, vd) {
 function moveBugs() {
     
     //no se pueden hacer grupos que sus hijos llamen a funciones?
-   // for (let i = 0; i < bugsArray.length; i++) {
-   //     bugsArray[i].move();
-   // }
+    for (let i = 0; i < bugsArray.length; i++) {
+       bugsArray[i].move();
+    }
    
-    for( const child in bugs.Children){
+   /* for( const child in bugs.Children){
         child.y += 2;
         console.log(child.y)
     }
-
+*/
 }
 
 function updateGame() {
@@ -211,6 +213,7 @@ function hagoDaño(disparo,bugs)
     disparo.kill();
     bugs.kill();
     console.log("te hago daño baby")
+    score+=10;
 }
 
 
