@@ -10,11 +10,12 @@ const DISPARO_GROUP_SIZE = 7;
 const DISPARO_OFFSET_X = 10;
 const DISPARO_OFFSET_Y = -300;
 const DISPARO_VEL = 350;
+const EMPTY_BRANCH = -10
 let threadImg;
 let line, player;
-const threadPosition = [];
+const threadPosition = [], branchPosition = [], branchSide = [];
 var timer;
-let actualThread, nThreads, Ypos = 500;
+let actualThread, nThreads, nBranches, Ypos = 500;
 let score; 
 let scoreText;
 let lives;
@@ -58,13 +59,34 @@ function displayScreen(){
     timer = game.time.create(false)
     timer.loop(1500,spawn);
     
-    nThreads = 8; //cambiar a un imput pasado desde Juego
-    actualThread = nThreads/2;
+    nThreads = 8; //cambiar a un imput pasado desde Juego----------------
+    nBranches = nThreads/2;
+
+    actualThread = nBranchs;//starting branch
+
+    //places threads
     for (let i = 0; i < nThreads; i++){
         
         threadPosition.push( ( ( game.world.width / (nThreads + 1) ) * (i+1)) - (line.width /2));
+        branchPosition.push( EMPTY_BRANCH ); //fill array with -10
+        branchSide.push( true ); //if true changes to RIGHT, false changes to LEFT
         game.add.image(threadPosition[i], 0, "drawLine");
     }
+    branchSide[nThreads -1] = false //las
+
+    //placeBranches
+    while( nBranches > 0){
+        let i = integerInRange(0, nThreads-1);
+
+        //put branches in 1/2 random positions
+        if( branchPosition[i] != EMPTY_BRANCH){
+            branchPosition[i] = integerInRange(40, (game.world.height/3)*2 )
+            if( integerInRange(0,1) != 0 && i != 0 ){
+                branchSide[i] = false;
+            }
+        }
+    }
+
 
     player = game.add.sprite(threadPosition[actualThread], Ypos, "daniel");
     player.scale.setTo(0.6,0.6);
@@ -91,7 +113,7 @@ function updateGame() {
 }
 
 function getKeyboardInput(e) {
-
+    console.log("AAAAAAAAAA")
     if (e.keyCode == Phaser.Keyboard.A || e.keyCode == Phaser.Keyboard.LEFT) {
         
         if (actualThread > 0) {
@@ -186,6 +208,9 @@ function createHUD(){
 
 function moveBugs() {
     for (const child of bugs.children) {
+
+        //change later -> add myThread to Bug
+        
         child.y += 2;
     }
 }
