@@ -44,6 +44,11 @@ let levelAState = {
 
 function loadAssets() {
     game.load.image("daniel", "assets/imgs/shipYellow.png");
+    game.load.image("vida1","assets/imgs/barra1.png")
+    game.load.image("vida2","assets/imgs/barra2.png")
+    game.load.image("vida3","assets/imgs/barra3.png")
+    game.load.image("vida4","assets/imgs/barra4.png")
+    game.load.image("vida0","assets/imgs/barra vacía.png")
     game.load.image("mariquita", "assets/imgs/mariquita.png");
     game.load.image("drawLine", "assets/imgs/line.png");
     game.load.image("levelA", "assets/imgs/start.png");
@@ -61,7 +66,7 @@ function displayScreen() {
 
     score = 0;
     level = 1.0;
-    lives = 3;
+    lives = 4;
 
     //bugs = game.add.group();
     createHUD();
@@ -84,6 +89,8 @@ function displayScreen() {
     createDisparo(DISPARO_GROUP_SIZE);
 
     timer.start();
+
+
 }
 
 function spawn() {
@@ -182,4 +189,33 @@ function moveBugs() {
 
 function updateGame() {
     moveBugs();
+    game.physics.arcade.overlap(disparo,bugsArray,hagoDaño,null,this);
+    game.physics.arcade.overlap(player,bugsArray,reciboDaño,null,this);
+
+}
+
+function hagoDaño(disparo,bugs)
+{
+    disparo.kill();
+    bugs.kill();
+    console.log("te hago daño baby")
+}
+
+
+function reciboDaño(player,bugs)
+{
+    if(lives > 1)
+    {
+        lives-=1;
+        bugs.kill();
+        console.log("no te pilles baby")
+    }
+
+    else
+    {
+        player.kill();
+        bugs.kill();
+        console.log("no te pilles baby")
+    }
+
 }
