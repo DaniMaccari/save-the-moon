@@ -96,22 +96,17 @@ function displayScreen(){
 };
 
 
-function spawn() {
-
-    
-    
-
-    
+function spawn() { //SPAWN ENEMIES ----------------------------------------
     
     var randomBugPosition = game.rnd.integerInRange(0, nThreads -1);
     
-    //bugs.add(new BugEnemy(randomBugPosition));
+    Bug = new BugEnemy(randomBugPosition);
 
     console.log("FALLA AQUI VERDAD???????")
     
-    Bug = game.add.sprite(threadPosition[randomBugPosition], yBug, "mariquita");
-    Bug.scale.setTo(0.1,0.1);
-    Bug.x -= Bug.width /2;
+    //Bug = game.add.sprite(threadPosition[randomBugPosition], yBug, "mariquita");
+    //Bug.scale.setTo(0.1,0.1);
+    //Bug.x -= Bug.width /2;
     bugs.add(Bug);
     
     
@@ -236,9 +231,6 @@ function moveBugs() {
     console.log("mover mariquita");
     console.log("mover mariquita");
     for (const child of bugs.children) {
-        child.y += 2;
-   
-
         child.y += 2;
         
         //child.move();
