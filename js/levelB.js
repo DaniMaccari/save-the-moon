@@ -1,4 +1,4 @@
-let levelAState = {
+let levelBState = {
      
     preload: loadAssets,
     create : displayScreen,
