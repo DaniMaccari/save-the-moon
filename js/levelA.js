@@ -4,6 +4,7 @@ const DISPARO_GROUP_SIZE = 7;
 const DISPARO_OFFSET_X = 10;
 const DISPARO_OFFSET_Y = -300;
 const DISPARO_VEL = 350;
+
 let threadImg;
 let line, player;
 const threadPosition = [];
@@ -99,6 +100,9 @@ function spawn() {
 
     
     
+
+    
+    
     var randomBugPosition = game.rnd.integerInRange(0, nThreads -1);
     
     //bugs.add(new BugEnemy(randomBugPosition));
@@ -113,10 +117,6 @@ function spawn() {
     
 };
 
-
-function updateGame() {    
-
-}
 
 function getKeyboardInput(e) {
 
@@ -148,7 +148,7 @@ function getKeyboardInput(e) {
         console.log("Daniel Maricón")
     }
 
-}
+};
 
 
 function createHUD(){
@@ -191,8 +191,28 @@ function resetMember(item)
     item.kill();
 }
 
+
+function fireDisparos() {
 function fireDisparos() {
 
+    let x = player.x + player.width/2;
+    let y = player.y;
+    let vd = -DISPARO_VEL;
+    let elDisparo = shootDisparo(x,y,vd);
+
+}
+
+function shootDisparo(x, y, vd)
+{
+    let shot = disparo.getFirstExists(false);
+    shot.scale.setTo(0.05,0.05)
+
+    if (shot) {
+        shot.reset(x, y);
+        shot.body.velocity.y = vd;
+        }
+        return shot;
+}
     let x = player.x + player.width/2;
     let y = player.y;
     let vd = -DISPARO_VEL;
@@ -214,6 +234,7 @@ function shootDisparo(x, y, vd)
 
 function moveBugs() {
     console.log("mover mariquita");
+    console.log("mover mariquita");
     for (const child of bugs.children) {
         child.y += 2;
    
@@ -225,7 +246,9 @@ function moveBugs() {
 };
     
 function updateGame() {
+    moveBugs()
+    
+};
 
-    moveBugs() 
-}
+
 

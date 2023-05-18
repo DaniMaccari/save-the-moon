@@ -31,16 +31,14 @@ function initGame() {
 
     
 function onButtonMouse() {
-    //this.input.keyboard.enabled = false
-    //this.input.mouse.enabled = true
-    
+    this.game.global.isKeyboradActive = false
+    this.game.global.isMouseActive = true
     game.state.start("inicio");
 }
 
 function onButtonKeyboard() {
-    //this.input.mouse.enabled = false
-    //this.input.keyboard.enabled = true
-
+    this.game.global.isKeyboradActive = true
+    this.game.global.isMouseActive = false
     game.state.start("inicio");
 }
     
