@@ -2,11 +2,9 @@ let juegoState = {
      
     preload: loadAssets,
     create : displayScreen
-    
 };
 
-let btnLevelA, btnLevelB, btnLevelC;
-
+let btnLevelA, btnLevelB, btnLevelC
 
 function loadAssets(){
 
@@ -27,10 +25,10 @@ function displayScreen(){
 };
 
 function onLevelAPressed(){
-    game.state.start("levelA");
+        game.state.start("levelA");
 };
 function onLevelBPressed(){
-    game.state.start("inicio");
+    game.state.start("levelB");
 };
 function onLevelCPressed(){
     game.state.start("inicio");
