@@ -68,7 +68,7 @@ function displayScreen() {
     level = 1.0;
     lives = 4;
 
-    //bugs = game.add.group();
+    bugs = game.add.group();
     createHUD();
 
     timer = game.time.create(false);
@@ -96,9 +96,20 @@ function displayScreen() {
 function spawn() {
     var randomBugPosition = game.rnd.integerInRange(0, nThreads - 1);
 
-    Bug = new BugEnemy(randomBugPosition);
-    bugsArray.push(Bug);
-    //bugs.add(Bug)
+    //Bug = new BugEnemy(randomBugPosition);
+    //bugsArray.push(Bug);
+
+        
+
+    
+    Bug = game.add.sprite(threadPosition[randomBugPosition],yBug,"mariquita")
+
+    Bug.scale.setTo(0.1,0.1);
+    Bug.y -= Bug.width / 2
+    Bug.myThread = randomBugPosition
+    bugs.add(Bug)
+
+    console.log(Bug.y)
 
 }
 
@@ -177,20 +188,21 @@ function shootDisparo(x, y, vd) {
 function moveBugs() {
     
     //no se pueden hacer grupos que sus hijos llamen a funciones?
-    for (let i = 0; i < bugsArray.length; i++) {
-        bugsArray[i].move();
+   // for (let i = 0; i < bugsArray.length; i++) {
+   //     bugsArray[i].move();
+   // }
+   
+    for( const child in bugs.Children){
+        child.y += 2;
+        console.log(child.y)
     }
-/*    
-    for( const child in bugs.children){
-        child.move()
-    }
-*/
+
 }
 
 function updateGame() {
     moveBugs();
-    game.physics.arcade.overlap(disparo,bugsArray,hagoDaño,null,this);
-    game.physics.arcade.overlap(player,bugsArray,reciboDaño,null,this);
+    game.physics.arcade.overlap(disparo,bugs,hagoDaño,null,this);
+    game.physics.arcade.overlap(player,bugs,reciboDaño,null,this);
 
 }
 

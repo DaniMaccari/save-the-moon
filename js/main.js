@@ -14,6 +14,6 @@ function startGame(){
     game.state.add("settings", settingsState);
     
     game.state.add("levelA", levelAState);
-    //game.state.add("levelB", levelBState);
+    game.state.add("levelB", levelBState);
     
 }

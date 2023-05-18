@@ -1,25 +1,14 @@
 
-const DISPARO_GROUP_SIZE = 7;
-const DISPARO_OFFSET_X = 10;
-const DISPARO_OFFSET_Y = -300;
-const DISPARO_VEL = 350;
-const EMPTY_BRANCH = -10
-let threadImg;
-let line, player;
-const threadPosition = [], branchPosition = [], branchSide = [];
-var timer;
-let actualThread, nThreads, nBranches, Ypos = 500;
-let score; 
-let scoreText;
-let lives;
-let livesText;
-let level;
-let levelText;
-let time;
-let timeText;
-let Bug, yBug = 0;
-let bugs;
-let disparo;
+const branchPosition = [], branchSide = [];
+
+
+//START LEVEL B --------------------------------------------
+let levelBState = {
+     
+    preload: loadAssets,
+    create : displayScreen,
+    update : updateGame
+};
 
 class BugEnemy {
     constructor(initialThread) {
@@ -80,13 +69,7 @@ class BugEnemy {
     }
   }
 
-//START LEVEL B --------------------------------------------
-let levelAState = {
-     
-    preload: loadAssets,
-    create : displayScreen,
-    update : updateGame
-};
+
 
 function loadAssets(){
 
