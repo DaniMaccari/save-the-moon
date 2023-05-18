@@ -1,9 +1,3 @@
-let levelAState = {
-     
-    preload: loadAssets,
-    create : displayScreen,
-    update : updateGame
-};
 
 
 const DISPARO_GROUP_SIZE = 7;
@@ -26,6 +20,32 @@ let timeText;
 let Bug, yBug = 0;
 let bugs;
 let disparo;
+
+class BugEnemy{
+    constructor(initialThread){
+        
+        var myThread = initialThread;
+        this.img = game.add.sprite(threadPosition[initialThread], yBug, "mariquita");
+        console.log(myThread)
+        this.img.scale.setTo(0.1, 0.1);
+        this.x -= this.img.width /2;
+
+    }
+
+    move(){
+        this.img.y += 2;
+        
+    }
+}
+
+//START LEVEL ---------------------------------------------------------------
+let levelAState = {
+     
+    preload: loadAssets,
+    create : displayScreen,
+    update : updateGame
+};
+
 
 function loadAssets(){
 
@@ -76,12 +96,20 @@ function displayScreen(){
 
 
 function spawn() {
-    var randomBugPosition = game.rnd.integerInRange(0, nThreads -1);
 
+    
+    
+    var randomBugPosition = game.rnd.integerInRange(0, nThreads -1);
+    
+    //bugs.add(new BugEnemy(randomBugPosition));
+
+    console.log("FALLA AQUI VERDAD???????")
+    
     Bug = game.add.sprite(threadPosition[randomBugPosition], yBug, "mariquita");
     Bug.scale.setTo(0.1,0.1);
     Bug.x -= Bug.width /2;
     bugs.add(Bug);
+    
     
 };
 
@@ -143,52 +171,58 @@ function createHUD(){
         livesX,allY,'Lives: '+ lives,styleHUD);
         livesText.anchor.setTo(1, 0);
 
-    }
+}
 
-    function createDisparo(number)
-    {
-        disparo = game.add.group();
-        disparo.enableBody = true;
-        disparo.createMultiple(number, "disparo");
-        disparo.callAll("events.onOutOfBounds.add",
-        "events.onOutOfBounds", resetMember);
-        disparo.callAll("anchor.setTo","anchor",0.5, 1.0);
-        disparo.setAll("checkWorldBounds",true);
-        
+function createDisparo(number)
+{
+    disparo = game.add.group();
+    disparo.enableBody = true;
+    disparo.createMultiple(number, "disparo");
+    disparo.callAll("events.onOutOfBounds.add",
+    "events.onOutOfBounds", resetMember);
+    disparo.callAll("anchor.setTo","anchor",0.5, 1.0);
+    disparo.setAll("checkWorldBounds",true);
     
-    }
 
-    function resetMember(item)
-    {
+}
+
+function resetMember(item)
+{
     item.kill();
-    }
+}
 
-    function fireDisparos() {
+function fireDisparos() {
 
-        let x = player.x + player.width/2;
-        let y = player.y;
-        let vd = -DISPARO_VEL;
-        let elDisparo = shootDisparo(x,y,vd);
-    
-    }
-    
-    function shootDisparo(x, y, vd)
-    {
-        let shot = disparo.getFirstExists(false);
-        shot.scale.setTo(0.05,0.05)
-    
-        if (shot) {
-            shot.reset(x, y);
-            shot.body.velocity.y = vd;
-            }
-            return shot;
-    }
+    let x = player.x + player.width/2;
+    let y = player.y;
+    let vd = -DISPARO_VEL;
+    let elDisparo = shootDisparo(x,y,vd);
+
+}
+
+function shootDisparo(x, y, vd)
+{
+    let shot = disparo.getFirstExists(false);
+    shot.scale.setTo(0.05,0.05)
+
+    if (shot) {
+        shot.reset(x, y);
+        shot.body.velocity.y = vd;
+        }
+        return shot;
+}
 
 function moveBugs() {
+    console.log("mover mariquita");
     for (const child of bugs.children) {
         child.y += 2;
-    }
-}
+   
+
+        child.y += 2;
+        
+        //child.move();
+    }  
+};
     
 function updateGame() {
 
