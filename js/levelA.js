@@ -7,15 +7,11 @@ let threadImg;
 let line, player;
 const threadPosition = [], bugsArray = [];
 var timer;
-let actualThread, nThreads, playerYpos = 540;
-let score;
-let scoreText;
-let lives;
-let livesText;
-let level;
-let levelText;
-let time;
-let timeText;
+let actualThread, nThreads, middleThread, playerYpos = 560, playerYchange = 7;
+let score, scoreText;
+let lives, livesText;
+let level, levelText;
+let time, timeText;
 let Bug, yBug = 0;
 let bugs;
 let disparo;
@@ -37,13 +33,16 @@ class BugEnemy {
     }
   }
 
-//START LEVEL ---------------------------------------------------------------
+//---------------------------------------------
+//--- START LEVEL -----------------------------
+//---------------------------------------------
 let levelAState = {
     preload: loadAssets,
     create: displayScreen,
     update: updateGame,
 };
 
+//--- load assets ---------------
 function loadAssets() {
     game.load.image("daniel", "assets/imgs/shipYellow.png");
     game.load.image("vida1","assets/imgs/barra1.png")
@@ -61,6 +60,7 @@ function loadAssets() {
     console.log(line.width);
 }
 
+//--- create level --------------
 function displayScreen() {
     game.input.enabled = true;
     game.input.keyboard.onDownCallback = getKeyboardInput;
@@ -79,10 +79,12 @@ function displayScreen() {
     timer = game.time.create(false);
     timer.loop(1500, spawn);
 
-    nThreads = 6;
-    actualThread = nThreads / 2; //arreglar cuando es impar
+    //--- num of threads ---
+    nThreads = 5
+    middleThread = Math.floor(nThreads / 2) //arreglar cuando es impar
+    actualThread = middleThread
 
-    //--- CREAR THREADS ---------------------------------------------------
+    //create threads
     for (let i = 0; i < nThreads; i++) {
         threadPosition.push( 
         (game.world.width / (nThreads + 1)) * (i + 1) );
@@ -90,7 +92,7 @@ function displayScreen() {
         tempLine.scale.setTo(0.3, 0.3)
         tempLine.x -= (tempLine.width / 2)
         
-        //tempLine.tint = 0xff0080;
+        //tempLine.tint = 0xff0080; //change color
         
     }
 
@@ -115,53 +117,53 @@ function displayScreen() {
 
 }
 
+//--- SPAWN ENEMY -------------------------
 function spawn() {
     var randomBugPosition = game.rnd.integerInRange(0, nThreads - 1);
 
     Bug = new BugEnemy(randomBugPosition);
     bugsArray.push(Bug);
-
-        
-
-    
-    /*Bug = game.add.sprite(threadPosition[randomBugPosition],yBug,"mariquita")
-
-    Bug.scale.setTo(0.1,0.1);
-    Bug.y -= Bug.width / 2
-    Bug.myThread = randomBugPosition
-    bugs.add(Bug)
-
-    console.log(Bug.y)
-    */
-
 }
 
+//--- GET IMPUT --------------------------
 function getKeyboardInput(e) {
+
+    //lateral move
     if (e.keyCode == Phaser.Keyboard.A || e.keyCode == Phaser.Keyboard.LEFT) {
         if (actualThread > 0) {
-        actualThread = actualThread - 1;
-        }
-        console.log(actualThread);
-        console.log(nThreads);
-        player.x = threadPosition[actualThread] - player.width / 2;
-    } else if (e.keyCode == Phaser.Keyboard.D || e.keyCode == Phaser.Keyboard.RIGHT) {
-        if (actualThread < nThreads - 1) {
-        actualThread = actualThread + 1;
-        }
-        console.log(actualThread);
-        console.log(nThreads);
+            actualThread = actualThread - 1;
 
-        player.x = threadPosition[actualThread] - player.width / 2;
+            if( actualThread < middleThread){
+                player.y -= playerYchange
+            } else {
+                player.y += playerYchange
+            }
+        }
     }
 
+    else if (e.keyCode == Phaser.Keyboard.D || e.keyCode == Phaser.Keyboard.RIGHT) {
+        if (actualThread < nThreads - 1) {
+            actualThread = actualThread + 1;
+
+            if( actualThread > middleThread){
+                player.y -= playerYchange
+            } else {
+                player.y += playerYchange
+            }
+        }   
+    }
+
+    player.x = threadPosition[actualThread] - player.width / 2;
+
+    //shoot imput
     if (e.keyCode == Phaser.Keyboard.SPACEBAR) {
         fireDisparos();
-        console.log("Daniel Maricón");
+        console.log("Disparo");
     }
 }
 
+//--- SHOW HUD ------------------------
 function createHUD() {
-
     let levelX = game.world.width / 2;
     let livesX = game.world.width - 5;
     let allY = - 25;
@@ -209,29 +211,16 @@ function shootDisparo(x, y, vd) {
     return shot;
 }
 
+//--- MOVE ALL BUGS/ENEMIES ---------------------
 function moveBugs() {
-    
-    //no se pueden hacer grupos que sus hijos llamen a funciones?
     for (let i = 0; i < bugsArray.length; i++) {
        bugsArray[i].move();
-    }
-   
-   /* for( const child in bugs.Children){
-        child.y += 2;
-        console.log(child.y)
-    }
-*/
-}
 
-function updateGame() {
-    moveBugs();
-
-    for (let i = 0; i < bugsArray.length; i++) {
-        game.physics.arcade.overlap(disparo, bugsArray[i].img, hagoDaño, null, this);
     }
-    
 
 }
+
+
 
 function hagoDaño(thisShot,thisBug)
 {
@@ -256,6 +245,20 @@ function reciboDaño(player,bugs)
         player.kill();
         bugs.kill();
         console.log("no te pilles baby")
+    }
+
+}
+
+//--- UPADATE ------------
+function updateGame() {
+
+    //move enemies
+    moveBugs();
+
+    //check collisions BULLET/ENEMI
+    for (let i = 0; i < bugsArray.length; i++) {
+        game.physics.arcade.overlap(disparo, bugsArray[i].img, hagoDaño, null, this);
+
     }
 
 }
