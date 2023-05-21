@@ -13,9 +13,9 @@ let isKeyboradActive = true, isMouseActive = false;
 function preloadAssets() { 
     game.load.image("tele","assets/imgs/BG-1.png");
     game.load.image("bg","/assets/SETTINGS SCREEN/settingsBG.png");
-    game.load.spritesheet("keyboard","assets/SETTINGS SCREEN/keyboardSpritesheet.png",519,519);
-    game.load.spritesheet("mouse","assets/SETTINGS SCREEN/mouseSpritesheet.png",519,519);
-    game.load.spritesheet("threads","assets/SETTINGS SCREEN/threadsSpritesheet.png",182,519);
+    game.load.spritesheet("keyboard","assets/SETTINGS SCREEN/keyboardSpritesheet.png", 519, 519);
+    game.load.spritesheet("mouse","assets/SETTINGS SCREEN/mouseSpritesheet.png", 519, 519);
+    game.load.spritesheet("threads","assets/SETTINGS SCREEN/threadsSpritesheet.png", 182, 519);
 }
 
 function initGame() {
@@ -36,14 +36,17 @@ function initGame() {
     game.input.enabled = true;
 
     //THREAD SELECTOR
-    let initialThreadPosX = 200;
-    let threadButton;
-    threadButton.scale.setTo(0.2, 0.2);
+    let initialThreadPosX = 220;
+    
 
     for (let i=0; i<9; i++) {
-        threadButton = game.add.button(initialThreadPosX,500,"threads", onButtonThread(i), 0,0,0,0);
-        arrThreads.push(threadButton);
-        initialThreadPosX += threadButton.width;
+        let threadButton = game.add.button(initialThreadPosX, 500, "threads", onButtonThread, 1,0,1,0)
+        if ( i<3 ){
+            threadButton.setFrames( 1, 0, 1, 0)
+        }
+        threadButton.scale.setTo(0.2, 0.2)
+        arrThreads.push(threadButton)
+        initialThreadPosX += threadButton.width +10
     }
 }
 
@@ -68,13 +71,21 @@ function onButtonKeyboard() {
     game.state.start("inicio");
 }
     
-function onButtonThread(button) {
-    for (let i= 0; i<9; i++) {
-        if (i<= button) {
-            button.setFrames(1,1,1,1);
+function onButtonThread(buttonIndex) {
+
+    let stop = false
+    for (let i = 0; i < arrThreads.length; i++) {
+
+        //update eachbutton
+        if ( !stop || i<3) {
+            arrThreads[i].setFrames( 1, 0, 1, 0)
+        } else {
+            arrThreads[i].setFrames( 0, 1, 0, 1)
         }
-        else {
-            button.setFrames(0,0,0,0);
-        }
+        
+        //when reached clicked buton
+        if (arrThreads[i] == buttonIndex) {
+            stop = true
+        } 
     }
 }

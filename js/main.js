@@ -8,13 +8,13 @@ function startGame(){
     //Inicio
     game.state.add("inicio", initialState);
     
-    
+    game.state.start("inicio");
     game.state.add("juego", juegoState);
     game.state.add("credits", creditState);
     game.state.add("settings", settingsState);
-    game.state.start("settings");
     
     game.state.add("levelA", levelAState);
     game.state.add("levelB", levelBState);
+
     
 }
