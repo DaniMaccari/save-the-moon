@@ -47,6 +47,7 @@ function initGame() {
     }
 }
 
+//lolololo
 
 function onButtonMouse() {
 
