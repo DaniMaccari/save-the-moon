@@ -9,7 +9,7 @@ let buttonMouse, buttonKeyboard;
 
 
 // methods for each phase of the state
-function preloadAssets() {
+function preloadAssets() { 
     game.load.image("tele","assets/imgs/BG-1.png");
     game.load.image("bg","/assets/SETTINGS SCREEN/settingsBG.png");
     game.load.image("thread_on","/assets/SETTINGS SCREEN/thread_on.png");
@@ -43,10 +43,11 @@ function initGame() {
 function onButtonMouse() {
 
 
-    this.game.global.isKeyboradActive = false
-    this.game.global.isMouseActive = true
+    this.game.global.isKeyboradActive = false;
+    this.game.global.isMouseActive = true;
     game.state.start("inicio");
 }
+
 
 function onButtonKeyboard() {
     this.game.global.isKeyboradActive = true
