@@ -3,7 +3,7 @@ let game;
 window.onload = startGame;
 
 function startGame(){
-    game = new Phaser.Game(800,600, Phaser.CANVAS, "Save The Moon");
+    game = new Phaser.Game(800,800, Phaser.CANVAS, "Save The Moon");
 
     //Inicio
     game.state.add("inicio", initialState);

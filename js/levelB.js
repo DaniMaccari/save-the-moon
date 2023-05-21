@@ -1,6 +1,6 @@
-
+/*
 const branchPosition = [], branchSide = [];
-
+let nBranches;
 
 //START LEVEL B --------------------------------------------
 let levelBState = {
@@ -254,4 +254,4 @@ function updateGame() {
 
     moveBugs() 
 }
-
+*/

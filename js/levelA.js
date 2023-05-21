@@ -4,10 +4,10 @@ const DISPARO_OFFSET_Y = -300;
 const DISPARO_VEL = 350;
 
 let threadImg;
-let line, player;
+let line, player, BG;
 const threadPosition = [], bugsArray = [];
 var timer;
-let actualThread, nThreads, Ypos = 500;
+let actualThread, nThreads, playerYpos = 540;
 let score;
 let scoreText;
 let lives;
@@ -24,10 +24,12 @@ class BugEnemy {
     constructor(initialThread) {
         this.myThread = initialThread
         this.img = game.add.sprite(threadPosition[initialThread], yBug, "mariquita")
-        console.log(this.myThread)
+        game.physics.arcade.enable(this.img);
+
         this.img.scale.setTo(0.1, 0.1)
         this.myWidth = this.img.width / 2
         this.img.x -= this.myWidth
+
     }
   
     move() {
@@ -53,7 +55,8 @@ function loadAssets() {
     game.load.image("drawLine", "assets/imgs/line.png");
     game.load.image("levelA", "assets/imgs/start.png");
     game.load.image("disparo", "assets/imgs/punto.png");
-    game.load.image("bg", "assets/imgs/bg.jpg");
+    game.load.image("bg", "assets/imgs/BG.png");
+    game.load.image("tv", "assets/imgs/BG-1.png");
     line = game.add.sprite(-10, 0, "drawLine");
     console.log(line.width);
 }
@@ -62,7 +65,8 @@ function displayScreen() {
     game.input.enabled = true;
     game.input.keyboard.onDownCallback = getKeyboardInput;
 
-    game.add.image(0, 0, "bg");
+    BG = game.add.image(0, 0, "bg");
+    BG.scale.setTo(game.width/BG.width, game.height/BG.height)
 
     score = 0;
     level = 1.0;
@@ -75,19 +79,34 @@ function displayScreen() {
     timer = game.time.create(false);
     timer.loop(1500, spawn);
 
-    nThreads = 8;
+    nThreads = 2;
     actualThread = nThreads / 2;
+
+    //--- CREAR THREADS ---------------------------------------------------
     for (let i = 0; i < nThreads; i++) {
-        threadPosition.push(
-        (game.world.width / (nThreads + 1)) * (i + 1) - line.width / 2
-        );
-        game.add.image(threadPosition[i], 0, "drawLine");
+        threadPosition.push( 15+
+        (game.world.width / (nThreads + 1)) * (i + 1) );
+        let tempLine = game.add.image(threadPosition[i], 100, "drawLine");
+        tempLine.scale.setTo(0.3, 0.3)
+        tempLine.x -= (tempLine.width / 2)
+        
     }
 
-    player = game.add.sprite(threadPosition[actualThread], Ypos, "daniel");
+    player = game.add.sprite(threadPosition[actualThread], playerYpos, "daniel");
     player.scale.setTo(0.6, 0.6);
     player.x = threadPosition[actualThread] - player.width / 2;
+
     createDisparo(DISPARO_GROUP_SIZE);
+
+    
+
+    //enable collisions
+    game.physics.arcade.enable("mariquita");
+    game.physics.arcade.enable("disparo");
+
+    tvForeground = game.add.image(0, 0, "tv")
+    tvForeground.scale.setTo(game.width/tvForeground.width, game.height/tvForeground.height)
+    tvForeground.bringToTop();
 
     timer.start();
 
@@ -160,6 +179,7 @@ function createDisparo(number) {
     disparo = game.add.group();
     disparo.enableBody = true;
     disparo.createMultiple(number, "disparo");
+
     disparo.callAll("events.onOutOfBounds.add", "events.onOutOfBounds", resetMember);
     disparo.callAll("anchor.setTo", "anchor", 0.5, 1.0);
     disparo.setAll("checkWorldBounds", true);
@@ -203,15 +223,18 @@ function moveBugs() {
 
 function updateGame() {
     moveBugs();
-    game.physics.arcade.overlap(disparo,bugs,hagoDaño,null,this);
-    game.physics.arcade.overlap(player,bugs,reciboDaño,null,this);
+
+    for (let i = 0; i < bugsArray.length; i++) {
+        game.physics.arcade.overlap(disparo, bugsArray[i].img, hagoDaño, null, this);
+    }
+    
 
 }
 
-function hagoDaño(disparo,bugs)
+function hagoDaño(thisShot,thisBug)
 {
-    disparo.kill();
-    bugs.kill();
+    thisShot.kill();
+    thisBug.kill();
     console.log("te hago daño baby")
     score+=10;
 }
