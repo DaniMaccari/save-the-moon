@@ -67,7 +67,8 @@ function displayScreen() {
         game.input.keyboard.onDownCallback = getKeyboardInput
 
     } else {
-        game.input.mouse.onDown = onMouseDown
+        game.input.mouse.capture = true
+        game.input.onDown.add(onMouseDown, this);
     }
     
 
@@ -92,14 +93,12 @@ function displayScreen() {
 
     //create threads
     threadPosition = []
-    threadObjects = []
     for (let i = 0; i < nThreads; i++) {
         threadPosition.push( 
         (game.world.width / (nThreads + 1)) * (i + 1) );
         let tempLine = game.add.image(threadPosition[i], 110, "drawLine");
         tempLine.scale.setTo(0.3, 0.3)
         tempLine.x -= (tempLine.width / 2)
-        threadObjects.add(tempLine)
         
         //tempLine.tint = 0xff0080; //change color
         
@@ -142,11 +141,13 @@ function getKeyboardInput(e) {
         if (actualThread > 0) {
             actualThread = actualThread - 1;
 
+            /*
             if( actualThread < middleThread){
                 player.y -= playerYchange
             } else {
                 player.y += playerYchange
             }
+            */
         }
     }
 
@@ -154,11 +155,13 @@ function getKeyboardInput(e) {
         if (actualThread < nThreads - 1) {
             actualThread = actualThread + 1;
 
+            /*
             if( actualThread > middleThread){
                 player.y -= playerYchange
             } else {
                 player.y += playerYchange
             }
+            */
         }   
     }
 
@@ -273,9 +276,10 @@ function updateGame() {
 
     //if mouse input is active
     if( !isKeyboradActive) {
-        for ( let i=0; i < threadObjects.length; i++){
-            if(threadObjects[i].input.pointerOver()){
-                player.x = threadPosition [i]
+        let mousePos = game.input.mousePointer.x
+        for ( let i=0; i < threadPosition.length; i++){
+            if(threadPosition[i] -30 < mousePos && threadPosition[i] +30 > mousePos){
+                player.x = threadPosition [i] - player.width / 2
             }
         }
         
