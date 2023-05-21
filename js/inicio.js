@@ -1,10 +1,12 @@
 let initialState = {
     preload: loadAssets,
-    create : displayScreen
+    create : displayScreen,
+    update: updateGame,
 };
 
 let btnStart, btnInfo, btnCredits;
 let GAP = 120;
+
 
 function loadAssets(){
     
@@ -17,6 +19,7 @@ function loadAssets(){
 
 function displayScreen(){
 
+    
     game.input.enabled = true;
     BG = game.add.image(0,0,"bg")
     TV = game.add.image(0,0,"tele")
@@ -30,12 +33,14 @@ function displayScreen(){
     btnCredits = game.add.button(game.world.width / 1.75, game.world.height / 3 + 2*GAP,
     'credits', onCreditsButtonPressed);
 
+   
+
 }
 
 
 function onStartButtonPressed(){
-    console.log("HOLI")
     game.state.start("juego");
+    
 }
 
 function onInfoButtonPressed(){
@@ -44,4 +49,8 @@ function onInfoButtonPressed(){
 
 function onCreditsButtonPressed(){
     game.state.start("credits");
+}
+
+function updateGame() {
+    
 }

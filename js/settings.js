@@ -6,17 +6,26 @@ let settingsState = {
 let settingsText;
 let buttonMouse, buttonKeyboard;
 
+
+
 // methods for each phase of the state
 function preloadAssets() {
-    game.load.image("bg","assets/imgs/bg.jpg");
+    game.load.image("tele","assets/imgs/BG-1.png");
+    game.load.image("bg","assets/imgs/BG.png");
     game.load.image("boton","assets/imgs/start.png")
 }
 
 function initGame() {
 
-    
+    //FONDO
+    BG = game.add.image(0,0,"bg")
+    BG.scale.setTo(game.width/BG.width, game.height/BG.height)
+
+    //MARCO DE LA TELE
+    TV = game.add.image(0,0,"tele")
+    TV.scale.setTo(game.width/TV.width, game.height/TV.height)
     game.input.enabled = true;
-    game.add.image(0,0,"bg");
+    
 
     //settingsText = game.add.text(160,30, "SETTINGS", {fontSize: "35px", fill: "#000"});ç
     buttonMouse = game.add.button(160, 100, "boton", onButtonMouse);
