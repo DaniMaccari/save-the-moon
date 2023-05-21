@@ -278,7 +278,7 @@ function updateGame() {
     if( !isKeyboradActive) {
         let mousePos = game.input.mousePointer.x
         for ( let i=0; i < threadPosition.length; i++){
-            if(threadPosition[i] -30 < mousePos && threadPosition[i] +30 > mousePos){
+            if(threadPosition[i] -35 < mousePos && threadPosition[i] +35 > mousePos){
                 player.x = threadPosition [i] - player.width / 2
             }
         }
