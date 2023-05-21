@@ -15,7 +15,7 @@ function loadAssets(){
 };
 
 function displayScreen(){
-
+    
     game.input.enabled = true;
     game.add.image(0,0,"bg");
 

@@ -79,7 +79,7 @@ function displayScreen() {
     timer = game.time.create(false);
     timer.loop(1500, spawn);
 
-    nThreads = 6;
+    nThreads = 9;
     actualThread = nThreads / 2; //arreglar cuando es impar
 
     //--- CREAR THREADS ---------------------------------------------------
