@@ -5,9 +5,9 @@ const DISPARO_VEL = 350;
 
 let threadImg;
 let line, player;
-const threadPosition = [], bugsArray = [];
+var threadPosition = [], bugsArray = [], threadObjects = [];
 var timer;
-let actualThread, nThreads, middleThread, playerYpos = 560, playerYchange = 7;
+let actualThread, middleThread, playerYpos = 560, playerYchange = 7;
 let score, scoreText;
 let lives, livesText;
 let level, levelText;
@@ -63,7 +63,13 @@ function loadAssets() {
 //--- create level --------------
 function displayScreen() {
     game.input.enabled = true;
-    game.input.keyboard.onDownCallback = getKeyboardInput;
+    if ( isKeyboradActive) {
+        game.input.keyboard.onDownCallback = getKeyboardInput
+
+    } else {
+        game.input.mouse.onDown = onMouseDown
+    }
+    
 
     BG = game.add.image(0, 0, "bg");
     BG.scale.setTo(game.width/BG.width, game.height/BG.height)
@@ -80,17 +86,20 @@ function displayScreen() {
     timer.loop(1500, spawn);
 
     //--- num of threads ---
-    nThreads = 5
+    //nThreads = 5
     middleThread = Math.floor(nThreads / 2) //arreglar cuando es impar
     actualThread = middleThread
 
     //create threads
+    threadPosition = []
+    threadObjects = []
     for (let i = 0; i < nThreads; i++) {
         threadPosition.push( 
         (game.world.width / (nThreads + 1)) * (i + 1) );
         let tempLine = game.add.image(threadPosition[i], 110, "drawLine");
         tempLine.scale.setTo(0.3, 0.3)
         tempLine.x -= (tempLine.width / 2)
+        threadObjects.add(tempLine)
         
         //tempLine.tint = 0xff0080; //change color
         
@@ -125,7 +134,7 @@ function spawn() {
     bugsArray.push(Bug);
 }
 
-//--- GET IMPUT --------------------------
+//--- GET INPUT --------------------------
 function getKeyboardInput(e) {
 
     //lateral move
@@ -160,7 +169,14 @@ function getKeyboardInput(e) {
         fireDisparos();
         console.log("Disparo");
     }
-}
+};
+
+//--- GET MOUSE INPUT -------------------
+function onMouseDown(pointer) {
+    if (pointer.button === Phaser.Mouse.LEFT_BUTTON) {
+        fireDisparos();
+    }
+};
 
 //--- SHOW HUD ------------------------
 function createHUD() {
@@ -254,6 +270,17 @@ function updateGame() {
 
     //move enemies
     moveBugs();
+
+    //if mouse input is active
+    if( !isKeyboradActive) {
+        for ( let i=0; i < threadObjects.length; i++){
+            if(threadObjects[i].input.pointerOver()){
+                player.x = threadPosition [i]
+            }
+        }
+        
+    }
+    
 
     //check collisions BULLET/ENEMI
     for (let i = 0; i < bugsArray.length; i++) {

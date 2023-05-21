@@ -1,4 +1,6 @@
 let game;
+var nThreads = 3;
+var isKeyboradActive = true, isMouseActive = false;
 
 window.onload = startGame;
 

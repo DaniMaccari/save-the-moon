@@ -39,6 +39,6 @@ function displayScreen(){
     
     TV = game.add.sprite(0,0,"tvAnim")
     TV.scale.setTo(game.width/TV.width, game.height/TV.height)
-    TV.animations.add("TVanimation", [0, 1, 2], 10, true)
+    TV.animations.add("TVanimation", [0, 1, 2], 15, true)
     TV.animations.play("TVanimation")
 };

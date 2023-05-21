@@ -1,13 +1,11 @@
+let settingsText;
+let buttonMouse, buttonKeyboard;
+let arrThreads = []
+
 let settingsState = {
     preload: preloadAssets,
     create: initGame
 };
-
-let settingsText;
-let buttonMouse, buttonKeyboard;
-let arrThreads = []
-let isKeyboradActive = true, isMouseActive = false;
-
 
 // methods for each phase of the state
 function preloadAssets() { 
@@ -52,33 +50,35 @@ function initGame() {
 
 //lolololo
 
+//activate mouse, deactivate keyboard
 function onButtonMouse() {
 
-    buttonMouse.setFrames(1,1,1,1);
-    buttonKeyboard.setFrames(1,0,0,0);
-    isKeyboradActive = false;
-    isMouseActive = true;
-    game.state.start("inicio");
+    buttonMouse.setFrames(1,1,1,1)
+    buttonKeyboard.setFrames(1,0,0,0)
+    isKeyboradActive = false
+    game.state.start("inicio")
 }
 
-
+//activate keyboard, deactivate mouse
 function onButtonKeyboard() {
 
-    buttonKeyboard.setFrames(1,1,1,1);
-    buttonMouse.setFrames(1,0,0,0);
+    buttonKeyboard.setFrames(1,1,1,1)
+    buttonMouse.setFrames(1,0,0,0)
     isKeyboradActive = true
-    isMouseActive = false
-    game.state.start("inicio");
+    game.state.start("inicio")
 }
     
 function onButtonThread(buttonIndex) {
 
     let stop = false
+    let contador = 0
+
     for (let i = 0; i < arrThreads.length; i++) {
 
         //update eachbutton
         if ( !stop || i<3) {
             arrThreads[i].setFrames( 1, 0, 1, 0)
+            contador += 1
         } else {
             arrThreads[i].setFrames( 0, 1, 0, 1)
         }
@@ -88,4 +88,7 @@ function onButtonThread(buttonIndex) {
             stop = true
         } 
     }
+
+    nThreads = contador
+    console.log(nThreads)
 }
