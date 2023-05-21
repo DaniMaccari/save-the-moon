@@ -12,10 +12,10 @@ let isKeyboradActive = true, isMouseActive = false;
 // methods for each phase of the state
 function preloadAssets() { 
     game.load.image("tele","assets/imgs/BG-1.png");
-    game.load.image("bg","/assets/SETTINGS SCREEN/settingsBG.png");
-    game.load.spritesheet("keyboard","assets/SETTINGS SCREEN/keyboardSpritesheet.png", 519, 519);
-    game.load.spritesheet("mouse","assets/SETTINGS SCREEN/mouseSpritesheet.png", 519, 519);
-    game.load.spritesheet("threads","assets/SETTINGS SCREEN/threadsSpritesheet.png", 182, 519);
+    game.load.image("bg","/assets/imgs/SETTINGS SCREEN/settingsBG.png");
+    game.load.spritesheet("keyboard","assets/imgs/SETTINGS SCREEN/keyboardSpritesheet.png", 519, 519);
+    game.load.spritesheet("mouse","assets/imgs/SETTINGS SCREEN/mouseSpritesheet.png", 519, 519);
+    game.load.spritesheet("threads","assets/imgs/SETTINGS SCREEN/threadsSpritesheet.png", 182, 519);
 }
 
 function initGame() {
@@ -36,15 +36,15 @@ function initGame() {
     game.input.enabled = true;
 
     //THREAD SELECTOR
-    let initialThreadPosX = 220;
+    let initialThreadPosX = 230;
     
 
     for (let i=0; i<9; i++) {
-        let threadButton = game.add.button(initialThreadPosX, 500, "threads", onButtonThread, 1,0,1,0)
+        let threadButton = game.add.button(initialThreadPosX, 480, "threads", onButtonThread, 1,0,1,0)
         if ( i<3 ){
             threadButton.setFrames( 1, 0, 1, 0)
         }
-        threadButton.scale.setTo(0.2, 0.2)
+        threadButton.scale.setTo(0.17, 0.17)
         arrThreads.push(threadButton)
         initialThreadPosX += threadButton.width +10
     }

@@ -3,25 +3,38 @@ let creditState = {
     create : displayScreen};
 
 
-    let btnBack;
+let btnBack;
 
-    function loadAssets(){
+
+function loadAssets(){
     
         game.load.image("start","assets/imgs/start.png");
-        game.load.image("bg","assets/imgs/bg.jpg");
+        game.load.image("bg","assets/imgs/BG.png");
+        game.load.spritesheet("tvAnim","assets/imgs/TVanim.png", 2050,2050);
+};
+    
+function displayScreen(){
+    
+    game.input.enabled = true;
+    BG = game.add.image(0, 0, "bg")
+    BG.scale.setTo(game.width/BG.width, game.height/BG.height)
+
+
+    btnBack = game.add.button(game.world.width / 2.75, game.world.height / 3 + 240,
+    'start', onBackButtonPressed);
+
+    function onBackButtonPressed(){
+        game.state.start("inicio");
+
+    }
+
+    game.anims.create({
+        key: "TVanimation",
+        frameRate:10,
+        frames:game.anims.generateFrameNumbers("tvAnim", {start: 0, end: 2}),
+        repeat: -1
+    });
         
-    };
-    
-    function displayScreen(){
-    
-        game.input.enabled = true;
-        game.add.image(0,0,"bg");
-
-        btnBack = game.add.button(game.world.width / 2.75, game.world.height / 3 + 240,
-        'start', onBackButtonPressed);
-
-        function onBackButtonPressed(){
-            game.state.start("inicio");
-        }
-
-    };
+    TV = game.add.sprite(0,0,"tvAnim");
+    TV.play("TVanimation");
+};
