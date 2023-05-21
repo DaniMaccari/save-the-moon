@@ -79,16 +79,18 @@ function displayScreen() {
     timer = game.time.create(false);
     timer.loop(1500, spawn);
 
-    nThreads = 2;
-    actualThread = nThreads / 2;
+    nThreads = 6;
+    actualThread = nThreads / 2; //arreglar cuando es impar
 
     //--- CREAR THREADS ---------------------------------------------------
     for (let i = 0; i < nThreads; i++) {
-        threadPosition.push( 15+
+        threadPosition.push( 
         (game.world.width / (nThreads + 1)) * (i + 1) );
-        let tempLine = game.add.image(threadPosition[i], 100, "drawLine");
+        let tempLine = game.add.image(threadPosition[i], 110, "drawLine");
         tempLine.scale.setTo(0.3, 0.3)
         tempLine.x -= (tempLine.width / 2)
+        
+        //tempLine.tint = 0xff0080;
         
     }
 
