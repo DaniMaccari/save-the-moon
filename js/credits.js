@@ -28,13 +28,17 @@ function displayScreen(){
 
     }
 
+    /*
     game.anims.create({
         key: "TVanimation",
         frameRate:10,
         frames:game.anims.generateFrameNumbers("tvAnim", {start: 0, end: 2}),
         repeat: -1
     });
-        
-    TV = game.add.sprite(0,0,"tvAnim");
-    TV.play("TVanimation");
+    */
+    
+    TV = game.add.sprite(0,0,"tvAnim")
+    TV.scale.setTo(game.width/TV.width, game.height/TV.height)
+    TV.animations.add("TVanimation", [0, 1, 2], 10, true)
+    TV.animations.play("TVanimation")
 };

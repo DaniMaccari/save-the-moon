@@ -37,7 +37,7 @@ function initGame() {
 
     //THREAD SELECTOR
     let initialThreadPosX = 230;
-    
+    arrThreads = []
 
     for (let i=0; i<9; i++) {
         let threadButton = game.add.button(initialThreadPosX, 480, "threads", onButtonThread, 1,0,1,0)
