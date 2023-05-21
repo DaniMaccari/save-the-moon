@@ -11,8 +11,11 @@ let buttonMouse, buttonKeyboard;
 // methods for each phase of the state
 function preloadAssets() {
     game.load.image("tele","assets/imgs/BG-1.png");
-    game.load.image("bg","assets/imgs/BG.png");
-    game.load.image("boton","assets/imgs/start.png")
+    game.load.image("bg","/assets/SETTINGS SCREEN/settingsBG.png");
+    game.load.image("thread_on","/assets/SETTINGS SCREEN/thread_on.png");
+    game.load.image("thread_off","/assets/SETTINGS SCREEN/thread_off.png");
+    game.load.spritesheet("keyboard","assets/SETTINGS SCREEN/keyboardSpritesheet.png",519,519);
+    game.load.spritesheet("mouse","assets/SETTINGS SCREEN/mouseSpritesheet.png",519,519);
 }
 
 function initGame() {
@@ -21,27 +24,25 @@ function initGame() {
     BG = game.add.image(0,0,"bg")
     BG.scale.setTo(game.width/BG.width, game.height/BG.height)
 
-    buttonMouse = game.add.button(160, 100, "boton", onButtonMouse);
-    buttonKeyboard = game.add.button(500, 100, "boton", onButtonKeyboard);
+    //Botones del Keyboard y el mouse
+    buttonKeyboard = game.add.button(440, 200, "keyboard", onButtonKeyboard,0,1,0,1);
+    buttonKeyboard.scale.setTo(0.4, 0.4);
+    buttonMouse = game.add.button(180, 200, "mouse", onButtonMouse,0,1,0,1);
+    buttonMouse.scale.setTo(0.4, 0.4);
 
     //MARCO DE LA TELE
     TV = game.add.image(0,0,"tele")
     TV.scale.setTo(game.width/TV.width, game.height/TV.height)
     game.input.enabled = true;
-    
 
-    //settingsText = game.add.text(160,30, "SETTINGS", {fontSize: "35px", fill: "#000"});ç
-    
-
-    /*Keyboard callback ESTO HABRÁ QUE PASARSELO A LA MAIN ESCENA IGUAL QUE LO DE KEYBOARD INPUT
-    game.input.keyboard.onDownCallback = getKeyboardInput;
-    game.input.mouse.onDownCallback = getMouseInput;
-    */
+    //THREAD SELECTOR
     
 }
 
     
 function onButtonMouse() {
+
+
     this.game.global.isKeyboradActive = false
     this.game.global.isMouseActive = true
     game.state.start("inicio");
