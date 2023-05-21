@@ -26,7 +26,7 @@ function displayScreen(){
 };
 
 function onLevelAPressed(){
-        game.state.start("levelA");
+    game.state.start("levelA");
 };
 function onLevelBPressed(){
     game.state.start("levelB");

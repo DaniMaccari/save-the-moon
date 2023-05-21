@@ -21,21 +21,21 @@ function displayScreen(){
     
     game.input.enabled = true;
     BG = game.add.image(0, 0, "bg")
-    TV = game.add.image(0, 0, "tele")
+    
     BG.scale.setTo(game.width/BG.width, game.height/BG.height)
-    TV.scale.setTo(game.width/TV.width, game.height/TV.height)
+    
 
-    btnStart = game.add.button(200, 200, "start", onStartButtonPressed, 0, 1, 0, 1)
+    btnStart = game.add.button(190, 200, "start", onStartButtonPressed, 0, 1, 0, 1)
     btnStart.scale.setTo(0.5, 0.5);
 
-    btnConf = game.add.button(270, 420, "conf", onConfButtonPressed, 0, 1, 0, 1)
+    btnConf = game.add.button(260, 420, "conf", onConfButtonPressed, 0, 1, 0, 1)
     btnConf.scale.setTo(0.22, 0.22);
     
-    btnCredits = game.add.button(430, 420, "credits", onCreditsButtonPressed, 0, 1, 0, 1)
+    btnCredits = game.add.button(420, 420, "credits", onCreditsButtonPressed, 0, 1, 0, 1)
     btnCredits.scale.setTo(0.22, 0.22);
 
-   
-
+    TV = game.add.image(0, 0, "tele")
+    TV.scale.setTo(game.width/TV.width, game.height/TV.height)
 }
 
 
