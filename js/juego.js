@@ -6,6 +6,7 @@ let juegoState = {
 
 let btnLevelA, btnLevelB, btnLevelC;
 
+
 function loadAssets(){
 
     game.load.image("levelA", "assets/imgs/start.png");//cambiar la ruta de las imagenes levels A B C

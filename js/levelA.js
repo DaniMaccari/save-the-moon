@@ -4,7 +4,7 @@ const DISPARO_OFFSET_Y = -300;
 const DISPARO_VEL = 350;
 
 let threadImg;
-let line, player, BG;
+let line, player;
 const threadPosition = [], bugsArray = [];
 var timer;
 let actualThread, nThreads, playerYpos = 540;
@@ -79,7 +79,7 @@ function displayScreen() {
     timer = game.time.create(false);
     timer.loop(1500, spawn);
 
-    nThreads = 9;
+    nThreads = 6;
     actualThread = nThreads / 2; //arreglar cuando es impar
 
     //--- CREAR THREADS ---------------------------------------------------
