@@ -29,6 +29,7 @@ class BugEnemy {
         this.myWidth = this.img.width / 2
         this.img.x -= this.myWidth
 
+        
     }
   
     move() {
@@ -118,7 +119,7 @@ function displayScreen() {
     tvForeground = game.add.image(0, 0, "tv")
     tvForeground.scale.setTo(game.width/tvForeground.width, game.height/tvForeground.height)
     tvForeground.bringToTop();
-
+    tvForeground.z = 1;
 
     createHUD();
 
@@ -171,9 +172,7 @@ function onMouseDown(pointer) {
 
 //--- SHOW HUD ------------------------
 function createHUD() {
-    let levelX = game.world.width / 2;
-    let livesX = game.world.width - 5;
-    let allY = - 25;
+
     let styleHUD = { fontSize: "18px", fill: "#FFFFFF" };
 
     timerText = game.add.text(50,  20, "Time: ", styleHUD);
@@ -182,8 +181,8 @@ function createHUD() {
 
     levelText = game.add.text(50, game.world.height/10, "Level: " + level, styleHUD);
 
-    livesText = game.add.text(livesX, allY, "Lives: " + lives, styleHUD);
-    livesText.anchor.setTo(1, 0);
+    livesText = game.add.text(50, 100, "Lives: " + lives, styleHUD);
+
 }
 
 function createDisparo(number) {
@@ -222,12 +221,6 @@ function shootDisparo(x, y, vd) {
 function moveBugs() {
     for (let i = 0; i < bugsArray.length; i++) {
        bugsArray[i].move();
-       
-       if (bugsArray[i].y > player.y) {
-        
-        reciboDaño(player,bugsArray[i].img);
-
-       }
 
     }
     
@@ -245,19 +238,20 @@ function hagoDaño(thisShot,thisBug)
 }
 
 
-function reciboDaño(player,bugs)
+function reciboDaño()
 {
     if(lives > 1)
     {
         lives-=1;
-        bugs.kill();
+        
+        livesText.text = "Lives: "+ lives;
         console.log("no te pilles baby")
     }
 
     else
     {
-        player.kill();
-        bugs.kill();
+        //player.kill();
+        
         console.log("He muerto")
     }
 
@@ -296,8 +290,12 @@ function updateGame() {
     for (let i = 0; i < bugsArray.length; i++) {
         game.physics.arcade.overlap(disparo, bugsArray[i].img, hagoDaño, null, this);
 
-        if( bugsArray[i].y > playerYpos ){
-            //AQUI HACER DAÑO A JUGADOR
+        if( bugsArray[i].img.y > playerYpos ){
+            reciboDaño();
+            
+            bugsArray[i].img.destroy();
+            bugsArray.splice(i, 1);
+            i--; 
         }
 
     }

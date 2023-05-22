@@ -1,6 +1,9 @@
 let settingsText;
-let buttonMouse, buttonKeyboard;
+let buttonMouse, buttonKeyboard; 
+let backButton;
 let arrThreads = []
+let fadeTweenConf;
+let fadeRectangleConf;
 
 let settingsState = {
     preload: preloadAssets,
@@ -11,30 +14,37 @@ let settingsState = {
 function preloadAssets() { 
     game.load.image("tele","assets/imgs/BG-1.png");
     game.load.image("bg","/assets/imgs/SETTINGS SCREEN/settingsBG.png");
+    game.load.spritesheet("back","assets/imgs/backSpritesheet.png", 519,519);
     game.load.spritesheet("keyboard","assets/imgs/SETTINGS SCREEN/keyboardSpritesheet.png", 519, 519);
     game.load.spritesheet("mouse","assets/imgs/SETTINGS SCREEN/mouseSpritesheet.png", 519, 519);
     game.load.spritesheet("threads","assets/imgs/SETTINGS SCREEN/threadsSpritesheet.png", 182, 519);
+    game.load.image("pantallaNegra","assets/imgs/Solid_black.png")
 }
 
 function initGame() {
 
-    //FONDO
+    //BACKGROUND
     BG = game.add.image(0,0,"bg")
     BG.scale.setTo(game.width/BG.width, game.height/BG.height)
 
-    //Botones del Keyboard y el mouse
+    //Keyboard and mouse
     buttonKeyboard = game.add.button(440, 200, "keyboard", onButtonKeyboard,0,1,0,1);
     buttonKeyboard.scale.setTo(0.4, 0.4);
     buttonMouse = game.add.button(180, 200, "mouse", onButtonMouse,0,1,0,1);
     buttonMouse.scale.setTo(0.4, 0.4);
-
-    //MARCO DE LA TELE
+    
+    //TV FOREGROUND
     TV = game.add.image(0,0,"tele")
     TV.scale.setTo(game.width/TV.width, game.height/TV.height)
     game.input.enabled = true;
 
+
+    //Back button
+    backButton = game.add.button(370, 550, "back", function() {fadeSceneOut("inicio"); },0,1,0,1);
+    backButton.scale.setTo(0.17, 0.17);
+
     //THREAD SELECTOR
-    let initialThreadPosX = 230;
+    let initialThreadPosX = 250;
     arrThreads = []
 
     for (let i=0; i<9; i++) {
@@ -42,13 +52,18 @@ function initGame() {
         if ( i<3 ){
             threadButton.setFrames( 1, 0, 1, 0)
         }
-        threadButton.scale.setTo(0.17, 0.17)
+        threadButton.scale.setTo(0.15, 0.15)
         arrThreads.push(threadButton)
         initialThreadPosX += threadButton.width +10
     }
-}
 
-//lolololo
+    fadeRectangle = game.add.sprite(0,0, "pantallaNegra");
+    fadeRectangle.width = game.width;
+    fadeRectangle.height = game.height;
+    fadeRectangle.alpha = 1;
+
+    fadeSceneIn();
+}
 
 //activate mouse, deactivate keyboard
 function onButtonMouse() {
@@ -92,3 +107,19 @@ function onButtonThread(buttonIndex) {
     nThreads = contador
     console.log(nThreads)
 }
+
+function fadeSceneIn() {
+    fadeTween = game.add.tween(fadeRectangle)
+    fadeTween.to({ alpha: 0 }, 500, Phaser.Easing.Linear.None, true);
+}
+
+function fadeSceneOut(siguienteEscena) {
+
+
+    fadeTween = game.add.tween(fadeRectangle)
+    fadeTween.to({ alpha: 1 }, 500, Phaser.Easing.Linear.None, true);
+    
+    fadeTween.onComplete.add(function() {
+      game.state.start(siguienteEscena);
+    }, this);
+  }
