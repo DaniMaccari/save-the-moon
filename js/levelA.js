@@ -15,6 +15,7 @@ let time, timeText;
 let Bug, yBug = 30;
 let bugs;
 let disparo;
+let tvForeground
 
 var startTime;
 var timerText;
@@ -23,12 +24,13 @@ class BugEnemy {
     constructor(initialThread) {
         this.myThread = initialThread
         this.img = game.add.sprite(threadPosition[initialThread], yBug, "mariquita")
-        game.physics.arcade.enable(this.img);
+        this.img.x = threadPosition[initialThread]
+        this.img.y = yBug
+        game.physics.arcade.enable(this.img)
 
         this.img.scale.setTo(0.1, 0.1)
         this.myWidth = this.img.width / 2
         this.img.x -= this.myWidth
-
         
     }
   
@@ -113,13 +115,14 @@ function displayScreen() {
     
 
     //enable collisions
+    //enemy = game.add.sprite(-100, 0, "mariquita")
+    //enemy.scale.setTo(0.1, 0.1)
     game.physics.arcade.enable("mariquita");
     game.physics.arcade.enable("disparo");
 
     tvForeground = game.add.image(0, 0, "tv")
     tvForeground.scale.setTo(game.width/tvForeground.width, game.height/tvForeground.height)
-    tvForeground.bringToTop();
-    tvForeground.z = 1;
+    tvForeground.z = 3;
 
     createHUD();
 
@@ -134,6 +137,9 @@ function spawn() {
 
     Bug = new BugEnemy(randomBugPosition);
     bugsArray.push(Bug);
+
+    //tvForeground.bringToTop()
+
 }
 
 //--- GET INPUT --------------------------
@@ -224,7 +230,6 @@ function moveBugs() {
 
     }
     
-
 }
 
 
@@ -234,7 +239,7 @@ function hagoDaño(thisShot,thisBug)
     thisBug.kill();
     
     score+=10;
-    console.log(score)
+    console.log(bugsArray.length)
 }
 
 
@@ -291,11 +296,11 @@ function updateGame() {
         game.physics.arcade.overlap(disparo, bugsArray[i].img, hagoDaño, null, this);
 
         if( bugsArray[i].img.y > playerYpos ){
-            reciboDaño();
+            reciboDaño()
             
-            bugsArray[i].img.destroy();
-            bugsArray.splice(i, 1);
-            i--; 
+            bugsArray[i].img.destroy()
+            bugsArray.splice(i, 1)
+            i--
         }
 
     }
