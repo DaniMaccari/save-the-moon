@@ -71,7 +71,7 @@ function onButtonMouse() {
     buttonMouse.setFrames(1,1,1,1)
     buttonKeyboard.setFrames(1,0,0,0)
     isKeyboradActive = false
-    game.state.start("inicio")
+    
 }
 
 //activate keyboard, deactivate mouse
@@ -80,7 +80,7 @@ function onButtonKeyboard() {
     buttonKeyboard.setFrames(1,1,1,1)
     buttonMouse.setFrames(1,0,0,0)
     isKeyboradActive = true
-    game.state.start("inicio")
+    
 }
     
 function onButtonThread(buttonIndex) {
