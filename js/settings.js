@@ -13,7 +13,7 @@ let settingsState = {
 // methods for each phase of the state
 function preloadAssets() { 
     game.load.image("tele","assets/imgs/BG-1.png");
-    game.load.image("bg","/assets/imgs/SETTINGS SCREEN/settingsBG.png");
+    game.load.image("bg","assets/imgs/SETTINGS SCREEN/settingsBGG.png");
     game.load.spritesheet("back","assets/imgs/backSpritesheet.png", 519,519);
     game.load.spritesheet("keyboard","assets/imgs/SETTINGS SCREEN/keyboardSpritesheet.png", 519, 519);
     game.load.spritesheet("mouse","assets/imgs/SETTINGS SCREEN/mouseSpritesheet.png", 519, 519);
