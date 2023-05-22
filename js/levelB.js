@@ -69,6 +69,8 @@ function displayScreen() {
     //create thread branches
     let nBranches = middleThread
     let aux
+    let branchGap = 0.3 - (nThreads * 0.02)
+    console.log(branchGap)
     while (nBranches >= 0){
         aux = game.rnd.integerInRange(0, nThreads - 1)
         console.log(aux)
@@ -76,16 +78,20 @@ function displayScreen() {
         //if this thread doents have branch
         if ( branchPosition[aux] == -10 ){
 
-            branchPosition[aux] = game.rnd.integerInRange(200, game.height*0.7)
+            branchPosition[aux] = game.rnd.integerInRange(200, game.height*0.6)
 
             let tempBranch = game.add.image(threadPosition[aux], branchPosition[aux], "drawBranch")
-            tempBranch.scale.setTo(0.2)
+            
 
             //señala izquierda entra if, señala derecha se queda como está
-            if ( aux == nThreads-1 && (aux != 0  && game.rnd.integerInRange(0, 1) == 0)){
+            if ( aux == nThreads-1 || (aux != 0  && game.rnd.integerInRange(0, 1) == 0)){
                 branchDirection[aux] = true 
-                tempBranch.scale.setTo( 0.2, -0.2)
-                tempBranch.x -= tempBranch.width
+                tempBranch.scale.setTo( -branchGap, branchGap)
+                tempBranch.x += 15
+
+            } else {
+                tempBranch.scale.setTo( branchGap, branchGap)
+                tempBranch.x -= 15
             }
             
 
