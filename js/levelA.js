@@ -31,6 +31,9 @@ class BugEnemy {
         this.img.scale.setTo(0.1, 0.1)
         this.myWidth = this.img.width / 2
         this.img.x -= this.myWidth
+
+        this.isMoving = false
+        this.direction = false
         
     }
   
