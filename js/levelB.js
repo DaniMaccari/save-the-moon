@@ -78,7 +78,7 @@ function displayScreen() {
         //if this thread doents have branch
         if ( branchPosition[aux] == -10 ){
 
-            branchPosition[aux] = game.rnd.integerInRange(200, game.height*0.6)
+            branchPosition[aux] = game.rnd.integerInRange(200, game.height*0.5)
 
             let tempBranch = game.add.image(threadPosition[aux], branchPosition[aux], "drawBranch")
             
@@ -119,14 +119,14 @@ function displayScreen() {
 
 }
 
-function moveBugs() {
+function moveBugsLevelB() {
     for (let i = 0; i < bugsArray.length; i++) {
         bugsArray[i].move();
 
         //check branch
         if ( bugsArray[i].y > branchPosition[bugsArray[i].actualThread] && bugsArray[i].y < branchPosition[bugsArray[i].actualThread] +5){
-            if( game.rnd.integerInRange(0, 2) == 0){
-
+            if( game.rnd.integerInRange(0, 2) != 4){
+                console.log("HERMANOO")
                 bugsArray[i].isMoving = true
                 if ( branchDirection[bugsArray[i].actualThread] ) {//hacia la izquierda
                     bugsArray[i].actualThread -= 1
@@ -135,7 +135,7 @@ function moveBugs() {
                 } else {
                     bugsArray[i].actualThread += 1
                     bugsArray[i].direction = false
-                    
+
                 }
                 //implementar modo moverse de lado cada bichito
             }
@@ -144,6 +144,7 @@ function moveBugs() {
     }
 }
 
-function update() {
-    moveBugs();
+function updateGame() {
+    moveBugsLevelB();
+    
 }

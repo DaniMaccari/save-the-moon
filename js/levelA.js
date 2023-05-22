@@ -38,7 +38,26 @@ class BugEnemy {
     }
   
     move() {
-        this.img.y += 2;
+        if(this.isMoving && this.direction){ //izquierda
+
+            this.img.x -= 2
+            if (this.img.x <= threadPosition[actualThread]) {
+                this.isMoving = false
+                this.img.x = threadPosition[actualThread]
+            }
+            
+        }
+        else if ( this.isMoving && !this.direction){ //derecha
+            this.img.x += 2
+            if (this.img.x >= threadPosition[actualThread]) {
+                this.isMoving = false
+                this.img.x = threadPosition[actualThread]
+            }
+        }
+        else{
+            this.img.y += 2
+        }
+        
     }
   }
 
