@@ -14,6 +14,7 @@ function loadAssets(){
     
         game.load.spritesheet("back","assets/imgs/backSpritesheet.png", 519,519);
         game.load.spritesheet("dani","assets/imgs/CREDITS SCREEN/daniSpritesheet.png", 519,519);
+        game.load.spritesheet("maggy","assets/imgs/CREDITS SCREEN/maggySpritesheet.png", 519,519);
         game.load.image("bg","assets/imgs/START SCREEN/BG-MAIN.png");
         game.load.image("pantallaNegra","assets/imgs/Solid_black.png")
         game.load.spritesheet("tvAnim","assets/imgs/TVanim.png", 2050,2050);
@@ -32,9 +33,12 @@ function displayScreen(){
     'back', function() {fadeSceneOut("inicio"); },0,1,0,1);
     btnBack.scale.setTo(0.3, 0.3);
 
-    dani = game.add.button(300,200,"dani", null, 0,1,0,1);
-    dani.scale.setTo(0.4,0.4);
+    dani = game.add.button(300,220,"dani", danifunction, 0,1,0,1);
+    dani.scale.setTo(0.5,0.5);
     
+    maggy = game.add.button(470,230,"maggy", maggyfunction, 0,1,0,1);
+    maggy.scale.setTo(0.47,0.47);
+
     TV = game.add.sprite(0,0,"tvAnim")
     TV.scale.setTo(game.width/TV.width, game.height/TV.height)
     TV.animations.add("TVanimation", [0, 1, 2], 15, true)
@@ -48,6 +52,14 @@ function displayScreen(){
     fadeSceneIn();
 };
 
+function maggyfunction() {
+    window.location.href = "https://twitter.com/moggichita";
+}
+
+function danifunction() {
+
+    window.location.href = "https://twitter.com/dani_maccari";
+}
 
 function fadeSceneIn() {
     fadeTween = game.add.tween(fadeRectangle)
