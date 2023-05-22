@@ -20,6 +20,8 @@ let tvForeground
 var startTime;
 var timerText;
 
+let iAux;
+
 class BugEnemy {
     constructor(initialThread) {
         this.myThread = initialThread
@@ -254,13 +256,16 @@ function moveBugs() {
     
 }
 
-
-function hagoDaño(thisShot,thisBug)
+//--- BULLET/ENEMY COLLISION --------------------
+function hagoDaño(thisShot,thisBug, i)
 {
-    thisShot.kill();
-    thisBug.kill();
-    
-    score+=10;
+    thisShot.kill()
+    bugsArray[i].img.destroy()
+    console.log(i)
+    bugsArray.splice(i, 1) //si no está los enemigos quitan vida aún borrados
+    iAux--
+
+    score+=10
     console.log(bugsArray.length)
 }
 
@@ -314,16 +319,21 @@ function updateGame() {
     }
     
     //check collisions BULLET/ENEMI and check if enemy reached bottom
-    for (let i = 0; i < bugsArray.length; i++) {
-        game.physics.arcade.overlap(disparo, bugsArray[i].img, hagoDaño, null, this);
+    for (iAux = 0; iAux < bugsArray.length; iAux++) {
 
-        if( bugsArray[i].img.y > playerYpos ){
+        if( bugsArray[iAux].img.y > playerYpos ){
             reciboDaño()
             
-            bugsArray[i].img.destroy()
-            bugsArray.splice(i, 1)
-            i--
+            bugsArray[iAux].img.destroy()
+            bugsArray.splice(iAux, 1)
+            iAux--
+
+        } else {
+            game.physics.arcade.overlap(disparo, bugsArray[iAux].img, hagoDaño, null, {i: iAux})
+
         }
+
+        
 
     }
 
