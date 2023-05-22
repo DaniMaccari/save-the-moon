@@ -12,7 +12,7 @@ let score, scoreText;
 let lives, livesText;
 let level, levelText;
 let time, timeText;
-let Bug, yBug = 0;
+let Bug, yBug = 30;
 let bugs;
 let disparo;
 
@@ -57,7 +57,6 @@ function loadAssets() {
     game.load.image("bg", "assets/imgs/BG.png");
     game.load.image("tv", "assets/imgs/BG-1.png");
     line = game.add.sprite(-10, 0, "drawLine");
-    console.log(line.width);
 }
 
 //--- create level --------------
@@ -285,10 +284,13 @@ function updateGame() {
         
     }
     
-
-    //check collisions BULLET/ENEMI
+    //check collisions BULLET/ENEMI and check if enemy reached bottom
     for (let i = 0; i < bugsArray.length; i++) {
         game.physics.arcade.overlap(disparo, bugsArray[i].img, hagoDaño, null, this);
+
+        if( bugsArray[i].y > playerYpos ){
+            //AQUI HACER DAÑO A JUGADOR
+        }
 
     }
 
