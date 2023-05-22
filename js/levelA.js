@@ -144,7 +144,6 @@ function displayScreen() {
 
     tvForeground = game.add.image(0, 0, "tv")
     tvForeground.scale.setTo(game.width/tvForeground.width, game.height/tvForeground.height)
-    tvForeground.z = 3;
 
     createHUD();
 
