@@ -1,5 +1,5 @@
 
-
+/*
 const DISPARO_GROUP_SIZE = 40;
 const DISPARO_OFFSET_X = 10;
 const DISPARO_OFFSET_Y = 10;
@@ -73,3 +73,4 @@ function shootDisparo(x, y, vd)
         }
         return shot;
 }
+*/

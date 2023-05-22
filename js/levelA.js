@@ -1,4 +1,4 @@
-const DISPARO_GROUP_SIZE = 7;
+const DISPARO_GROUP_SIZE = 3;
 const DISPARO_OFFSET_X = 10;
 const DISPARO_OFFSET_Y = -300;
 const DISPARO_VEL = 350;
@@ -187,13 +187,12 @@ function getKeyboardInput(e) {
     //shoot imput
     if (e.keyCode == Phaser.Keyboard.SPACEBAR) {
         fireDisparos();
-        console.log("Disparo");
     }
 };
 
 //--- GET MOUSE INPUT -------------------
 function onMouseDown(pointer) {
-    if (pointer.button === Phaser.Mouse.LEFT_BUTTON) {
+    if (pointer.button == Phaser.Mouse.LEFT_BUTTON) {
         fireDisparos();
     }
 };
@@ -224,7 +223,7 @@ function createDisparo(number) {
 }
 
 function resetMember(item) {
-     item.kill();
+    item.kill();
 }
 
 function fireDisparos() {
@@ -236,9 +235,10 @@ function fireDisparos() {
 
 function shootDisparo(x, y, vd) {
     let shot = disparo.getFirstExists(false);
-    shot.scale.setTo(0.05, 0.05);
+    
 
     if (shot) {
+        shot.scale.setTo(0.05, 0.05);
         shot.reset(x, y);
         shot.body.velocity.y = vd;
     }
@@ -255,15 +255,16 @@ function moveBugs() {
 }
 
 //--- BULLET/ENEMY COLLISION --------------------
-function hagoDaño(thisShot,thisBug, i)
-{
+function hagoDaño(thisShot, thisBug){
+    let i = this.i
+
     thisShot.kill()
-    thisBug.destroy()
+    thisBug.kill()
     console.log(i)
     bugsArray.splice(i, 1) //si no está los enemigos quitan vida aún borrados
 
     score+=10
-    console.log(bugsArray.length)
+    console.log("this i is ->" + i)
 }
 
 
@@ -315,26 +316,23 @@ function updateGame() {
         
     }
     
+    //deactivate shots
+    
     //check collisions BULLET/ENEMI and check if enemy reached bottom
-    for (let i = 0; i < bugsArray.length; i++) {
+    for (let i = bugsArray.length-1; i >=0; i--) { //de atras hacia adelante para que no salten tantos errores
 
+        
+        
         if( bugsArray[i].img.y > playerYpos ){
             reciboDaño()
             
             bugsArray[i].img.destroy()
             bugsArray.splice(i, 1)
-            i--
 
         } else {
-            game.physics.arcade.overlap(disparo, bugsArray[i].img, function(thisShot, thisBug) {
-                hagoDaño(thisShot, thisBug, i)
-                i--
-            })
+            game.physics.arcade.overlap( disparo, bugsArray[i].img, hagoDaño, null, { i: i })
 
         }
-
-        
-
     }
 
 }
