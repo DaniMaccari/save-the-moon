@@ -121,7 +121,20 @@ function displayScreen() {
 
 function moveBugs() {
     for (let i = 0; i < bugsArray.length; i++) {
-        bugsArray[i].move(); 
+        bugsArray[i].move();
+
+        //check branch
+        if ( bugsArray[i].y > branchPosition[bugsArray[i].actualThread] && bugsArray[i].y < branchPosition[bugsArray[i].actualThread] +5){
+            if( game.rnd.integerInRange(0, 2) == 0){
+                if ( branchDirection[bugsArray[i].actualThread] ) {//hacia la izquierda
+                    bugsArray[i].actualThread -= 1
+                } else {
+                    bugsArray[i].actualThread += 1
+                }
+                //implementar modo moverse de lado cada bichito
+            }
+
+        }
     }
 }
 
