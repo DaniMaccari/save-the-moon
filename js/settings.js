@@ -17,7 +17,7 @@ function preloadAssets() {
     game.load.spritesheet("back","assets/imgs/backSpritesheet.png", 519,519);
     game.load.spritesheet("keyboard","assets/imgs/SETTINGS SCREEN/keyboardSpritesheet.png", 519, 519);
     game.load.spritesheet("mouse","assets/imgs/SETTINGS SCREEN/mouseSpritesheet.png", 519, 519);
-    game.load.spritesheet("threads","assets/imgs/SETTINGS SCREEN/threadsSpritesheet.png", 182, 519);
+    game.load.spritesheet("threads","assets/imgs/SETTINGS SCREEN/confthreadSpritesheet.png", 182, 182);
     game.load.image("pantallaNegra","assets/imgs/Solid_black.png")
 }
 
@@ -40,11 +40,11 @@ function initGame() {
 
 
     //Back button
-    backButton = game.add.button(370, 550, "back", function() {fadeSceneOut("inicio"); },0,1,0,1);
+    backButton = game.add.button(370, 530, "back", function() {fadeSceneOut("inicio"); },0,1,0,1);
     backButton.scale.setTo(0.17, 0.17);
 
     //THREAD SELECTOR
-    let initialThreadPosX = 250;
+    let initialThreadPosX = 210;
     arrThreads = []
 
     for (let i=0; i<9; i++) {
@@ -52,7 +52,7 @@ function initGame() {
         if ( i<3 ){
             threadButton.setFrames( 1, 0, 1, 0)
         }
-        threadButton.scale.setTo(0.15, 0.15)
+        threadButton.scale.setTo(0.2, 0.2)
         arrThreads.push(threadButton)
         initialThreadPosX += threadButton.width +10
     }
@@ -71,7 +71,7 @@ function onButtonMouse() {
     buttonMouse.setFrames(1,1,1,1)
     buttonKeyboard.setFrames(1,0,0,0)
     isKeyboradActive = false
-    game.state.start("inicio")
+    
 }
 
 //activate keyboard, deactivate mouse
@@ -80,7 +80,7 @@ function onButtonKeyboard() {
     buttonKeyboard.setFrames(1,1,1,1)
     buttonMouse.setFrames(1,0,0,0)
     isKeyboradActive = true
-    game.state.start("inicio")
+    
 }
     
 function onButtonThread(buttonIndex) {
