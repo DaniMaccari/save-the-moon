@@ -16,6 +16,9 @@ let Bug, yBug = 30;
 let bugs;
 let disparo;
 
+var startTime;
+var timerText;
+
 class BugEnemy {
     constructor(initialThread) {
         this.myThread = initialThread
@@ -77,10 +80,7 @@ function displayScreen() {
     score = 0;
     level = 1.0;
     lives = 4;
-
-    createHUD();
-    bugs = game.add.group();
-    
+    startTime = game.time.now;
 
     timer = game.time.create(false);
     timer.loop(1500, spawn);
@@ -119,6 +119,9 @@ function displayScreen() {
     tvForeground.scale.setTo(game.width/tvForeground.width, game.height/tvForeground.height)
     tvForeground.bringToTop();
 
+
+    createHUD();
+
     timer.start();
 
 
@@ -140,13 +143,6 @@ function getKeyboardInput(e) {
         if (actualThread > 0) {
             actualThread = actualThread - 1;
 
-            /*
-            if( actualThread < middleThread){
-                player.y -= playerYchange
-            } else {
-                player.y += playerYchange
-            }
-            */
         }
     }
 
@@ -154,13 +150,6 @@ function getKeyboardInput(e) {
         if (actualThread < nThreads - 1) {
             actualThread = actualThread + 1;
 
-            /*
-            if( actualThread > middleThread){
-                player.y -= playerYchange
-            } else {
-                player.y += playerYchange
-            }
-            */
         }   
     }
 
@@ -187,11 +176,11 @@ function createHUD() {
     let allY = - 25;
     let styleHUD = { fontSize: "18px", fill: "#FFFFFF" };
 
-    scoreText = game.add.text(game.world.width/15,  game.world.height/15, "Score: " + score, styleHUD);
+    timerText = game.add.text(50,  20, "Time: ", styleHUD);
 
-    levelText = game.add.text(game.world.width/9, game.world.height/10, "Level: " + level, styleHUD);
+    scoreText = game.add.text(50,  game.world.height/15, "Score: " + score, styleHUD);
 
-    levelText.anchor.setTo(0.5, 0);
+    levelText = game.add.text(50, game.world.height/10, "Level: " + level, styleHUD);
 
     livesText = game.add.text(livesX, allY, "Lives: " + lives, styleHUD);
     livesText.anchor.setTo(1, 0);
@@ -233,19 +222,26 @@ function shootDisparo(x, y, vd) {
 function moveBugs() {
     for (let i = 0; i < bugsArray.length; i++) {
        bugsArray[i].move();
+       
+       if (bugsArray[i].y > player.y) {
+        
+        reciboDaño(player,bugsArray[i].img);
+
+       }
 
     }
+    
 
 }
-
 
 
 function hagoDaño(thisShot,thisBug)
 {
     thisShot.kill();
     thisBug.kill();
-    console.log("te hago daño baby")
+    
     score+=10;
+    console.log(score)
 }
 
 
@@ -262,9 +258,19 @@ function reciboDaño(player,bugs)
     {
         player.kill();
         bugs.kill();
-        console.log("no te pilles baby")
+        console.log("He muerto")
     }
 
+}
+
+function updateScore() {
+
+    scoreText.text = "Score: "+ score;
+}
+
+function updateTimer() {
+    var elapsed = game.time.now - startTime;
+    timerText.text = "Time: " + Math.floor(elapsed / 1000); // Display in seconds
 }
 
 //--- UPADATE ------------
@@ -272,6 +278,8 @@ function updateGame() {
 
     //move enemies
     moveBugs();
+    updateScore();
+    updateTimer();
 
     //if mouse input is active
     if( !isKeyboradActive) {
