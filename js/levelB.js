@@ -1,5 +1,4 @@
-const branchPosition = [], branchSide = [];
-let nBranches;
+var branchPosition = [], branchDirection = [];
 
 //START LEVEL B --------------------------------------------
 let levelBState = {
@@ -13,6 +12,7 @@ function loadAssets() {
     game.load.image("daniel", "assets/imgs/shipYellow.png")
     game.load.image("mariquita", "assets/imgs/mariquita.png")
     game.load.image("drawLine", "assets/imgs/line.png")
+    game.load.image("drawBranch", "assets/imgs/line_tumbada.png")
     game.load.image("levelA", "assets/imgs/start.png")
     game.load.image("disparo", "assets/imgs/punto.png")
     game.load.image("bg", "assets/imgs/BG.png")
@@ -39,9 +39,7 @@ function displayScreen() {
     lives = 4;
 
     createHUD();
-    bugs = game.add.group();
     
-
     timer = game.time.create(false);
     timer.loop(1500, spawn);
 
@@ -52,6 +50,9 @@ function displayScreen() {
 
     //create threads
     threadPosition = []
+    branchPosition = []
+    branchDirection = []
+
     for (let i = 0; i < nThreads; i++) {
         threadPosition.push( 
         (game.world.width / (nThreads + 1)) * (i + 1) );
@@ -60,7 +61,38 @@ function displayScreen() {
         tempLine.x -= (tempLine.width / 2)
         
         tempLine.tint = 0xff0080; //change color
-        
+
+        branchPosition.push(-10)
+        branchDirection.push(false)
+    }
+
+    //create thread branches
+    let nBranches = middleThread
+    let aux
+    while (nBranches >= 0){
+        aux = game.rnd.integerInRange(0, nThreads - 1)
+        console.log(aux)
+
+        //if this thread doents have branch
+        if ( branchPosition[aux] == -10 ){
+
+            branchPosition[aux] = game.rnd.integerInRange(200, game.height*0.7)
+
+            let tempBranch = game.add.image(threadPosition[aux], branchPosition[aux], "drawBranch")
+            tempBranch.scale.setTo(0.2)
+
+            //señala izquierda entra if, señala derecha se queda como está
+            if ( aux == nThreads-1 && (aux != 0  && game.rnd.integerInRange(0, 1) == 0)){
+                branchDirection[aux] = true 
+                tempBranch.scale.setTo( 0.2, -0.2)
+                tempBranch.x -= tempBranch.width
+            }
+            
+
+            nBranches -= 1
+            
+            console.log(branchDirection[aux])
+        }
     }
 
     player = game.add.sprite(threadPosition[actualThread], playerYpos, "daniel");
@@ -68,8 +100,6 @@ function displayScreen() {
     player.x = threadPosition[actualThread] - player.width / 2;
 
     createDisparo(DISPARO_GROUP_SIZE);
-
-    
 
     //enable collisions
     game.physics.arcade.enable("mariquita");
@@ -81,5 +111,14 @@ function displayScreen() {
 
     timer.start();
 
+}
 
+function moveBugs() {
+    for (let i = 0; i < bugsArray.length; i++) {
+        bugsArray[i].move(); 
+    }
+}
+
+function update() {
+    moveBugs();
 }
