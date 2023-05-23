@@ -37,8 +37,7 @@ function displayScreen() {
     score = 0;
     level = 1.0;
     lives = 4;
-
-    createHUD();
+    startTime = game.time.now;
     
     timer = game.time.create(false);
     timer.loop(1500, spawn);
@@ -73,12 +72,13 @@ function displayScreen() {
     console.log(branchGap)
     while (nBranches >= 0){
         aux = game.rnd.integerInRange(0, nThreads - 1)
-        console.log(aux)
+        
 
         //if this thread doents have branch
         if ( branchPosition[aux] == -10 ){
 
             branchPosition[aux] = game.rnd.integerInRange(200, game.height*0.5)
+            console.log("pos->" + aux + " altura y->" + branchPosition[aux])
 
             let tempBranch = game.add.image(threadPosition[aux], branchPosition[aux], "drawBranch")
             
@@ -115,25 +115,58 @@ function displayScreen() {
     tvForeground.scale.setTo(game.width/tvForeground.width, game.height/tvForeground.height)
     tvForeground.bringToTop();
 
+    createHUD();
+
     timer.start();
 
 }
 
-function moveBugsLevelB() {
-    for (let i = 0; i < bugsArray.length; i++) {
-        bugsArray[i].move();
+/*
+//Is it necesarry?
+function spawn() {
+    var randomBugPosition = game.rnd.integerInRange(0, nThreads - 1);
 
+    Bug = new BugEnemy(randomBugPosition);
+    bugsArray.push(Bug);
+
+    //tvForeground.bringToTop()
+
+}
+*/
+
+function createHUD() {
+
+    let styleHUD = { fontSize: "18px", fill: "#FFFFFF" };
+
+    timerText = game.add.text(50,  20, "Time: ", styleHUD);
+
+    scoreText = game.add.text(50,  game.world.height/15, "Score: " + score, styleHUD);
+
+    levelText = game.add.text(50, game.world.height/10, "Level: " + level, styleHUD);
+
+    livesText = game.add.text(50, 100, "Lives: " + lives, styleHUD);
+
+}
+
+function moveBugsLevelB() {
+
+    for (let i = 0; i < bugsArray.length; i++) {
+        bugsArray[i].move()
+        
         //check branch
-        if ( bugsArray[i].y > branchPosition[bugsArray[i].actualThread] && bugsArray[i].y < branchPosition[bugsArray[i].actualThread] +5){
-            if( game.rnd.integerInRange(0, 2) != 4){
-                console.log("HERMANOO")
+        if ( !bugsArray[i].isMoving &&
+            bugsArray[i].img.y > branchPosition[bugsArray[i].myThread] &&
+            bugsArray[i].img.y < branchPosition[bugsArray[i].myThread] +10){
+            
+            if( game.rnd.integerInRange(0, 2) == 0){
+                
                 bugsArray[i].isMoving = true
-                if ( branchDirection[bugsArray[i].actualThread] ) {//hacia la izquierda
-                    bugsArray[i].actualThread -= 1
+                if ( branchDirection[bugsArray[i].myThread] ) {//hacia la izquierda
+                    bugsArray[i].myThread -= 1
                     bugsArray[i].direction = true
 
-                } else {
-                    bugsArray[i].actualThread += 1
+                } else { //hacia la derecha
+                    bugsArray[i].myThread += 1
                     bugsArray[i].direction = false
 
                 }
@@ -145,6 +178,38 @@ function moveBugsLevelB() {
 }
 
 function updateGame() {
-    moveBugsLevelB();
+    moveBugsLevelB()
+    updateScore()
+    updateTimer()
+
+    //if mouse input is active
+    if( !isKeyboradActive) {
+        let mousePos = game.input.mousePointer.x
+        for ( let i=0; i < threadPosition.length; i++){
+            if(threadPosition[i] -35 < mousePos && threadPosition[i] +35 > mousePos){
+                player.x = threadPosition [i] - player.width / 2
+            }
+        }
+        
+    }
+    
+    //deactivate shots
+    
+    //check collisions BULLET/ENEMI and check if enemy reached bottom
+    for (let i = bugsArray.length-1; i >=0; i--) { //de atras hacia adelante para que no salten tantos errores
+
+        
+        
+        if( bugsArray[i].img.y > playerYpos ){
+            reciboDaño()
+            
+            bugsArray[i].img.destroy()
+            bugsArray.splice(i, 1)
+
+        } else {
+            game.physics.arcade.overlap( disparo, bugsArray[i].img, hagoDaño, null, { i: i })
+
+        }
+    }
     
 }
