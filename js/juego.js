@@ -1,16 +1,19 @@
+
+let btnLevelA, btnLevelB, btnLevelC;
+
+
 let juegoState = {
      
     preload: loadAssets,
     create : displayScreen
 };
 
-let btnLevelA, btnLevelB, btnLevelC;
-
 
 function loadAssets(){
 
-    game.load.image("levelA", "assets/imgs/start.png");//cambiar la ruta de las imagenes levels A B C
-    game.load.image("levelB", "assets/imgs/start.png");//cambiar la ruta de las imagenes levels A B C
+    game.load.spritesheet("levelA","assets/imgs/partASpritesheet.png", 925,519);
+    game.load.spritesheet("levelB", "assets/imgs/partBSpritesheet.png",925,519);
+    game.load.spritesheet("levelC", "assets/imgs/partCSpritesheet.png",925,519);
 
     game.load.image("tele","assets/imgs/BG-1.png");
     game.load.image("bg","assets/imgs/START SCREEN/BG-MAIN.png");
@@ -21,14 +24,20 @@ function displayScreen(){
     
     game.input.enabled = true;
 
-    //set bacground
+    //set background
     BG = game.add.image(0, 0, "bg")
     BG.scale.setTo(game.width/BG.width, game.height/BG.height)
     
+    
 
-    btnLevelA = game.add.button(game.world.width / 2, (game.world.height / 6) * 2, 'levelA', onLevelAPressed);
-    btnLevelB = game.add.button(game.world.width / 2, (game.world.height / 6) * 3, 'levelB', onLevelBPressed);
-    btnLevelC = game.add.button(game.world.width / 2, (game.world.height / 6) * 4, 'levelA', onLevelCPressed);
+    btnLevelA = game.add.button(180,200,"levelA",onLevelAPressed,0,1,0,1);
+    btnLevelA.scale.setTo(0.3,0.3);
+
+    btnLevelB = game.add.button(400,315,"levelB",onLevelBPressed,0,1,0,1);
+    btnLevelB.scale.setTo(0.3,0.3);
+
+    btnLevelC = game.add.button(180,440,"levelC",onLevelCPressed,0,1,0,1);
+    btnLevelC.scale.setTo(0.3,0.3);
 
     //TV layout
     TV = game.add.image(0, 0, "tele")
@@ -36,7 +45,6 @@ function displayScreen(){
 };
 
 function onLevelAPressed(){
-    console.log("level A les GOO")
     game.state.start("levelA");
 };
 function onLevelBPressed(){

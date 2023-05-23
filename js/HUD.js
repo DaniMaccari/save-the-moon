@@ -29,7 +29,7 @@ function createLives() {
     const life = lifeGroup.create(lifesX + i * spacing, lifestY, 'lives');
 
     life.frame = 0; // Set the initial frame of the sprite sheet
-    life.anchor.setTo(0.5, 0.5); // Adjust the anchor point if needed
+    life.anchor.setTo(0.5, 0.5); 
     life.scale.setTo(0.15,0.13);
   }
    
