@@ -81,7 +81,8 @@ function loadAssets() {
     game.load.image("disparo", "assets/imgs/punto.png");
     game.load.image("bg", "assets/imgs/BG.png");
     game.load.image("tv", "assets/imgs/BG-1.png");
-    line = game.add.sprite(-10, 0, "drawLine");
+    game.load.spritesheet("lives","assets/imgs/lifeSpritesheet.png",519,519);
+
 }
 
 //--- create level --------------
@@ -101,7 +102,9 @@ function displayScreen() {
 
     score = 0;
     level = 1.0;
-    lives = 4;
+    lives = 5;
+    
+
     startTime = game.time.now;
 
     timer = game.time.create(false);
@@ -141,6 +144,7 @@ function displayScreen() {
     tvForeground.scale.setTo(game.width/tvForeground.width, game.height/tvForeground.height)
 
     createHUD();
+    createLives();
     timer.start();
 
 
@@ -247,10 +251,7 @@ function hagoDaño(thisShot, thisBug){
 }
 
 
-
-
-
-//--- UPADATE ------------
+//--- UPDATE ------------
 function updateGame() {
 
     //move enemies

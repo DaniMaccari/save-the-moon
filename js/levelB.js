@@ -17,7 +17,7 @@ function loadAssets() {
     game.load.image("disparo", "assets/imgs/punto.png")
     game.load.image("bg", "assets/imgs/BG.png")
     game.load.image("tv", "assets/imgs/BG-1.png")
-    //line = game.add.sprite(-10, 0, "drawLine")
+    
 }
 
 function displayScreen() {
