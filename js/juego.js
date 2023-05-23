@@ -1,5 +1,5 @@
 
-let btnLevelA, btnLevelB, btnLevelC;
+let btnLevelA, btnLevelB, btnLevelC, BackButton;
 
 
 let juegoState = {
@@ -14,7 +14,7 @@ function loadAssets(){
     game.load.spritesheet("levelA","assets/imgs/partASpritesheet.png", 925,519);
     game.load.spritesheet("levelB", "assets/imgs/partBSpritesheet.png",925,519);
     game.load.spritesheet("levelC", "assets/imgs/partCSpritesheet.png",925,519);
-
+    game.load.spritesheet("back","assets/imgs/backSpritesheet.png", 519,519);
     game.load.image("tele","assets/imgs/BG-1.png");
     game.load.image("bg","assets/imgs/START SCREEN/BG-MAIN.png");
     
@@ -28,7 +28,10 @@ function displayScreen(){
     BG = game.add.image(0, 0, "bg")
     BG.scale.setTo(game.width/BG.width, game.height/BG.height)
     
-    
+    //Buttons
+
+    BackButton = game.add.button(470,470,"back",onBackPressed,0,1,0,1);
+    BackButton.scale.setTo(0.25,0.25);
 
     btnLevelA = game.add.button(180,200,"levelA",onLevelAPressed,0,1,0,1);
     btnLevelA.scale.setTo(0.3,0.3);
@@ -44,12 +47,18 @@ function displayScreen(){
     TV.scale.setTo(game.width/TV.width, game.height/TV.height)
 };
 
+function onBackPressed() {
+    game.state.start("inicio");
+}
+
 function onLevelAPressed(){
     game.state.start("levelA");
 };
+
 function onLevelBPressed(){
     game.state.start("levelB");
 };
+
 function onLevelCPressed(){
     game.state.start("inicio");
 };
