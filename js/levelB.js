@@ -17,7 +17,7 @@ function loadAssets() {
     game.load.image("disparo", "assets/imgs/punto.png")
     game.load.image("bg", "assets/imgs/BG.png")
     game.load.image("tv", "assets/imgs/BG-1.png")
-    line = game.add.sprite(-10, 0, "drawLine")
+    //line = game.add.sprite(-10, 0, "drawLine")
 }
 
 function displayScreen() {
@@ -118,33 +118,6 @@ function displayScreen() {
     createHUD();
 
     timer.start();
-
-}
-
-/*
-//Is it necesarry?
-function spawn() {
-    var randomBugPosition = game.rnd.integerInRange(0, nThreads - 1);
-
-    Bug = new BugEnemy(randomBugPosition);
-    bugsArray.push(Bug);
-
-    //tvForeground.bringToTop()
-
-}
-*/
-
-function createHUD() {
-
-    let styleHUD = { fontSize: "18px", fill: "#FFFFFF" };
-
-    timerText = game.add.text(50,  20, "Time: ", styleHUD);
-
-    scoreText = game.add.text(50,  game.world.height/15, "Score: " + score, styleHUD);
-
-    levelText = game.add.text(50, game.world.height/10, "Level: " + level, styleHUD);
-
-    livesText = game.add.text(50, 100, "Lives: " + lives, styleHUD);
 
 }
 

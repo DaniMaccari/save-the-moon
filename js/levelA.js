@@ -1,4 +1,4 @@
-const DISPARO_GROUP_SIZE = 3;
+const DISPARO_GROUP_SIZE = 5;
 const DISPARO_OFFSET_X = 10;
 const DISPARO_OFFSET_Y = -300;
 const DISPARO_VEL = 350;
@@ -11,7 +11,7 @@ let actualThread, middleThread, playerYpos = 560, playerYchange = 7;
 let score, scoreText;
 let lives, livesText;
 let level, levelText;
-let time, timeText;
+var time, timeText;
 let Bug, yBug = 30;
 let bugs;
 let disparo;
@@ -297,8 +297,11 @@ function updateScore() {
 
 function updateTimer() {
     var elapsed = game.time.now - startTime;
-    timerText.text = "Time: " + Math.floor(elapsed / 1000); // Display in seconds
+    var actualTime = Math.floor(elapsed / 1000);
+    timerText.text = "Time: " + actualTime; // Display in seconds
+    
 }
+
 
 //--- UPADATE ------------
 function updateGame() {
@@ -307,6 +310,7 @@ function updateGame() {
     moveBugs();
     updateScore();
     updateTimer();
+
 
     //if mouse input is active
     if( !isKeyboradActive) {
