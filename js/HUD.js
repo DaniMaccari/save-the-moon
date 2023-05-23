@@ -9,7 +9,7 @@ function createHUD() {
 
     let styleHUD = { fontSize: "18px", fill: "#FFFFFF" };
 
-    timerText = game.add.text(50,  20, "Time: ", styleHUD);
+    timeText = game.add.text(50,  20, "Time: ", styleHUD);
 
     scoreText = game.add.text(50,  game.world.height/15, "Score: " + score, styleHUD);
 
@@ -28,28 +28,11 @@ function updateScore() {
 function updateTimer() {
     var elapsed = game.time.now - startTime;
     var actualTime = Math.floor(elapsed / 1000);
-    timerText.text = "Time: " + actualTime; // Display in seconds
+    timeText.text = "Time: " + actualTime; // Display in seconds
     
 }
 
-function reciboDaño(lives)
-{
-    if(lives > 1)
-    {
-        lives-=1;
-        
-        livesText.text = "Lives: "+ lives;
-        console.log("no te pilles baby")
-    }
 
-    else
-    {
-        //player.kill();
-        
-        console.log("He muerto")
-    }
-
-}
 
 function reciboDaño()
 {
@@ -65,3 +48,4 @@ function reciboDaño()
     }
 
 }
+
