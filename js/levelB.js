@@ -35,7 +35,7 @@ function displayScreen() {
     BG.scale.setTo(game.width/BG.width, game.height/BG.height)
 
     score = 0;
-    level = 1.0;
+    level = 2;
     lives = 4;
     startTime = game.time.now;
     

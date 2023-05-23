@@ -6,13 +6,17 @@ const DISPARO_VEL = 350;
 let threadImg;
 let line, player;
 var threadPosition = [], bugsArray = [], threadObjects = [];
-var timer;
+var timerEnemy;
+var timerLifeItems;
+
 let actualThread, middleThread, playerYpos = 560, playerYchange = 7;
 
 let Bug, yBug = 30;
 let bugsGroup;
 let disparo;
 let tvForeground
+let itemGroup;
+
 
 var startTime;
 
@@ -107,8 +111,12 @@ function displayScreen() {
 
     startTime = game.time.now;
 
-    timer = game.time.create(false);
-    timer.loop(1500, spawn);
+    timerEnemy = game.time.create(false);
+    timerEnemy.loop(1500, spawn);
+
+    timerLifeItems = game.time.create(false);
+    timerLifeItems.loop(5000,spawnLifeItems);
+
 
     //--- num of threads ---
     //nThreads = 5
@@ -135,7 +143,8 @@ function displayScreen() {
 
     createDisparo(DISPARO_GROUP_SIZE);//crear grupo de disparos
     bugsGroup = game.add.group()//para que los enemigos aparezcan por debajo de tvForeground
-
+    itemGroup = game.add.group();
+    
     //enable collisions
     game.physics.arcade.enable("mariquita");
     game.physics.arcade.enable("disparo");
@@ -145,7 +154,8 @@ function displayScreen() {
 
     createHUD();
     createLives();
-    timer.start();
+    timerEnemy.start();
+    timerLifeItems.start();
 
 
 }
@@ -157,8 +167,16 @@ function spawn() {
     Bug = new BugEnemy(randomBugPosition);
     bugsArray.push(Bug);
 
-    //tvForeground.bringToTop()
+}
 
+function spawnLifeItems() {
+
+    const randomThread = game.rnd.integerInRange(0, nThreads - 1); // Generate random thread
+    var x = threadPosition[randomThread];
+    const item = itemGroup.create(x, 30, 'disparo');
+    item.anchor.setTo(0.5, 0.5);
+    item.scale.setTo(0.1,0.1);
+    console.log("LIFE ITEMS");
 }
 
 //--- GET INPUT --------------------------
@@ -237,6 +255,15 @@ function moveBugs() {
     
 }
 
+function moveItems() {
+    
+    var children = itemGroup.children;
+    var numChildren = children.length;
+    for (var i = 0; i < numChildren; i++) {
+      var item = children[i];
+      item.y += 2; }
+}
+
 //--- BULLET/ENEMY COLLISION --------------------
 function hagoDaño(thisShot, thisBug){
     let i = this.i
@@ -256,7 +283,13 @@ function updateGame() {
 
     //move enemies
     moveBugs();
+
+    if (itemGroup && itemGroup.children) {
+        moveItems();
+    }
     
+
+    //Update HUD
     updateScore();
     updateTimer();
 
@@ -275,20 +308,21 @@ function updateGame() {
     //deactivate shots
     
     //check collisions BULLET/ENEMI and check if enemy reached bottom
-    for (let i = bugsArray.length-1; i >=0; i--) { //de atras hacia adelante para que no salten tantos errores
+    for (let i = bugsArray.length-1; i >=0; i--) { //de atras hacia adelante para que no salten errores
 
         
         
         if( bugsArray[i].img.y > playerYpos ){
-            reciboDaño()
+            reciboDaño();
             
             bugsArray[i].img.destroy()
-            bugsArray.splice(i, 1)
+            bugsArray.splice(i, 1);
 
         } else {
             game.physics.arcade.overlap( disparo, bugsArray[i].img, hagoDaño, null, { i: i })
 
         }
     }
+
 
 }
