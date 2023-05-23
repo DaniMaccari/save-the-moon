@@ -13,7 +13,7 @@ let lives, livesText;
 let level, levelText;
 var time, timeText;
 let Bug, yBug = 30;
-let bugs;
+let bugsGroup;
 let disparo;
 let tvForeground
 
@@ -24,6 +24,7 @@ class BugEnemy {
     constructor(initialThread) {
         this.myThread = initialThread
         this.img = game.add.sprite(threadPosition[initialThread], yBug, "mariquita")
+        bugsGroup.addChild(this.img)
         this.img.x = threadPosition[initialThread]
         this.img.y = yBug
         game.physics.arcade.enable(this.img)
@@ -136,13 +137,12 @@ function displayScreen() {
     player.scale.setTo(0.6, 0.6);
     player.x = threadPosition[actualThread] - player.width / 2;
 
+
     createDisparo(DISPARO_GROUP_SIZE);
 
-    
+    bugsGroup = game.add.group()
 
     //enable collisions
-    //enemy = game.add.sprite(-100, 0, "mariquita")
-    //enemy.scale.setTo(0.1, 0.1)
     game.physics.arcade.enable("mariquita");
     game.physics.arcade.enable("disparo");
 
