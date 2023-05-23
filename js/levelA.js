@@ -8,17 +8,14 @@ let line, player;
 var threadPosition = [], bugsArray = [], threadObjects = [];
 var timer;
 let actualThread, middleThread, playerYpos = 560, playerYchange = 7;
-let score, scoreText;
-let lives, livesText;
-let level, levelText;
-var time, timeText;
+
 let Bug, yBug = 30;
 let bugsGroup;
 let disparo;
 let tvForeground
 
 var startTime;
-var timerText;
+
 
 class BugEnemy {
     constructor(initialThread) {
@@ -78,11 +75,6 @@ let levelAState = {
 //--- load assets ---------------
 function loadAssets() {
     game.load.image("daniel", "assets/imgs/shipYellow.png");
-    game.load.image("vida1","assets/imgs/barra1.png")
-    game.load.image("vida2","assets/imgs/barra2.png")
-    game.load.image("vida3","assets/imgs/barra3.png")
-    game.load.image("vida4","assets/imgs/barra4.png")
-    game.load.image("vida0","assets/imgs/barra vacía.png")
     game.load.image("mariquita", "assets/imgs/mariquita.png");
     game.load.image("drawLine", "assets/imgs/line.png");
     game.load.image("levelA", "assets/imgs/start.png");
@@ -149,7 +141,6 @@ function displayScreen() {
     tvForeground.scale.setTo(game.width/tvForeground.width, game.height/tvForeground.height)
 
     createHUD();
-
     timer.start();
 
 
@@ -199,20 +190,6 @@ function onMouseDown(pointer) {
     }
 };
 
-//--- SHOW HUD ------------------------
-function createHUD() {
-
-    let styleHUD = { fontSize: "18px", fill: "#FFFFFF" };
-
-    timerText = game.add.text(50,  20, "Time: ", styleHUD);
-
-    scoreText = game.add.text(50,  game.world.height/15, "Score: " + score, styleHUD);
-
-    levelText = game.add.text(50, game.world.height/10, "Level: " + level, styleHUD);
-
-    livesText = game.add.text(50, 100, "Lives: " + lives, styleHUD);
-
-}
 
 function createDisparo(number) {
     disparo = game.add.group();
@@ -269,7 +246,6 @@ function hagoDaño(thisShot, thisBug){
     console.log("this i is ->" + i)
 }
 
-
 function reciboDaño()
 {
     if(lives > 1)
@@ -289,17 +265,6 @@ function reciboDaño()
 
 }
 
-function updateScore() {
-
-    scoreText.text = "Score: "+ score;
-}
-
-function updateTimer() {
-    var elapsed = game.time.now - startTime;
-    var actualTime = Math.floor(elapsed / 1000);
-    timerText.text = "Time: " + actualTime; // Display in seconds
-    
-}
 
 
 //--- UPADATE ------------
@@ -307,6 +272,7 @@ function updateGame() {
 
     //move enemies
     moveBugs();
+    
     updateScore();
     updateTimer();
 

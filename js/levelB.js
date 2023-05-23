@@ -115,6 +115,7 @@ function displayScreen() {
     tvForeground.scale.setTo(game.width/tvForeground.width, game.height/tvForeground.height)
     tvForeground.bringToTop();
 
+
     createHUD();
 
     timer.start();
@@ -150,10 +151,28 @@ function moveBugsLevelB() {
     }
 }
 
+function reciboDaño()
+{
+    if(lives > 1)
+    {
+        lives-=1;
+        
+        livesText.text = "Lives: "+ lives;
+        console.log("no te pilles baby")
+    }
+
+    else
+    {
+        //player.kill();
+        
+        console.log("He muerto")
+    }
+
+}
+
 function updateGame() {
     moveBugsLevelB()
-    updateScore()
-    updateTimer()
+
 
     //if mouse input is active
     if( !isKeyboradActive) {
