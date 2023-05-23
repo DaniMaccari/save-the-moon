@@ -246,24 +246,7 @@ function hagoDaño(thisShot, thisBug){
     console.log("this i is ->" + i)
 }
 
-function reciboDaño()
-{
-    if(lives > 1)
-    {
-        lives-=1;
-        
-        livesText.text = "Lives: "+ lives;
-        console.log("no te pilles baby")
-    }
 
-    else
-    {
-        //player.kill();
-        
-        console.log("He muerto")
-    }
-
-}
 
 
 

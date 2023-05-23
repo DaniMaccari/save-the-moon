@@ -77,7 +77,7 @@ function displayScreen() {
         //if this thread doents have branch
         if ( branchPosition[aux] == -10 ){
 
-            branchPosition[aux] = game.rnd.integerInRange(200, game.height*0.5)
+            branchPosition[aux] = game.rnd.integerInRange(160, game.height*0.5)
             console.log("pos->" + aux + " altura y->" + branchPosition[aux])
 
             let tempBranch = game.add.image(threadPosition[aux], branchPosition[aux], "drawBranch")
@@ -105,7 +105,8 @@ function displayScreen() {
     player.scale.setTo(0.6, 0.6);
     player.x = threadPosition[actualThread] - player.width / 2;
 
-    createDisparo(DISPARO_GROUP_SIZE);
+    createDisparo(DISPARO_GROUP_SIZE)//crear grupo de disparos
+    bugsGroup = game.add.group()//para que los enemigos aparezcan por debajo de tvForeground
 
     //enable collisions
     game.physics.arcade.enable("mariquita");
@@ -151,6 +152,7 @@ function moveBugsLevelB() {
     }
 }
 
+/*
 function reciboDaño()
 {
     if(lives > 1)
@@ -169,6 +171,7 @@ function reciboDaño()
     }
 
 }
+*/
 
 function updateGame() {
     moveBugsLevelB()
