@@ -59,7 +59,7 @@ function displayScreen() {
         tempLine.scale.setTo(0.3, 0.3)
         tempLine.x -= (tempLine.width / 2)
         
-        tempLine.tint = 0xff0080; //change color
+        //tempLine.tint = 0xff0080; //change color
 
         branchPosition.push(-10)
         branchDirection.push(false)
@@ -170,7 +170,7 @@ function moveBugsLevelB() {
                     bugsArray[i].direction = false
 
                 }
-                //implementar modo moverse de lado cada bichito
+                
             }
 
         }

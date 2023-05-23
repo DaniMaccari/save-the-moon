@@ -38,6 +38,7 @@ class BugEnemy {
     }
   
     move() {
+        //changes thread/ takes branch
         if(this.isMoving && this.direction){ //izquierda
 
             this.img.x -= 2
@@ -56,6 +57,7 @@ class BugEnemy {
                 this.img.x = threadPosition[this.myThread] - this.myWidth
             }
         }
+        //move down
         else{
             this.img.y += 2
         }
