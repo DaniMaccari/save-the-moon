@@ -138,9 +138,8 @@ function displayScreen() {
     player.x = threadPosition[actualThread] - player.width / 2;
 
 
-    createDisparo(DISPARO_GROUP_SIZE);
-
-    bugsGroup = game.add.group()
+    createDisparo(DISPARO_GROUP_SIZE);//crear grupo de disparos
+    bugsGroup = game.add.group()//para que los enemigos aparezcan por debajo de tvForeground
 
     //enable collisions
     game.physics.arcade.enable("mariquita");
