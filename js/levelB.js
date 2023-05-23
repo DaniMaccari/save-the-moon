@@ -17,7 +17,7 @@ function loadAssets() {
     game.load.image("disparo", "assets/imgs/punto.png")
     game.load.image("bg", "assets/imgs/BG.png")
     game.load.image("tv", "assets/imgs/BG-1.png")
-    
+    game.load.spritesheet("lives","assets/imgs/lifeSpritesheet.png",519,519);    
 }
 
 function displayScreen() {
