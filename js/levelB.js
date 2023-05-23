@@ -107,7 +107,8 @@ function displayScreen() {
 
     createDisparo(DISPARO_GROUP_SIZE)//crear grupo de disparos
     bugsGroup = game.add.group()//para que los enemigos aparezcan por debajo de tvForeground
-
+    itemGroup = game.add.group();
+    
     //enable collisions
     game.physics.arcade.enable("mariquita");
     game.physics.arcade.enable("disparo");
@@ -118,7 +119,7 @@ function displayScreen() {
 
 
     createHUD();
-
+    createLives();
     timer.start();
 
 }
