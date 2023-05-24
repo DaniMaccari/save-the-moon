@@ -148,6 +148,7 @@ function displayScreen() {
     //enable collisions
     game.physics.arcade.enable("mariquita");
     game.physics.arcade.enable("disparo");
+    game.physics.arcade.enable("disparo"); //hay q cambuarlo al sprite luego
 
     tvForeground = game.add.image(0, 0, "tv")
     tvForeground.scale.setTo(game.width/tvForeground.width, game.height/tvForeground.height)
@@ -277,6 +278,11 @@ function hagoDaño(thisShot, thisBug){
     console.log("this i is ->" + i)
 }
 
+function deleteItem(thisShot,thisItem) {
+    thisShot.kill();
+    thisItem.kill();
+}
+
 
 //--- UPDATE ------------
 function updateGame() {
@@ -284,10 +290,13 @@ function updateGame() {
     //move enemies
     moveBugs();
 
-    if (itemGroup && itemGroup.children) {
+    if (itemGroup && itemGroup.children) { //si existe el grupo y tiene hijos
         moveItems();
+
+        game.physics.arcade.overlap( disparo, itemGroup, deleteItem, null, this )
     }
     
+
 
     //Update HUD
     updateScore();
@@ -305,7 +314,7 @@ function updateGame() {
         
     }
     
-    //deactivate shots
+    
     
     //check collisions BULLET/ENEMI and check if enemy reached bottom
     for (let i = bugsArray.length-1; i >=0; i--) { //de atras hacia adelante para que no salten errores

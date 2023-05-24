@@ -33,7 +33,7 @@ function initGame() {
     buttonMouse = game.add.button(180, 200, "mouse", onButtonMouse,0,1,0,1);
     buttonMouse.scale.setTo(0.4, 0.4);
     
-    //TV FOREGROUND
+    //TV FOREGROUNDbuttonKeyboard = game.add.button(440, 200, "keyboard", onButtonKeyboard,0,1,0,1);
     TV = game.add.image(0,0,"tele")
     TV.scale.setTo(game.width/TV.width, game.height/TV.height)
     game.input.enabled = true;

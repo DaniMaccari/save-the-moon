@@ -1,13 +1,11 @@
-
-let btnStart, btnConf, btnCredits;
-let TV, BG;
-
-
 let initialState = {
     preload: loadAssets,
     create : displayScreen,
     update: updateGame,
 };
+
+let btnStart, btnConf, btnCredits;
+let TV, BG;
 
 function loadAssets(){
     
