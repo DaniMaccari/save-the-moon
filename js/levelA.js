@@ -83,6 +83,7 @@ function loadAssets() {
     game.load.image("drawLine", "assets/imgs/line.png");
     game.load.image("levelA", "assets/imgs/start.png");
     game.load.image("disparo", "assets/imgs/punto.png");
+    game.load.image("lifeItem", "assets/imgs/punto.png");
     game.load.image("bg", "assets/imgs/BG.png");
     game.load.image("tv", "assets/imgs/BG-1.png");
     game.load.spritesheet("lives","assets/imgs/lifeSpritesheet.png",519,519);
@@ -148,6 +149,7 @@ function displayScreen() {
     //enable collisions
     game.physics.arcade.enable("mariquita");
     game.physics.arcade.enable("disparo");
+    game.physics.arcade.enable("lifeItem");
     game.physics.arcade.enable("disparo"); //hay q cambuarlo al sprite luego
 
     tvForeground = game.add.image(0, 0, "tv")
@@ -174,7 +176,7 @@ function spawnLifeItems() {
 
     const randomThread = game.rnd.integerInRange(0, nThreads - 1); // Generate random thread
     var x = threadPosition[randomThread];
-    const item = itemGroup.create(x, 30, 'disparo');
+    const item = itemGroup.create(x, 30, "lifeItem");
     item.anchor.setTo(0.5, 0.5);
     item.scale.setTo(0.1,0.1);
     console.log("LIFE ITEMS");
@@ -278,7 +280,7 @@ function hagoDaño(thisShot, thisBug){
     console.log("this i is ->" + i)
 }
 
-function deleteItem(thisShot,thisItem) {
+function deleteItem(thisShot, thisItem){
     thisShot.kill();
     thisItem.kill();
 }
@@ -291,11 +293,10 @@ function updateGame() {
     moveBugs();
 
     if (itemGroup && itemGroup.children) { //si existe el grupo y tiene hijos
-        moveItems();
-
-        game.physics.arcade.overlap( disparo, itemGroup, deleteItem, null, this )
+        moveItems()
+        
     }
-    
+    game.physics.arcade.overlap( disparo, itemGroup, deleteItem, null, this )
 
 
     //Update HUD
