@@ -14,6 +14,7 @@ function loadAssets(){
     game.load.spritesheet("credits","assets/imgs/START SCREEN/InfoSpritesheet.png",519,519);
     game.load.image("tele","assets/imgs/BG-1.png");
     game.load.image("bg","assets/imgs/START SCREEN/BG-MAIN.png");
+    game.load.image("pantallaNegra","assets/imgs/Solid_black.png")
 }
 
 function displayScreen(){
@@ -37,7 +38,12 @@ function displayScreen(){
     TV = game.add.image(0, 0, "tele")
     TV.scale.setTo(game.width/TV.width, game.height/TV.height)
 
-
+    
+    fadeRectangle = game.add.sprite(0,0, "pantallaNegra");
+    fadeRectangle.width = game.width;
+    fadeRectangle.height = game.height;
+    fadeRectangle.alpha = 1;
+    fadeSceneIn();
 }
 
 

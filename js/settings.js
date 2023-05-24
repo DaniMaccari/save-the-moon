@@ -57,12 +57,7 @@ function initGame() {
         initialThreadPosX += threadButton.width +10
     }
 
-    fadeRectangle = game.add.sprite(0,0, "pantallaNegra");
-    fadeRectangle.width = game.width;
-    fadeRectangle.height = game.height;
-    fadeRectangle.alpha = 1;
-
-    fadeSceneIn();
+    createfade();
 }
 
 //activate mouse, deactivate keyboard
@@ -108,18 +103,3 @@ function onButtonThread(buttonIndex) {
     console.log(nThreads)
 }
 
-function fadeSceneIn() {
-    fadeTween = game.add.tween(fadeRectangle)
-    fadeTween.to({ alpha: 0 }, 500, Phaser.Easing.Linear.None, true);
-}
-
-function fadeSceneOut(siguienteEscena) {
-
-
-    fadeTween = game.add.tween(fadeRectangle)
-    fadeTween.to({ alpha: 1 }, 500, Phaser.Easing.Linear.None, true);
-    
-    fadeTween.onComplete.add(function() {
-      game.state.start(siguienteEscena);
-    }, this);
-  }

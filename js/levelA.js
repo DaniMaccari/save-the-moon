@@ -4,6 +4,7 @@ const DISPARO_OFFSET_Y = -300;
 const DISPARO_VEL = 350;
 
 
+
 let threadImg;
 let line, player;
 var threadPosition = [], bugsArray = [], threadObjects = [];
@@ -291,6 +292,33 @@ function deleteItem(thisShot,thisItem) {
     thisItem.kill();
 }
 
+function checkItemCollision() {
+    itemGroup.forEach(function(item) {
+        if (item.y > playerYpos) {
+            item.kill(); // Remove the item from the group
+        }
+    }, this);
+}
+
+function checkBulletItemCollision() {
+
+    //check collisions BULLET/ENEMI and check if enemy reached bottom
+    for (let i = bugsArray.length-1; i >=0; i--) { //de atras hacia adelante para que no salten errores
+
+        
+        
+        if( bugsArray[i].img.y > playerYpos ){
+            reciboDaño();
+            
+            bugsArray[i].img.destroy()
+            bugsArray.splice(i, 1);
+
+        } else {
+            game.physics.arcade.overlap( disparo, bugsArray[i].img, hagoDaño, null, { i: i })
+
+        }
+    }
+}
 
 //--- UPDATE ------------
 function updateGame() {
@@ -311,7 +339,8 @@ function updateGame() {
     //Update HUD
     updateScore();
     updateTimer();
-
+    checkItemCollision();
+    checkBulletItemCollision();
 
     //if mouse input is active
     if( !isKeyboradActive) {
@@ -322,25 +351,6 @@ function updateGame() {
             }
         }
         
-    }
-    
-    
-    
-    //check collisions BULLET/ENEMI and check if enemy reached bottom
-    for (let i = bugsArray.length-1; i >=0; i--) { //de atras hacia adelante para que no salten errores
-
-        
-        
-        if( bugsArray[i].img.y > playerYpos ){
-            reciboDaño();
-            
-            bugsArray[i].img.destroy()
-            bugsArray.splice(i, 1);
-
-        } else {
-            game.physics.arcade.overlap( disparo, bugsArray[i].img, hagoDaño, null, { i: i })
-
-        }
     }
 
 
