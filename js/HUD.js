@@ -33,7 +33,6 @@ function createLives() {
     life.scale.setTo(0.15,0.13);
   }
    
-  console.log("LIFES SPRITES CREATED");
 
 }
 
@@ -50,7 +49,20 @@ function updateTimer() {
     
 }
 
+function ganoVida(player, thisItem) {
 
+    var lifeGained;
+    thisItem.kill()
+
+    if(lives > 0 && lives < 5) {
+
+        lives ++;
+
+        lifeGained = lifeGroup.getAt(lives-1); 
+        lifeGained.frame = 0;
+        console.log("life gained "+lives)
+    }
+}
 
 function reciboDaño()
 {
@@ -61,10 +73,10 @@ function reciboDaño()
     if(lives > 0) {
 
         lives--; 
-        lifeLost = lifeGroup.getAt(lives); //last object of the group
+        lifeLost = lifeGroup.getAt(lives); 
 
         lifeLost.frame = 1;
-        
+        console.log("life lost "+lives)
         
     } else {
         //player.kill();
@@ -72,7 +84,7 @@ function reciboDaño()
         console.log("He muerto")
     }
 
-    console.log(lives);
+   
     
 
 }

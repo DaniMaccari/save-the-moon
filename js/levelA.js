@@ -3,6 +3,7 @@ const DISPARO_OFFSET_X = 10;
 const DISPARO_OFFSET_Y = -300;
 const DISPARO_VEL = 350;
 
+
 let threadImg;
 let line, player;
 var threadPosition = [], bugsArray = [], threadObjects = [];
@@ -81,9 +82,7 @@ function loadAssets() {
     game.load.image("daniel", "assets/imgs/shipYellow.png");
     game.load.image("mariquita", "assets/imgs/mariquita.png");
     game.load.image("drawLine", "assets/imgs/line.png");
-    game.load.image("levelA", "assets/imgs/start.png");
     game.load.image("disparo", "assets/imgs/punto.png");
-    game.load.image("lifeItem", "assets/imgs/punto.png");
     game.load.image("bg", "assets/imgs/BG.png");
     game.load.image("tv", "assets/imgs/BG-1.png");
     game.load.spritesheet("lives","assets/imgs/lifeSpritesheet.png",519,519);
@@ -144,13 +143,18 @@ function displayScreen() {
 
     createDisparo(DISPARO_GROUP_SIZE);//crear grupo de disparos
     bugsGroup = game.add.group()//para que los enemigos aparezcan por debajo de tvForeground
+
+    
+    player.enableBody = true;
+
     itemGroup = game.add.group();
+    itemGroup.enableBody = true;
     
     //enable collisions
     game.physics.arcade.enable("mariquita");
     game.physics.arcade.enable("disparo");
-    game.physics.arcade.enable("lifeItem");
-    game.physics.arcade.enable("disparo"); //hay q cambuarlo al sprite luego
+    game.physics.arcade.enable(player);
+    //game.physics.arcade.enable("disparo"); //hay q cambuarlo al sprite luego
 
     tvForeground = game.add.image(0, 0, "tv")
     tvForeground.scale.setTo(game.width/tvForeground.width, game.height/tvForeground.height)
@@ -176,7 +180,7 @@ function spawnLifeItems() {
 
     const randomThread = game.rnd.integerInRange(0, nThreads - 1); // Generate random thread
     var x = threadPosition[randomThread];
-    const item = itemGroup.create(x, 30, "lifeItem");
+    const item = itemGroup.create(x, 30, 'disparo');
     item.anchor.setTo(0.5, 0.5);
     item.scale.setTo(0.1,0.1);
     console.log("LIFE ITEMS");
@@ -280,7 +284,9 @@ function hagoDaño(thisShot, thisBug){
     console.log("this i is ->" + i)
 }
 
-function deleteItem(thisShot, thisItem){
+
+function deleteItem(thisShot,thisItem) {
+    console.log("BORRO DISPARO E ITEM")
     thisShot.kill();
     thisItem.kill();
 }
@@ -293,11 +299,14 @@ function updateGame() {
     moveBugs();
 
     if (itemGroup && itemGroup.children) { //si existe el grupo y tiene hijos
-        moveItems()
+        moveItems();
+
+        game.physics.arcade.overlap( disparo,itemGroup, deleteItem, null, this )
+        
         
     }
-    game.physics.arcade.overlap( disparo, itemGroup, deleteItem, null, this )
-
+    
+    game.physics.arcade.overlap(player,itemGroup, ganoVida, null, this )
 
     //Update HUD
     updateScore();
