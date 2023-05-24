@@ -38,17 +38,13 @@ function displayScreen(){
     TV = game.add.image(0, 0, "tele")
     TV.scale.setTo(game.width/TV.width, game.height/TV.height)
 
+    createfade();
     
-    fadeRectangle = game.add.sprite(0,0, "pantallaNegra");
-    fadeRectangle.width = game.width;
-    fadeRectangle.height = game.height;
-    fadeRectangle.alpha = 1;
-    fadeSceneIn();
 }
 
 
 function onStartButtonPressed(){
-    game.state.start("juego");
+    fadeSceneOut("juego")
  
 }
 

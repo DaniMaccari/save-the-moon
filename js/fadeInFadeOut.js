@@ -9,14 +9,14 @@ function createfade() {
 
 function fadeSceneIn() {
     fadeTween = game.add.tween(fadeRectangle)
-    fadeTween.to({ alpha: 0 }, 500, Phaser.Easing.Linear.None, true);
+    fadeTween.to({ alpha: 0 }, 400, Phaser.Easing.Linear.None, true);
 }
 
 function fadeSceneOut(siguienteEscena) {
 
 
     fadeTween = game.add.tween(fadeRectangle)
-    fadeTween.to({ alpha: 1 }, 500, Phaser.Easing.Linear.None, true);
+    fadeTween.to({ alpha: 1 }, 400, Phaser.Easing.Linear.None, true);
     
     fadeTween.onComplete.add(function() {
       game.state.start(siguienteEscena);

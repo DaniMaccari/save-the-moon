@@ -45,6 +45,8 @@ function displayScreen(){
     //TV layout
     TV = game.add.image(0, 0, "tele")
     TV.scale.setTo(game.width/TV.width, game.height/TV.height)
+
+    createfade();
 };
 
 function onBackPressed() {
