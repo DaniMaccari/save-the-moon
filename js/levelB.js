@@ -34,6 +34,7 @@ function displayScreen() {
     BG = game.add.image(0, 0, "bg");
     BG.scale.setTo(game.width/BG.width, game.height/BG.height)
 
+    bugVelocity = 0.5;
     score = 0;
     level = 2;
     lives = 4;

@@ -4,7 +4,7 @@ const DISPARO_OFFSET_Y = -300;
 const DISPARO_VEL = 350;
 
 
-
+let bugVelocity;
 let threadImg;
 let line, player;
 var threadPosition = [], bugsArray = [], threadObjects = [];
@@ -19,6 +19,8 @@ let disparo;
 let tvForeground
 let itemGroup;
 
+let spawnEnemyRnd;
+let spawnItemRnd;
 
 var startTime;
 
@@ -45,8 +47,8 @@ class BugEnemy {
         //changes thread/ takes branch
         if(this.isMoving && this.direction){ //izquierda
 
-            this.img.x -= 2
-            this.img.y += 1
+            this.img.x -= 2 * bugVelocity;
+            this.img.y += 1 * bugVelocity;
             if (this.img.x + this.myWidth <= threadPosition[this.myThread]) {
                 this.isMoving = false
                 this.img.x = threadPosition[this.myThread] - this.myWidth
@@ -54,8 +56,8 @@ class BugEnemy {
             
         }
         else if ( this.isMoving && !this.direction){ //derecha
-            this.img.x += 2
-            this.img.y += 1
+            this.img.x += 2 * bugVelocity;
+            this.img.y += 1 * bugVelocity;
             if (this.img.x + this.myWidth >= threadPosition[this.myThread]) {
                 this.isMoving = false
                 this.img.x = threadPosition[this.myThread] - this.myWidth
@@ -63,7 +65,7 @@ class BugEnemy {
         }
         //move down
         else{
-            this.img.y += 2
+            this.img.y += bugVelocity;
         }
         
     }
@@ -105,23 +107,27 @@ function displayScreen() {
     BG = game.add.image(0, 0, "bg");
     BG.scale.setTo(game.width/BG.width, game.height/BG.height)
 
+    level = 1;
     score = 0;
-    level = 1.0;
+    part = 1;
     lives = 5;
-    
+    bugVelocity = 2; //Velocidad de los bugs cuando empieza el juego
+
+    spawnEnemyRnd = game.rnd.integerInRange(1500,3000) //entre 1 y 3 segundos
+    spawnItemRnd = game.rnd.integerInRange(5000,8000) //entre 5 y 3 segundos
 
     startTime = game.time.now;
 
     timerEnemy = game.time.create(false);
-    timerEnemy.loop(1500, spawn);
+    timerEnemy.loop(spawnEnemyRnd, spawn);
 
     timerLifeItems = game.time.create(false);
-    timerLifeItems.loop(5000,spawnLifeItems);
+    timerLifeItems.loop(spawnItemRnd,spawnLifeItems);
 
 
     //--- num of threads ---
     //nThreads = 5
-    middleThread = Math.floor(nThreads / 2) //arreglar cuando es impar
+    middleThread = Math.floor(nThreads / 2) 
     actualThread = middleThread
 
     //create threads
@@ -320,6 +326,33 @@ function checkBulletItemCollision() {
     }
 }
 
+function checkScore() {
+
+    if (score >= 80) {
+
+        levelAPhase2();
+        
+    }
+
+    else if (score >= 160) {
+        level = 3;
+    }
+
+    
+
+}
+
+function levelAPhase2() {
+
+    level = 2;
+    spawnEnemyRnd = game.rnd.integerInRange(1500,2000) //entre 1 y 2 segundos
+    spawnItemRnd = game.rnd.integerInRange(6000,8000) //entre 6 y 8 segundos
+    bugVelocity = 4;
+
+    updateLevel();
+    
+}
+
 //--- UPDATE ------------
 function updateGame() {
 
@@ -341,6 +374,7 @@ function updateGame() {
     updateTimer();
     checkItemCollision();
     checkBulletItemCollision();
+    checkScore();
 
     //if mouse input is active
     if( !isKeyboradActive) {

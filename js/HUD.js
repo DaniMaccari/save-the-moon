@@ -2,7 +2,8 @@
 var time, timeText;
 let score, scoreText;
 let lives, livesText;
-let level, levelText;
+let part, levelText;
+var level;
 var lifeIterator = 1;
 
 function createHUD() {
@@ -13,7 +14,7 @@ function createHUD() {
 
     scoreText = game.add.text(50,  game.world.height/15, "Score: " + score, styleHUD);
 
-    levelText = game.add.text(50, game.world.height/10, "Level: " + level, styleHUD);
+    levelText = game.add.text(50, game.world.height/10, "Level: " + part +  " Part: " + level , styleHUD);
 
 }
 
@@ -34,6 +35,11 @@ function createLives() {
   }
    
 
+}
+
+function updateLevel() {
+
+    levelText.text = "Level: " + part +  " Part: " + level;
 }
 
 function updateScore() {
