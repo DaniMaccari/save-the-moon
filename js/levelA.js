@@ -332,18 +332,18 @@ function checkBulletItemCollision() {
 function checkScore() {
 
 
-    if (score >= 80 ) {
+    if (score >= 150 ) {
         fadeSceneOutBetweenScenes("levelB");
         console.log("aASIDODSIODIOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOS")
     }
 
-    else if (score >= 60) {
+    else if (score >= 100) {
 
         levelAPhase2();
         
     }
 
-    else  if (score >=40) {
+    else  if (score >=50) {
         levelAPhase3();
     }
 
@@ -366,7 +366,7 @@ function levelAPhase3() {
     level = 3;
     spawnEnemyRnd = game.rnd.integerInRange(1500,2000) //entre 1 y 2 segundos
     spawnItemRnd = game.rnd.integerInRange(6000,8000) //entre 6 y 8 segundos
-    bugVelocity = 4;
+    bugVelocity = 6;
 
     updateLevel();
     
