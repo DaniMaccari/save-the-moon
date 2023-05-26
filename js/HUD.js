@@ -55,12 +55,6 @@ function updateTimer() {
     
 }
 
-function updateTimerLevelB(timeLevelB) {
-    timeLevelB = game.time.now - startTime;
-    actualTime = Math.floor(timeLevelB / 1000);
-    timeText.text = "Time: " + actualTime; // Display in seconds
-    
-}
 
 function ganoVida(player, thisItem) {
 
