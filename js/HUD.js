@@ -39,7 +39,7 @@ function createLives() {
 
 function updateLevel() {
 
-    levelText.text = "Level: " + part +  " Part: " + level;
+    levelText.text = "Part: " + part +  " Level: " + level;
 }
 
 function updateScore() {
