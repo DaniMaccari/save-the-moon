@@ -13,11 +13,12 @@ function loadAssets() {
     game.load.image("mariquita", "assets/imgs/mariquita.png")
     game.load.image("drawLine", "assets/imgs/line.png")
     game.load.image("drawBranch", "assets/imgs/line_tumbada.png")
-    game.load.image("levelA", "assets/imgs/start.png")
     game.load.image("disparo", "assets/imgs/punto.png")
     game.load.image("bg", "assets/imgs/BG.png")
     game.load.image("tv", "assets/imgs/BG-1.png")
-    game.load.spritesheet("lives","assets/imgs/lifeSpritesheet.png",519,519);    
+    game.load.spritesheet("lives","assets/imgs/lifeSpritesheet.png",519,519);   
+    game.load.image("pantallaNegra","assets/imgs/Solid_black.png")
+     
 }
 
 function displayScreen() {
@@ -114,6 +115,9 @@ function displayScreen() {
     game.physics.arcade.enable("mariquita");
     game.physics.arcade.enable("disparo");
 
+
+    createfade();
+    
     tvForeground = game.add.image(0, 0, "tv")
     tvForeground.scale.setTo(game.width/tvForeground.width, game.height/tvForeground.height)
     tvForeground.bringToTop();

@@ -89,6 +89,7 @@ function loadAssets() {
     game.load.image("bg", "assets/imgs/BG.png");
     game.load.image("tv", "assets/imgs/BG-1.png");
     game.load.spritesheet("lives","assets/imgs/lifeSpritesheet.png",519,519);
+    game.load.image("pantallaNegra","assets/imgs/Solid_black.png")
 
 }
 
@@ -162,6 +163,8 @@ function displayScreen() {
     game.physics.arcade.enable("disparo");
     game.physics.arcade.enable(player);
     //game.physics.arcade.enable("disparo"); //hay q cambuarlo al sprite luego
+
+    createfade();
 
     tvForeground = game.add.image(0, 0, "tv")
     tvForeground.scale.setTo(game.width/tvForeground.width, game.height/tvForeground.height)
@@ -328,17 +331,22 @@ function checkBulletItemCollision() {
 
 function checkScore() {
 
-    if (score >= 80) {
+
+    if (score >= 80 ) {
+        fadeSceneOutBetweenScenes("levelB");
+        console.log("aASIDODSIODIOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOS")
+    }
+
+    else if (score >= 60) {
 
         levelAPhase2();
         
     }
 
-    else if (score >= 160) {
-        level = 3;
+    else  if (score >=40) {
+        levelAPhase3();
     }
 
-    
 
 }
 
@@ -352,6 +360,18 @@ function levelAPhase2() {
     updateLevel();
     
 }
+
+function levelAPhase3() {
+
+    level = 3;
+    spawnEnemyRnd = game.rnd.integerInRange(1500,2000) //entre 1 y 2 segundos
+    spawnItemRnd = game.rnd.integerInRange(6000,8000) //entre 6 y 8 segundos
+    bugVelocity = 4;
+
+    updateLevel();
+    
+}
+
 
 //--- UPDATE ------------
 function updateGame() {

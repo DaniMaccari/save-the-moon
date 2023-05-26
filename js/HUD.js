@@ -14,7 +14,7 @@ function createHUD() {
 
     scoreText = game.add.text(50,  game.world.height/15, "Score: " + score, styleHUD);
 
-    levelText = game.add.text(50, game.world.height/10, "Level: " + part +  " Part: " + level , styleHUD);
+    levelText = game.add.text(50, game.world.height/10, "Part: " + part +  " Level: " + level , styleHUD);
 
 }
 
