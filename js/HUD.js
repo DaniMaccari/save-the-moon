@@ -49,8 +49,15 @@ function updateScore() {
 
 
 function updateTimer() {
-    var elapsed = game.time.now - startTime;
-    var actualTime = Math.floor(elapsed / 1000);
+    elapsed = game.time.now - startTime;
+    actualTime = Math.floor(elapsed / 1000);
+    timeText.text = "Time: " + actualTime; // Display in seconds
+    
+}
+
+function updateTimerLevelB(timeLevelB) {
+    timeLevelB = game.time.now - startTime;
+    actualTime = Math.floor(timeLevelB / 1000);
     timeText.text = "Time: " + actualTime; // Display in seconds
     
 }

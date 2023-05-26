@@ -3,6 +3,8 @@ const DISPARO_OFFSET_X = 10;
 const DISPARO_OFFSET_Y = -300;
 const DISPARO_VEL = 350;
 
+var actualTime;
+var elapsed;
 
 let bugVelocity;
 let threadImg;
@@ -110,7 +112,7 @@ function displayScreen() {
 
     level = 1;
     score = 0;
-    part = 1;
+    part = "A";
     lives = 5;
     bugVelocity = 2; //Velocidad de los bugs cuando empieza el juego
 

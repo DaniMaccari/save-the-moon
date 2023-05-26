@@ -37,8 +37,9 @@ function displayScreen() {
 
     bugVelocity = 0.5;
     score = 0;
-    level = 2;
-    lives = 4;
+    part = "B";
+    level = 1;
+    lives = 5;
     startTime = game.time.now;
     
     timer = game.time.create(false);
@@ -158,30 +159,11 @@ function moveBugsLevelB() {
     }
 }
 
-/*
-function reciboDaño()
-{
-    if(lives > 1)
-    {
-        lives-=1;
-        
-        livesText.text = "Lives: "+ lives;
-        console.log("no te pilles baby")
-    }
-
-    else
-    {
-        //player.kill();
-        
-        console.log("He muerto")
-    }
-
-}
-*/
 
 function updateGame() {
-    moveBugsLevelB()
-
+    moveBugsLevelB();
+    updateScore();
+    updateTimer();
 
     //if mouse input is active
     if( !isKeyboradActive) {
