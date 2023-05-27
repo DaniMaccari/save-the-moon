@@ -13,7 +13,7 @@ var threadPosition = [], bugsArray = [], threadObjects = [];
 var timerEnemy;
 var timerLifeItems;
 
-let actualThread, middleThread, playerYpos = 560, playerYchange = 7;
+let actualThread, middleThread, playerYpos = 520, playerYchange = 7;
 
 let Bug, yBug = 30;
 let bugsGroup;
@@ -26,6 +26,8 @@ let spawnItemRnd;
 
 var startTime;
 
+let isShooting;
+let shootAnimTimer;
 
 class BugEnemy {
     constructor(initialThread) {
@@ -84,13 +86,14 @@ let levelAState = {
 
 //--- load assets ---------------
 function loadAssets() {
-    game.load.image("daniel", "assets/imgs/shipYellow.png");
+
     game.load.image("mariquita", "assets/imgs/mariquita.png");
     game.load.image("drawLine", "assets/imgs/line.png");
     game.load.image("disparo", "assets/imgs/punto.png");
     game.load.image("bg", "assets/imgs/BG.png");
     game.load.image("tv", "assets/imgs/BG-1.png");
     game.load.spritesheet("lives","assets/imgs/lifeSpritesheet.png",519,519);
+    game.load.spritesheet("character","assets/imgs/characterSpritesheet.png",519,519);
     game.load.image("pantallaNegra","assets/imgs/Solid_black.png")
 
 }
@@ -146,8 +149,9 @@ function displayScreen() {
         
     }
 
-    player = game.add.sprite(threadPosition[actualThread], playerYpos, "daniel");
-    player.scale.setTo(0.6, 0.6);
+    player = game.add.sprite(threadPosition[actualThread], playerYpos, "character");
+    player.scale.setTo(0.27, 0.27);
+    player.frame = 0;
     player.x = threadPosition[actualThread] - player.width / 2;
 
 
@@ -221,6 +225,7 @@ function getKeyboardInput(e) {
     //shoot imput
     if (e.keyCode == Phaser.Keyboard.SPACEBAR) {
         fireDisparos();
+        
     }
 };
 
@@ -228,18 +233,22 @@ function getKeyboardInput(e) {
 function onMouseDown(pointer) {
     if (pointer.button == Phaser.Mouse.LEFT_BUTTON) {
         fireDisparos();
+       
+        
     }
 };
 
 
 function createDisparo(number) {
+    
     disparo = game.add.group();
     disparo.enableBody = true;
     disparo.createMultiple(number, "disparo");
-
+    
     disparo.callAll("events.onOutOfBounds.add", "events.onOutOfBounds", resetMember);
     disparo.callAll("anchor.setTo", "anchor", 0.5, 1.0);
     disparo.setAll("checkWorldBounds", true);
+    
 }
 
 function resetMember(item) {
@@ -247,13 +256,27 @@ function resetMember(item) {
 }
 
 function fireDisparos() {
+
     let x = player.x + player.width / 2;
     let y = player.y;
     let vd = -DISPARO_VEL;
     let elDisparo = shootDisparo(x, y, vd);
+
+    isShooting = true;
+
+    shootAnimTimer = game.time.create(true);
+    shootAnimTimer.add(500, resetShootingState, this);
+    shootAnimTimer.start();
+
+}
+
+function resetShootingState() {
+    isShooting = false;
 }
 
 function shootDisparo(x, y, vd) {
+
+    
     let shot = disparo.getFirstExists(false);
     
 
@@ -398,6 +421,16 @@ function updateGame() {
     checkBulletItemCollision();
     checkScore();
 
+
+    if (isShooting) {
+        player.frame = 1;
+    } 
+
+    else {
+        player.frame = 0;
+    }
+
+    
     //if mouse input is active
     if( !isKeyboradActive) {
         let mousePos = game.input.mousePointer.x

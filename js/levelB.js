@@ -16,7 +16,8 @@ function loadAssets() {
     game.load.image("disparo", "assets/imgs/punto.png")
     game.load.image("bg", "assets/imgs/BG.png")
     game.load.image("tv", "assets/imgs/BG-1.png")
-    game.load.spritesheet("lives","assets/imgs/lifeSpritesheet.png",519,519);   
+    game.load.spritesheet("lives","assets/imgs/lifeSpritesheet.png",519,519);  
+    game.load.spritesheet("character","assets/imgs/characterSpritesheet.png",519,519); 
     game.load.image("pantallaNegra","assets/imgs/Solid_black.png")
      
 }
@@ -35,15 +36,27 @@ function displayScreen() {
     BG = game.add.image(0, 0, "bg");
     BG.scale.setTo(game.width/BG.width, game.height/BG.height)
 
-    bugVelocity = 0.5;
+    bugVelocity = 1;
     score = 0;
     part = "B";
     level = 1;
     lives = 5;
     startTime = game.time.now;
     
-    timer = game.time.create(false);
-    timer.loop(1500, spawn);
+
+    timerLifeItems = game.time.create(false);
+    timerLifeItems.loop(spawnItemRnd,spawnLifeItems);
+
+    spawnEnemyRnd = game.rnd.integerInRange(1500,3000) //entre 1 y 3 segundos
+    spawnItemRnd = game.rnd.integerInRange(5000,8000) //entre 5 y 3 segundos
+    
+    
+    timerEnemy = game.time.create(false);
+    timerEnemy.loop(spawnEnemyRnd, spawn);
+
+    timerLifeItems = game.time.create(false);
+    timerLifeItems.loop(spawnItemRnd,spawnLifeItems);
+
 
     //--- num of threads ---
     //nThreads = 5
@@ -104,18 +117,22 @@ function displayScreen() {
         }
     }
 
-    player = game.add.sprite(threadPosition[actualThread], playerYpos, "daniel");
-    player.scale.setTo(0.6, 0.6);
+    player = game.add.sprite(threadPosition[actualThread], playerYpos, "character");
+    player.scale.setTo(0.27, 0.27);
     player.x = threadPosition[actualThread] - player.width / 2;
+
+    player.enableBody = true;
 
     createDisparo(DISPARO_GROUP_SIZE)//crear grupo de disparos
     bugsGroup = game.add.group()//para que los enemigos aparezcan por debajo de tvForeground
+
     itemGroup = game.add.group();
+    itemGroup.enableBody = true;
     
     //enable collisions
     game.physics.arcade.enable("mariquita");
     game.physics.arcade.enable("disparo");
-
+    game.physics.arcade.enable(player);
 
     createfade();
     
@@ -126,7 +143,9 @@ function displayScreen() {
 
     createHUD();
     createLives();
-    timer.start();
+
+    timerLifeItems.start();
+    timerEnemy.start();
 
 }
 
@@ -164,6 +183,18 @@ function updateGame() {
     moveBugsLevelB();
     updateScore();
     updateTimer();
+    checkItemCollision();
+    checkBulletItemCollision();
+
+    if (itemGroup && itemGroup.children) { //si existe el grupo y tiene hijos
+        moveItems();
+
+        game.physics.arcade.overlap( disparo,itemGroup, deleteItem, null, this )
+        
+        
+    }
+
+    game.physics.arcade.overlap(player,itemGroup, ganoVida, null, this )
 
     //if mouse input is active
     if( !isKeyboradActive) {
@@ -174,6 +205,14 @@ function updateGame() {
             }
         }
         
+    }
+
+    if (isShooting) {
+        player.frame = 1;
+    } 
+
+    else {
+        player.frame = 0;
     }
     
     //deactivate shots
