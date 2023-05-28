@@ -9,8 +9,9 @@ let levelBState = {
 };
 
 function loadAssets() {
-    game.load.image("daniel", "assets/imgs/shipYellow.png")
-    game.load.image("mariquita", "assets/imgs/mariquita.png")
+    
+    game.load.image("enemy", "assets/imgs/enemy.png");
+    game.load.image("lifeItem", "assets/imgs/lifeItem.png");
     game.load.image("drawLine", "assets/imgs/line.png")
     game.load.image("drawBranch", "assets/imgs/line_tumbada.png")
     game.load.image("disparo", "assets/imgs/punto.png")
@@ -131,7 +132,7 @@ function displayScreen() {
     itemGroup.enableBody = true;
     
     //enable collisions
-    game.physics.arcade.enable("mariquita");
+    game.physics.arcade.enable("enemy");
     game.physics.arcade.enable("disparo");
     game.physics.arcade.enable(player);
 

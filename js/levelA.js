@@ -31,18 +31,19 @@ let shootAnimTimer;
 class BugEnemy {
     constructor(initialThread) {
         this.myThread = initialThread
-        this.img = game.add.sprite(threadPosition[initialThread], yBug, "mariquita")
+        this.img = game.add.sprite(threadPosition[initialThread], yBug, "enemy")
         bugsGroup.addChild(this.img)
         this.img.x = threadPosition[initialThread]
         this.img.y = yBug
         game.physics.arcade.enable(this.img)
 
-        this.img.scale.setTo(0.1, 0.1)
-        this.myWidth = this.img.width / 2
-        this.img.x -= this.myWidth
+        this.img.scale.setTo(0.15, 0.15)
+        
 
         this.isMoving = false
         this.direction = false
+
+        
         
     }
   
@@ -86,9 +87,9 @@ let levelAState = {
 //--- load assets ---------------
 function loadAssets() {
 
-    game.load.image("mariquita", "assets/imgs/mariquita.png");
+    game.load.image("enemy", "assets/imgs/enemy.png");
     game.load.image("drawLine", "assets/imgs/line.png");
-    game.load.image("disparo", "assets/imgs/punto.png");
+    game.load.image("lifeItem", "assets/imgs/lifeItem.png");
     game.load.image("bg", "assets/imgs/BG.png");
     game.load.image("tv", "assets/imgs/BG-1.png");
     game.load.spritesheet("lives","assets/imgs/lifeSpritesheet.png",519,519);
@@ -165,8 +166,8 @@ function displayScreen() {
     itemGroup.enableBody = true;
     
     //enable collisions
-    game.physics.arcade.enable("mariquita");
-    game.physics.arcade.enable("disparo");
+    game.physics.arcade.enable("enemy");
+    game.physics.arcade.enable("lifeItem");
     game.physics.arcade.enable(player);
 
 
@@ -188,6 +189,12 @@ function spawn() {
     var randomBugPosition = game.rnd.integerInRange(0, nThreads - 1);
 
     Bug = new BugEnemy(randomBugPosition);
+
+    Bug.img.anchor.setTo(0.5,0.5);
+    Bug.rotationTween = game.add.tween(Bug.img).to({ angle: 360 }, 2000, Phaser.Easing.Linear.None);
+    Bug.rotationTween.loop(true);
+    Bug.rotationTween.start();
+
     bugsArray.push(Bug);
 
 }
@@ -196,9 +203,9 @@ function spawnLifeItems() {
 
     const randomThread = game.rnd.integerInRange(0, nThreads - 1); // Generate random thread
     var x = threadPosition[randomThread];
-    const item = itemGroup.create(x, 30, 'disparo');
+    const item = itemGroup.create(x, 30, 'lifeItem');
     item.anchor.setTo(0.5, 0.5);
-    item.scale.setTo(0.1,0.1);
+    item.scale.setTo(0.15,0.15);
     console.log("LIFE ITEMS");
 }
 
@@ -282,7 +289,7 @@ function shootDisparo(x, y, vd) {
     
 
     if (shot) {
-        shot.scale.setTo(0.1, 0.1);
+        shot.scale.setTo(0.13, 0.13);
         rndBalaFrame = game.rnd.integerInRange(0, 4);
         shot.frame = rndBalaFrame;
         shot.reset(x, y);
@@ -319,7 +326,6 @@ function hagoDaño(thisShot, thisBug){
     bugsArray.splice(i, 1) //si no está los enemigos quitan vida aún borrados
 
     score+=10
-    console.log("this i is ->" + i)
 }
 
 
