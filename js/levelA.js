@@ -3,11 +3,10 @@ const DISPARO_OFFSET_X = 10;
 const DISPARO_OFFSET_Y = -300;
 const DISPARO_VEL = 350;
 
-var actualTime;
-var elapsed;
-
 let bugVelocity;
 let threadImg;
+let rndBalaFrame;
+
 let line, player;
 var threadPosition = [], bugsArray = [], threadObjects = [];
 var timerEnemy;
@@ -94,6 +93,7 @@ function loadAssets() {
     game.load.image("tv", "assets/imgs/BG-1.png");
     game.load.spritesheet("lives","assets/imgs/lifeSpritesheet.png",519,519);
     game.load.spritesheet("character","assets/imgs/characterSpritesheet.png",519,519);
+    game.load.spritesheet("balas","assets/imgs/balasSpritesheet.png",519,519);
     game.load.image("pantallaNegra","assets/imgs/Solid_black.png")
 
 }
@@ -103,7 +103,7 @@ function displayScreen() {
     game.input.enabled = true;
     if ( isKeyboradActive) {
         game.input.keyboard.onDownCallback = getKeyboardInput
-
+        
     } else {
         game.input.mouse.capture = true
         game.input.onDown.add(onMouseDown, this);
@@ -168,7 +168,7 @@ function displayScreen() {
     game.physics.arcade.enable("mariquita");
     game.physics.arcade.enable("disparo");
     game.physics.arcade.enable(player);
-    //game.physics.arcade.enable("disparo"); //hay q cambuarlo al sprite luego
+
 
     createfade();
 
@@ -243,8 +243,9 @@ function createDisparo(number) {
     
     disparo = game.add.group();
     disparo.enableBody = true;
-    disparo.createMultiple(number, "disparo");
-    
+    disparo.createMultiple(number, "balas");
+
+
     disparo.callAll("events.onOutOfBounds.add", "events.onOutOfBounds", resetMember);
     disparo.callAll("anchor.setTo", "anchor", 0.5, 1.0);
     disparo.setAll("checkWorldBounds", true);
@@ -281,7 +282,9 @@ function shootDisparo(x, y, vd) {
     
 
     if (shot) {
-        shot.scale.setTo(0.05, 0.05);
+        shot.scale.setTo(0.1, 0.1);
+        rndBalaFrame = game.rnd.integerInRange(0, 4);
+        shot.frame = rndBalaFrame;
         shot.reset(x, y);
         shot.body.velocity.y = vd;
     }

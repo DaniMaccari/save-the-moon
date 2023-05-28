@@ -1,4 +1,7 @@
 
+var actualTime;
+var elapsed;
+
 var time, timeText;
 let score, scoreText;
 let lives, livesText;
