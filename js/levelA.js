@@ -12,7 +12,7 @@ var threadPosition = [], bugsArray = [], threadObjects = [];
 var timerEnemy;
 var timerLifeItems;
 
-let actualThread, middleThread, playerYpos = 520, playerYchange = 7;
+let actualThread, middleThread, playerYpos = 520, playerYchange = 7; objectsLimit = 560;
 
 let Bug, yBug = 30;
 let bugsGroup;
@@ -86,6 +86,7 @@ let levelAState = {
 
 //--- load assets ---------------
 function loadAssets() {
+
 
     game.load.image("enemy", "assets/imgs/enemy.png");
     game.load.image("drawLine", "assets/imgs/line.png");
@@ -337,7 +338,7 @@ function deleteItem(thisShot,thisItem) {
 
 function checkItemCollision() {
     itemGroup.forEach(function(item) {
-        if (item.y > playerYpos) {
+        if (item.y > objectsLimit) {
             item.kill(); // Remove the item from the group
         }
     }, this);
@@ -350,7 +351,7 @@ function checkBulletItemCollision() {
 
         
         
-        if( bugsArray[i].img.y > playerYpos ){
+        if( bugsArray[i].img.y > objectsLimit ){
             reciboDaño();
             
             bugsArray[i].img.destroy()
