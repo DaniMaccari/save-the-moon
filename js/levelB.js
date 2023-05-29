@@ -161,7 +161,7 @@ function moveBugsLevelB() {
             bugsArray[i].img.y > branchPosition[bugsArray[i].myThread] &&
             bugsArray[i].img.y < branchPosition[bugsArray[i].myThread] +5){
             
-            if( game.rnd.integerInRange(0, 2) != 0){
+            if( game.rnd.integerInRange(0,5) == 0){
                 
                 bugsArray[i].isMoving = true
                 if ( branchDirection[bugsArray[i].myThread] ) {//hacia la izquierda
@@ -175,7 +175,6 @@ function moveBugsLevelB() {
                 }
                 
             }
-
         }
     }
 }
