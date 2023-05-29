@@ -71,5 +71,5 @@ function onLevelBPressed(){
 function onLevelCPressed(){
 
     menuMusic.stop();
-    game.state.start("inicio");
+    game.state.start("levelC");
 };
