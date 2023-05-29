@@ -103,7 +103,6 @@ let wfConfig = {
         families: ["Alkatra"]
         },
     };
-    
     WebFont.load(wfConfig);
 
 //--- load assets ---------------
