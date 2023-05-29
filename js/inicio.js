@@ -50,6 +50,9 @@ function displayScreen(){
         menuMusic.loop = true;
         menuMusic.volume = 0.5;
         menuMusic.play();
+
+        menuMusic.onStop.add(function () {
+            menuMusic.play(); });
         musicPlaying = true;
       }
 
