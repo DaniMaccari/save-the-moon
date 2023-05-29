@@ -27,8 +27,8 @@ function createEnding() {
     BG = game.add.image(0, 0, "bg");
     BG.scale.setTo(game.width/BG.width, game.height/BG.height)
 
-    let again = game.add.text(0, -305, "Press 'R' to go back to the beginning.",
-    {font:'27px Arial', fill:'#FFFFFF',
+    let again = game.add.text(0, -315, "Press 'R' to go back to the beginning.",
+    {font:'27px Alkatra', fill:'#FFFFFF',
      boundsAlignH:'center', boundsAlignV:'bottom'});
     again.setTextBounds(0, game.world.height-80, game.world.width, 40);
         
@@ -37,16 +37,16 @@ function createEnding() {
 
     if(score >= 20)
     {
-        let puntacion = game.add.text(0, -500, "You won! You've arrived to: " + score + " points in just "+ actualTime +" seconds!",    
-        {font:'25px Arial', fill:'#FFFFFF',
+        let puntacion = game.add.text(0, -400, "You won! You've arrived to: " + score + " points in just "+ actualTime +" seconds!",    
+        {font:'25px Alkatra', fill:'#FFFFFF',
         boundsAlignH:'center', boundsAlignV:'bottom'});
        puntacion.setTextBounds(0, game.world.height-80, game.world.width, 40);
     }
 
     else
     {
-        let puntacion = game.add.text(0, -500, "You lost... You've arrived to: " + score + " points in "+ actualTime +" seconds, try again!",    
-        {font:'25px Arial', fill:'#FFFFFF',
+        let puntacion = game.add.text(0, -400, "You lost... You've arrived to: " + score + " points in "+ actualTime +" seconds, try again!",    
+        {font:'25px Alkatra', fill:'#FFFFFF',
         boundsAlignH:'center', boundsAlignV:'bottom'});
        puntacion.setTextBounds(0, game.world.height-80, game.world.width, 40);
 
