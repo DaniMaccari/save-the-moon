@@ -29,6 +29,9 @@ var startTime;
 let isShooting;
 let shootAnimTimer;
 
+
+
+
 class BugEnemy {
     constructor(initialThread) {
         this.myThread = initialThread
@@ -91,6 +94,18 @@ let levelAState = {
     update: updateGame,
 };
 
+let wfConfig = {
+    active: function () {
+    displayScreen();
+    },
+    
+    google: {
+        families: ["Alkatra"]
+        },
+    };
+    
+    WebFont.load(wfConfig);
+
 //--- load assets ---------------
 function loadAssets() {
 
@@ -105,7 +120,9 @@ function loadAssets() {
     game.load.spritesheet("balas","assets/imgs/balasSpritesheet.png",519,519);
     game.load.image("pantallaNegra","assets/imgs/Solid_black.png")
 
+    
 }
+
 
 //--- create level --------------
 function displayScreen() {

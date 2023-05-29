@@ -11,7 +11,8 @@ var lifeIterator = 1;
 
 function createHUD() {
 
-    let styleHUD = { fontSize: "18px", fill: "#FFFFFF" };
+
+    let styleHUD = {font: "Alkatra", fontSize: "18px", fill: "#FFFFFF" };
 
     timeText = game.add.text(50,  20, "Time: ", styleHUD);
 
@@ -98,4 +99,5 @@ function reciboDaño()
     
 
 }
+
 

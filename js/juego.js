@@ -17,6 +17,7 @@ function loadAssets(){
     game.load.spritesheet("back","assets/imgs/backSpritesheet.png", 519,519);
     game.load.image("tele","assets/imgs/BG-1.png");
     game.load.image("bg","assets/imgs/START SCREEN/BG-MAIN.png");
+
     
 };
 
