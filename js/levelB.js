@@ -163,8 +163,8 @@ function moveBugsLevelB(delta) {
             bugsArray[i].img.y < branchPosition[bugsArray[i].myThread] +10){
             
             bugsArray[i].checkCollision = false
-            
-            if( game.rnd.integerInRange(0,2) == 0){
+
+            if( game.rnd.integerInRange(0,2) != 0){
                 
                 bugsArray[i].isMoving = true
                 if ( branchDirection[bugsArray[i].myThread] ) {//hacia la izquierda
