@@ -40,7 +40,7 @@ function displayScreen() {
     BG = game.add.image(0, 0, "bg");
     BG.scale.setTo(game.width/BG.width, game.height/BG.height)
 
-    bugVelocity = 4;
+    bugVelocity = 2;
     score = 0;
     part = "B";
     level = 1;
@@ -150,7 +150,6 @@ function displayScreen() {
 
     //timerLifeItems.start();
     timerEnemy.start();
-
 }
 
 function moveBugsLevelB(delta) {
@@ -162,6 +161,8 @@ function moveBugsLevelB(delta) {
         if ( bugsArray[i].checkCollision && !bugsArray[i].isMoving &&
             bugsArray[i].img.y > branchPosition[bugsArray[i].myThread] &&
             bugsArray[i].img.y < branchPosition[bugsArray[i].myThread] +10){
+            
+            bugsArray[i].checkCollision = false
             
             if( game.rnd.integerInRange(0,2) == 0){
                 
@@ -208,7 +209,7 @@ function levelBPhase2() {
     level = 2;
     spawnEnemyRnd = game.rnd.integerInRange(1500,2000) //entre 1 y 2 segundos
     spawnItemRnd = game.rnd.integerInRange(6000,8000) //entre 6 y 8 segundos
-    bugVelocity = 6;
+    bugVelocity = 3;
 
     updateLevel();
     
@@ -219,7 +220,7 @@ function levelBPhase3() {
     level = 3;
     spawnEnemyRnd = game.rnd.integerInRange(1500,2000) //entre 1 y 2 segundos
     spawnItemRnd = game.rnd.integerInRange(6000,8000) //entre 6 y 8 segundos
-    bugVelocity = 8;
+    bugVelocity = 4;
 
     updateLevel();
     
