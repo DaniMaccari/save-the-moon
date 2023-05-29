@@ -1,5 +1,5 @@
 
-let marcadorState = {
+let endScreenState = {
     preload: preloadEnding,
     create: createEnding,
     update: updateEnding

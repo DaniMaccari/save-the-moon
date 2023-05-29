@@ -187,7 +187,7 @@ function checkScoreB() {
 
 
     if (score >= 120 ) {
-        fadeSceneOutBetweenScenes("marcador");
+        fadeSceneOutBetweenScenes("endScreen");
         console.log("aASIDODSIODIOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOS")
     }
 

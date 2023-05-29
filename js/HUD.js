@@ -91,7 +91,7 @@ function reciboDaño()
         
     } else {
         //player.kill();
-        fadeSceneOutBetweenScenes("marcador")
+        fadeSceneOutBetweenScenes("endScreen")
         console.log("He muerto")
     }
 
