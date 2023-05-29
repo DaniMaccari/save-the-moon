@@ -50,17 +50,24 @@ function displayScreen(){
 };
 
 function onBackPressed() {
+    buttonMusic.play();
     game.state.start("inicio");
 }
 
 function onLevelAPressed(){
+
+    menuMusic.stop();
     game.state.start("levelA");
 };
 
 function onLevelBPressed(){
+
+    menuMusic.stop();
     game.state.start("levelB");
 };
 
 function onLevelCPressed(){
+
+    menuMusic.stop();
     game.state.start("inicio");
 };
