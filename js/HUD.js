@@ -87,6 +87,7 @@ function reciboDaño()
         lifeLost = lifeGroup.getAt(lives); 
 
         lifeLost.frame = 1;
+        tocadoSound.play();
         console.log("life lost "+lives)
         
     } else {

@@ -122,6 +122,11 @@ function loadAssets() {
     game.load.spritesheet("balas","assets/imgs/balasSpritesheet.png",519,519);
     game.load.image("pantallaNegra","assets/imgs/Solid_black.png")
 
+    game.load.audio("piumSound","assets/snds/disparo.mp3");
+    game.load.audio("colisionSound","assets/snds/colision.mp3");
+    game.load.audio("tocadoSound","assets/snds/tocado.mp3");
+    game.load.audio("cambioSound","assets/snds/cambio.mp3")
+
     
 }
 
@@ -146,6 +151,15 @@ function displayScreen() {
     part = "A";
     lives = 5;
     bugVelocity = 4; //Velocidad de los bugs cuando empieza el juego
+
+    piumSound = game.sound.add("piumSound");
+    piumSound.volume = 0.5;
+    colisionSound = game.sound.add("colisionSound");
+    colisionSound.volume = 0.7;
+    tocadoSound = game.sound.add("tocadoSound");
+    tocadoSound.volume = 0.5;
+    cambioSound = game.sound.add("cambioSound");
+    cambioSound.volume = 0.5;
 
     spawnEnemyRnd = game.rnd.integerInRange(1500,3000) //entre 1 y 3 segundos
     //spawnItemRnd = game.rnd.integerInRange(5000,8000) //entre 5 y 3 segundos
@@ -264,6 +278,7 @@ function getKeyboardInput(e) {
     //shoot imput
     if (e.keyCode == Phaser.Keyboard.SPACEBAR) {
         fireDisparos();
+        piumSound.play();
         
     }
 };
@@ -272,6 +287,7 @@ function getKeyboardInput(e) {
 function onMouseDown(pointer) {
     if (pointer.button == Phaser.Mouse.LEFT_BUTTON) {
         fireDisparos();
+        piumSound.play();
        
         
     }
@@ -352,6 +368,8 @@ function moveItems() {
 function hagoDaño(thisShot, thisBug){
     let i = this.i
 
+    colisionSound.play();
+
     thisShot.kill()
     thisBug.kill()
     console.log(i)
@@ -359,6 +377,7 @@ function hagoDaño(thisShot, thisBug){
     itemSpawnCounter++
 
     score+=10
+    
 }
 
 
@@ -400,17 +419,19 @@ function checkScore() {
 
 
     if (score >= 80 ) {
+        cambioSound.play();
         fadeSceneOutBetweenScenes("levelB");
         console.log("aASIDODSIODIOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOS")
     }
 
     else if (score >= 60) {
-
+        
         levelAPhase3();
         
     }
 
     else  if (score >=40) {
+        
         levelAPhase2();
     }
 
@@ -419,6 +440,7 @@ function checkScore() {
 
 function levelAPhase2() {
 
+    cambioSound.play();
     level = 2;
     spawnEnemyRnd = game.rnd.integerInRange(1500,2000) //entre 1 y 2 segundos
     spawnItemRnd = game.rnd.integerInRange(6000,8000) //entre 6 y 8 segundos
@@ -430,6 +452,7 @@ function levelAPhase2() {
 
 function levelAPhase3() {
 
+    cambioSound.play();
     level = 3;
     spawnEnemyRnd = game.rnd.integerInRange(1500,2000) //entre 1 y 2 segundos
     spawnItemRnd = game.rnd.integerInRange(6000,8000) //entre 6 y 8 segundos

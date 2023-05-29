@@ -187,17 +187,19 @@ function checkScoreB() {
 
 
     if (score >= 120 ) {
+        cambioSound.play();
         fadeSceneOutBetweenScenes("endScreen");
         console.log("aASIDODSIODIOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOS")
     }
 
     else if (score >= 80) {
-
+        cambioSound.play();
         levelBPhase3();
         
     }
 
     else  if (score >=40) {
+        cambioSound.play();
         levelBPhase2();
     }
 
