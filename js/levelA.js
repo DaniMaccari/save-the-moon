@@ -136,8 +136,10 @@ function displayScreen() {
     timerEnemy = game.time.create(false);
     timerEnemy.loop(spawnEnemyRnd, spawn);
 
+    /*
     timerLifeItems = game.time.create(false);
     timerLifeItems.loop(spawnItemRnd,spawnLifeItems);
+    */
 
 
     //--- num of threads ---
@@ -187,7 +189,7 @@ function displayScreen() {
     createHUD();
     createLives();
     timerEnemy.start();
-    timerLifeItems.start();
+    //timerLifeItems.start();
 
 
 }
@@ -335,6 +337,7 @@ function hagoDaño(thisShot, thisBug){
     thisBug.kill()
     console.log(i)
     bugsArray.splice(i, 1) //si no está los enemigos quitan vida aún borrados
+    itemSpawnCounter++
 
     score+=10
 }
@@ -367,8 +370,6 @@ function checkBulletItemCollision() {
             bugsArray[i].img.destroy()
             bugsArray.splice(i, 1);
             
-            itemSpawnCounter++
-
         } else {
             game.physics.arcade.overlap( disparo, bugsArray[i].img, hagoDaño, null, { i: i })
 
