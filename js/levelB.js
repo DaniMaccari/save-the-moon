@@ -25,6 +25,7 @@ function loadAssets() {
 
 }
 
+
 function displayScreen() {
     game.input.enabled = true;
     if ( isKeyboradActive) {
