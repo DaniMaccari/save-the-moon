@@ -24,6 +24,7 @@ function loadAssets() {
 }
 
 function displayScreen() {
+
     game.input.enabled = true;
     if ( isKeyboradActive) {
         game.input.keyboard.onDownCallback = getKeyboardInput
@@ -39,24 +40,20 @@ function displayScreen() {
 
     bugVelocity = 1;
     score = 0;
-    part = "B";
+    part = "C";
     level = 1;
     lives = 5;
     startTime = game.time.now;
     
 
     timerLifeItems = game.time.create(false);
-    //timerLifeItems.loop(spawnItemRnd,spawnLifeItems);
 
     spawnEnemyRnd = game.rnd.integerInRange(1500,2500) //entre 1 y 2'5 segundos
-    //spawnItemRnd = game.rnd.integerInRange(5000,8000) //entre 5 y 3 segundos
+
     
     
     timerEnemy = game.time.create(false);
     timerEnemy.loop(spawnEnemyRnd, spawn);
-
-    //timerLifeItems = game.time.create(false);
-    //timerLifeItems.loop(spawnItemRnd,spawnLifeItems);
 
 
     //--- num of threads ---
@@ -75,8 +72,6 @@ function displayScreen() {
         let tempLine = game.add.image(threadPosition[i], 110, "drawLine");
         tempLine.scale.setTo(0.3, 0.3)
         tempLine.x -= (tempLine.width / 2)
-        
-        //tempLine.tint = 0xff0080; //change color
 
         branchPosition.push(-10)
         branchDirection.push(false)
@@ -148,4 +143,62 @@ function displayScreen() {
     //timerLifeItems.start();
     timerEnemy.start();
 
+}
+
+function updateGame() {
+    
+    moveBugsLevelB();
+    updateScore();
+    updateTimer();
+    checkItemCollision();
+    checkBulletItemCollision();
+
+    if (itemGroup && itemGroup.children) { //si existe el grupo y tiene hijos
+        moveItems();
+
+        game.physics.arcade.overlap( disparo,itemGroup, deleteItem, null, this )
+        
+        
+    }
+
+    game.physics.arcade.overlap(player,itemGroup, ganoVida, null, this )
+
+    //if mouse input is active
+    if( !isKeyboradActive) {
+        let mousePos = game.input.mousePointer.x
+        for ( let i=0; i < threadPosition.length; i++){
+            if(threadPosition[i] -35 < mousePos && threadPosition[i] +35 > mousePos){
+                player.x = threadPosition [i] - player.width / 2
+            }
+        }
+        
+    }
+
+    if (isShooting) {
+        player.frame = 1;
+    } 
+
+    else {
+        player.frame = 0;
+    }
+    
+    //deactivate shots
+    
+    //check collisions BULLET/ENEMI and check if enemy reached bottom
+    for (let i = bugsArray.length-1; i >=0; i--) { //de atras hacia adelante para que no salten tantos errores
+
+        
+        
+        if( bugsArray[i].img.y > playerYpos ){
+            reciboDaño()
+            
+            bugsArray[i].img.destroy()
+            bugsArray.splice(i, 1)
+
+        } else {
+            game.physics.arcade.overlap( disparo, bugsArray[i].img, hagoDaño, null, { i: i })
+
+        }
+    }
+    
 }
