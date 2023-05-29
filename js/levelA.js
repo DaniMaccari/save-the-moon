@@ -129,7 +129,7 @@ function displayScreen() {
     bugVelocity = 2; //Velocidad de los bugs cuando empieza el juego
 
     spawnEnemyRnd = game.rnd.integerInRange(1500,3000) //entre 1 y 3 segundos
-    spawnItemRnd = game.rnd.integerInRange(5000,8000) //entre 5 y 3 segundos
+    //spawnItemRnd = game.rnd.integerInRange(5000,8000) //entre 5 y 3 segundos
 
     startTime = game.time.now;
 
@@ -194,11 +194,19 @@ function displayScreen() {
 
 //--- SPAWN ENEMY -------------------------
 function spawn() {
-    var randomBugPosition = game.rnd.integerInRange(0, nThreads - 1);
 
-    Bug = new BugEnemy(randomBugPosition);
+    if ( itemSpawnCounter >= itemSpawn) {
+        spawnLifeItems()
+        itemSpawnCounter = 0
 
-    bugsArray.push(Bug);
+    } else {
+        var randomBugPosition = game.rnd.integerInRange(0, nThreads - 1);
+
+        Bug = new BugEnemy(randomBugPosition);
+
+        bugsArray.push(Bug);
+    }
+    
 
 }
 
@@ -358,7 +366,7 @@ function checkBulletItemCollision() {
             
             bugsArray[i].img.destroy()
             bugsArray.splice(i, 1);
-
+            
             itemSpawnCounter++
 
         } else {
