@@ -103,6 +103,7 @@ let wfConfig = {
         families: ["Alkatra"]
         },
     };
+    
     WebFont.load(wfConfig);
 
 //--- load assets ---------------
@@ -118,7 +119,7 @@ function loadAssets() {
     game.load.spritesheet("character","assets/imgs/characterSpritesheet.png",519,519);
     game.load.spritesheet("balas","assets/imgs/balasSpritesheet.png",519,519);
     game.load.image("pantallaNegra","assets/imgs/Solid_black.png")
-    
+
     
 }
 
