@@ -81,7 +81,7 @@ function displayScreen() {
         
         //tempLine.tint = 0xff0080; //change color
 
-        branchPosition.push(-10)
+        branchPosition.push(game.height)
         branchDirection.push(false)
     }
 
@@ -95,7 +95,7 @@ function displayScreen() {
         
 
         //if this thread doents have branch
-        if ( branchPosition[aux] == -10 ){
+        if ( branchPosition[aux] == game.height ){
 
             branchPosition[aux] = game.rnd.integerInRange(160, game.height*0.5)
             console.log("pos->" + aux + " altura y->" + branchPosition[aux])
