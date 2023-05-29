@@ -29,7 +29,7 @@ var startTime;
 let isShooting;
 let shootAnimTimer;
 
-
+var elapsedTime;
 
 
 class BugEnemy {
@@ -57,12 +57,13 @@ class BugEnemy {
 
     }
   
-    move() {
+    move(delta) {
+        let speed = bugVelocity / delta
         //changes thread/ takes branch
         if(this.isMoving && this.direction){ //izquierda
 
-            this.img.x -= 2 * bugVelocity;
-            this.img.y += 1 * bugVelocity;
+            this.img.x -= 2 * speed;
+            this.img.y += 1 * speed;
             if (this.img.x <= threadPosition[this.myThread]) {
                 this.isMoving = false
                 this.img.x = threadPosition[this.myThread]
@@ -70,8 +71,8 @@ class BugEnemy {
             
         }
         else if ( this.isMoving && !this.direction){ //derecha
-            this.img.x += 2 * bugVelocity;
-            this.img.y += 1 * bugVelocity;
+            this.img.x += 2 * speed;
+            this.img.y += 1 * speed;
             if (this.img.x >= threadPosition[this.myThread]) {
                 this.isMoving = false
                 this.img.x = threadPosition[this.myThread]
@@ -79,7 +80,7 @@ class BugEnemy {
         }
         //move down
         else{
-            this.img.y += bugVelocity;
+            this.img.y += speed;
         }
         
     }
@@ -329,9 +330,9 @@ function shootDisparo(x, y, vd) {
 }
 
 //--- MOVE ALL BUGS/ENEMIES ---------------------
-function moveBugs() {
+function moveBugs(delta) {
     for (let i = 0; i < bugsArray.length; i++) {
-       bugsArray[i].move();
+       bugsArray[i].move(delta);
 
     }
     
@@ -441,8 +442,10 @@ function levelAPhase3() {
 //--- UPDATE ------------
 function updateGame() {
 
+    elapsedTime = game.time.elapsed; //get time between frames
+
     //move enemies
-    moveBugs();
+    moveBugs(elapsedTime);
 
     if (itemGroup && itemGroup.children) { //si existe el grupo y tiene hijos
         moveItems();
