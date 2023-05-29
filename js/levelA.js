@@ -19,6 +19,7 @@ let bugsGroup;
 let disparo;
 let tvForeground
 let itemGroup;
+let itemSpawn = 4, itemSpawnCounter = 0;
 
 let spawnEnemyRnd;
 let spawnItemRnd;
@@ -357,6 +358,8 @@ function checkBulletItemCollision() {
             
             bugsArray[i].img.destroy()
             bugsArray.splice(i, 1);
+
+            itemSpawnCounter++
 
         } else {
             game.physics.arcade.overlap( disparo, bugsArray[i].img, hagoDaño, null, { i: i })
