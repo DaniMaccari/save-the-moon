@@ -153,10 +153,10 @@ function displayScreen() {
 
 }
 
-function moveBugsLevelB() {
+function moveBugsLevelB(delta) {
 
     for (let i = 0; i < bugsArray.length; i++) {
-        bugsArray[i].move()
+        bugsArray[i].move(delta)
         
         //check branch
         if ( bugsArray[i].checkCollision && !bugsArray[i].isMoving &&
@@ -226,7 +226,10 @@ function levelBPhase3() {
 }
 
 function updateGame() {
-    moveBugsLevelB();
+
+    elapsedTime = game.time.elapsed; //get time between frames
+
+    moveBugsLevelB(elapsedTime);
     updateScore();
     updateTimer();
     checkItemCollision();
