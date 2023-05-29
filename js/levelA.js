@@ -49,8 +49,7 @@ class BugEnemy {
 
         game.physics.arcade.enable(this.img)
 
-        
-        
+        this.checkCollision = true
 
         this.isMoving = false
         this.direction = false
