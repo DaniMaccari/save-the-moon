@@ -6,7 +6,7 @@ let marcadorState = {
 };
 
 function restartPlay() {
-    fadeSceneOutBetweenScenes("inicio");
+    fadeSceneOutBetweenScenes("levelA");
 }
 
 function correElTiempo(){
@@ -27,13 +27,13 @@ function createEnding() {
     BG = game.add.image(0, 0, "bg");
     BG.scale.setTo(game.width/BG.width, game.height/BG.height)
 
-    let again = game.add.text(0, -315, "Press 'R' to go back to the beginning.",
+    let again = game.add.text(0, -315, "Press 'ENTER' to restart at level A.",
     {font:'27px Alkatra', fill:'#FFFFFF',
      boundsAlignH:'center', boundsAlignV:'bottom'});
     again.setTextBounds(0, game.world.height-80, game.world.width, 40);
         
-    let rkey = game.input.keyboard.addKey(Phaser.Keyboard.R);
-    rkey.onDown.addOnce(restartPlay, this);
+    let enterkey = game.input.keyboard.addKey(Phaser.Keyboard.ENTER);
+    enterkey.onDown.addOnce(restartPlay, this);
 
     if(score >= 20)
     {
@@ -67,6 +67,6 @@ function updateEnding()
     
     if(actualTime >= 20)
     {
-        restartPlay();
+        fadeSceneOutBetweenScenes("inicio");
     }
 }
