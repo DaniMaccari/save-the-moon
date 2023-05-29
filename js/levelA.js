@@ -32,19 +32,25 @@ class BugEnemy {
     constructor(initialThread) {
         this.myThread = initialThread
         this.img = game.add.sprite(threadPosition[initialThread], yBug, "enemy")
+        this.img.scale.setTo(0.15, 0.15)
+        this.img.anchor.setTo(0.5,0.5)
+
+        this.rotationTween = game.add.tween(this.img).to({ angle: 360 }, 2000, Phaser.Easing.Linear.None);
+        this.rotationTween.loop(true);
+        this.rotationTween.start();
         bugsGroup.addChild(this.img)
+
         this.img.x = threadPosition[initialThread]
         this.img.y = yBug
+
         game.physics.arcade.enable(this.img)
 
-        this.img.scale.setTo(0.15, 0.15)
+        
         
 
         this.isMoving = false
         this.direction = false
 
-        
-        
     }
   
     move() {
@@ -53,18 +59,18 @@ class BugEnemy {
 
             this.img.x -= 2 * bugVelocity;
             this.img.y += 1 * bugVelocity;
-            if (this.img.x + this.myWidth <= threadPosition[this.myThread]) {
+            if (this.img.x <= threadPosition[this.myThread]) {
                 this.isMoving = false
-                this.img.x = threadPosition[this.myThread] - this.myWidth
+                this.img.x = threadPosition[this.myThread]
             }
             
         }
         else if ( this.isMoving && !this.direction){ //derecha
             this.img.x += 2 * bugVelocity;
             this.img.y += 1 * bugVelocity;
-            if (this.img.x + this.myWidth >= threadPosition[this.myThread]) {
+            if (this.img.x >= threadPosition[this.myThread]) {
                 this.isMoving = false
-                this.img.x = threadPosition[this.myThread] - this.myWidth
+                this.img.x = threadPosition[this.myThread]
             }
         }
         //move down
@@ -190,11 +196,6 @@ function spawn() {
     var randomBugPosition = game.rnd.integerInRange(0, nThreads - 1);
 
     Bug = new BugEnemy(randomBugPosition);
-
-    Bug.img.anchor.setTo(0.5,0.5);
-    Bug.rotationTween = game.add.tween(Bug.img).to({ angle: 360 }, 2000, Phaser.Easing.Linear.None);
-    Bug.rotationTween.loop(true);
-    Bug.rotationTween.start();
 
     bugsArray.push(Bug);
 
