@@ -17,6 +17,6 @@ function startGame(){
     
     game.state.add("levelA", levelAState);
     game.state.add("levelB", levelBState);
-
+    game.state.add("marcador", marcadorState);
     
 }
