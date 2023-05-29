@@ -1,13 +1,20 @@
 
 let marcadorState = {
     preload: preloadEnding,
-    create: createEnding
+    create: createEnding,
+    update: updateEnding
 };
 
 function restartPlay() {
-    game.state.start('inicio');
+    fadeSceneOutBetweenScenes("inicio");
 }
 
+function correElTiempo(){
+
+    
+    elapsed = game.time.now - startTime;
+    actualTime = Math.floor(elapsed / 1000);    
+}
 
 function preloadEnding() {
 
@@ -30,16 +37,16 @@ function createEnding() {
 
     if(score >= 20)
     {
-        let puntacion = game.add.text(0, -500, "You won! You've arrived to: " + score + " in just "+ actualTime +" seconds!!",    
-        {font:'27px Arial', fill:'#FFFFFF',
+        let puntacion = game.add.text(0, -500, "You won! You've arrived to: " + score + " points in just "+ actualTime +" seconds!",    
+        {font:'25px Arial', fill:'#FFFFFF',
         boundsAlignH:'center', boundsAlignV:'bottom'});
        puntacion.setTextBounds(0, game.world.height-80, game.world.width, 40);
     }
 
     else
     {
-        let puntacion = game.add.text(0, -500, "You lost... You've arrived to: " + score + " in just "+ actualTime +" seconds, try again!",    
-        {font:'27px Arial', fill:'#FFFFFF',
+        let puntacion = game.add.text(0, -500, "You lost... You've arrived to: " + score + " points in "+ actualTime +" seconds, try again!",    
+        {font:'25px Arial', fill:'#FFFFFF',
         boundsAlignH:'center', boundsAlignV:'bottom'});
        puntacion.setTextBounds(0, game.world.height-80, game.world.width, 40);
 
@@ -49,11 +56,17 @@ function createEnding() {
     tvForeground.scale.setTo(game.width/tvForeground.width, game.height/tvForeground.height)
 
 
-
     startTime = game.time.now;
 
-
-    
 }
 
+function updateEnding()
+{
+    updateTimer();
 
+    
+    if(actualTime >= 20)
+    {
+        restartPlay();
+    }
+}
