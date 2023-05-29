@@ -65,6 +65,7 @@ class BugEnemy {
             this.img.y += 1 * speed;
             if (this.img.x <= threadPosition[this.myThread]) {
                 this.isMoving = false
+                this.checkCollision = true
                 this.img.x = threadPosition[this.myThread]
             }
             
@@ -74,6 +75,7 @@ class BugEnemy {
             this.img.y += 1 * speed;
             if (this.img.x >= threadPosition[this.myThread]) {
                 this.isMoving = false
+                this.checkCollision = true
                 this.img.x = threadPosition[this.myThread]
             }
         }
