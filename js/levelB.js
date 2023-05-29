@@ -40,7 +40,7 @@ function displayScreen() {
     BG = game.add.image(0, 0, "bg");
     BG.scale.setTo(game.width/BG.width, game.height/BG.height)
 
-    bugVelocity = 1;
+    bugVelocity = 2;
     score = 0;
     part = "B";
     level = 1;
@@ -182,12 +182,56 @@ function moveBugsLevelB() {
 }
 
 
+function checkScoreB() {
+
+
+    if (score >= 120 ) {
+        fadeSceneOutBetweenScenes("marcador");
+        console.log("aASIDODSIODIOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOS")
+    }
+
+    else if (score >= 80) {
+
+        levelBPhase3();
+        
+    }
+
+    else  if (score >=40) {
+        levelBPhase2();
+    }
+
+
+}
+
+function levelBPhase2() {
+
+    level = 2;
+    spawnEnemyRnd = game.rnd.integerInRange(1500,2000) //entre 1 y 2 segundos
+    spawnItemRnd = game.rnd.integerInRange(6000,8000) //entre 6 y 8 segundos
+    bugVelocity = 3;
+
+    updateLevel();
+    
+}
+
+function levelBPhase3() {
+
+    level = 3;
+    spawnEnemyRnd = game.rnd.integerInRange(1500,2000) //entre 1 y 2 segundos
+    spawnItemRnd = game.rnd.integerInRange(6000,8000) //entre 6 y 8 segundos
+    bugVelocity = 4;
+
+    updateLevel();
+    
+}
+
 function updateGame() {
     moveBugsLevelB();
     updateScore();
     updateTimer();
     checkItemCollision();
     checkBulletItemCollision();
+    checkScoreB()
 
     if (itemGroup && itemGroup.children) { //si existe el grupo y tiene hijos
         moveItems();
