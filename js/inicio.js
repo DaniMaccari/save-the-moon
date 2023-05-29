@@ -7,6 +7,7 @@ let initialState = {
 let btnStart, btnConf, btnCredits;
 let TV, BG;
 var musicPlaying = false;
+let buttonMusic;
 
 function loadAssets(){
     
@@ -16,7 +17,9 @@ function loadAssets(){
     game.load.image("tele","assets/imgs/BG-1.png");
     game.load.image("bg","assets/imgs/START SCREEN/BG-MAIN.png");
     game.load.image("pantallaNegra","assets/imgs/Solid_black.png")
+
     game.load.audio("menuMusic","assets/imgs/music/menuMusic.mp3");
+    game.load.audio("buttonMusic","assets/imgs/music/ButtonMusic.wav");
 }
 
 function displayScreen(){
@@ -45,24 +48,35 @@ function displayScreen(){
     if (!musicPlaying) {
         menuMusic = game.sound.add("menuMusic");
         menuMusic.loop = true;
-        menuMusic.volume = 0.25;
+        menuMusic.volume = 0.5;
         menuMusic.play();
         musicPlaying = true;
       }
+
+    buttonMusic = game.sound.add("buttonMusic");
+    buttonMusic.volume = 0.7;
+
+
     
 }
 
 
 function onStartButtonPressed(){
+
+    buttonMusic.play();
     fadeSceneOut("juego")
  
 }
 
 function onConfButtonPressed(){
+    
+    buttonMusic.play();
     game.state.start("settings");
 }
 
 function onCreditsButtonPressed(){
+
+    buttonMusic.play();
     game.state.start("credits");
 }
 

@@ -62,7 +62,8 @@ function initGame() {
 
 //activate mouse, deactivate keyboard
 function onButtonMouse() {
-
+    
+    buttonMusic.play();
     buttonMouse.setFrames(1,1,1,1)
     buttonKeyboard.setFrames(1,0,0,0)
     isKeyboradActive = false
@@ -72,6 +73,7 @@ function onButtonMouse() {
 //activate keyboard, deactivate mouse
 function onButtonKeyboard() {
 
+    buttonMusic.play();
     buttonKeyboard.setFrames(1,1,1,1)
     buttonMouse.setFrames(1,0,0,0)
     isKeyboradActive = true
@@ -79,7 +81,8 @@ function onButtonKeyboard() {
 }
     
 function onButtonThread(buttonIndex) {
-
+    
+    buttonMusic.play();
     let stop = false
     let contador = 0
 

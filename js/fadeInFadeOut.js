@@ -14,7 +14,7 @@ function fadeSceneIn() {
 
 function fadeSceneOut(siguienteEscena) {
 
-
+    buttonMusic.play();
     fadeTween = game.add.tween(fadeRectangle)
     fadeTween.to({ alpha: 1 }, 400, Phaser.Easing.Linear.None, true);
     
