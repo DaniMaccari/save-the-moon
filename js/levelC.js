@@ -1,4 +1,10 @@
 
+
+let spawnUltiRnd;
+var timerUlti;
+let haveUlti = false;
+
+
 let levelCState = {
      
     preload: loadAssets,
@@ -12,13 +18,15 @@ function loadAssets() {
     game.load.image("lifeItem", "assets/imgs/lifeItem.png");
     game.load.image("drawLine", "assets/imgs/line.png")
     game.load.image("drawBranch", "assets/imgs/line_tumbada.png")
-    game.load.image("disparo", "assets/imgs/punto.png")
+    game.load.image("bomb", "assets/imgs/PARTC/bomb.png")
     game.load.image("bg", "assets/imgs/BG.png")
     game.load.image("tv", "assets/imgs/BG-1.png")
     game.load.spritesheet("lives","assets/imgs/lifeSpritesheet.png",519,519);  
+    game.load.spritesheet("bombHUD","assets/imgs/PARTC/bombSpritesheet.png",519,519);  
     game.load.spritesheet("character","assets/imgs/characterSpritesheet.png",519,519); 
     game.load.spritesheet("balas","assets/imgs/balasSpritesheet.png",519,519);
     game.load.image("pantallaNegra","assets/imgs/Solid_black.png")
+    game.load.image("whiteFlash","assets/imgs/PARTC/whiteFlashBomb.png")
 
     game.load.audio("piumSound","assets/snds/disparo.mp3");
     game.load.audio("colisionSound","assets/snds/colision.mp3");
@@ -29,6 +37,10 @@ function loadAssets() {
 }
 
 function displayScreen() {
+
+    //LA BOMBA SE ACTIVA CON E
+    var keyE = game.input.keyboard.addKey(Phaser.Keyboard.E);
+    keyE.onDown.add(tiraBomba, this);
 
     game.input.enabled = true;
     if ( isKeyboradActive) {
@@ -43,7 +55,7 @@ function displayScreen() {
     BG = game.add.image(0, 0, "bg");
     BG.scale.setTo(game.width/BG.width, game.height/BG.height)
 
-    bugVelocity = 1;
+    bugVelocity = 5;
     score = 0;
     part = "C";
     level = 1;
@@ -62,10 +74,12 @@ function displayScreen() {
 
     timerLifeItems = game.time.create(false);
 
-    spawnEnemyRnd = game.rnd.integerInRange(1500,2500) //entre 1 y 2'5 segundos
+    
+    spawnUltiRnd = game.rnd.integerInRange(1500,10000) //entre 1 y 2'5 segundos
+    timerUlti = game.time.create(false);
+    timerUlti.loop(spawnUltiRnd, spawnUlti);
 
-    
-    
+    spawnEnemyRnd = game.rnd.integerInRange(1500,2500) //entre 1 y 2'5 segundos
     timerEnemy = game.time.create(false);
     timerEnemy.loop(spawnEnemyRnd, spawn);
 
@@ -138,10 +152,13 @@ function displayScreen() {
 
     itemGroup = game.add.group();
     itemGroup.enableBody = true;
+
+    ultiGroup = game.add.group();
+    ultiGroup.enableBody = true;
     
     //enable collisions
     game.physics.arcade.enable("enemy");
-    game.physics.arcade.enable("disparo");
+    game.physics.arcade.enable("bomb");
     game.physics.arcade.enable(player);
 
     createfade();
@@ -150,13 +167,96 @@ function displayScreen() {
     tvForeground.scale.setTo(game.width/tvForeground.width, game.height/tvForeground.height)
     tvForeground.bringToTop();
 
+    bombHUD = game.add.sprite(640,660,"bombHUD",0);
+    bombHUD.scale.setTo(0.25,0.25);
 
     createHUD();
     createLives();
 
     //timerLifeItems.start();
     timerEnemy.start();
+    timerUlti.start();
 
+}
+
+function spawnUlti() {
+
+    const randomThread = game.rnd.integerInRange(0, nThreads - 1); // Generate random thread
+    var x = threadPosition[randomThread];
+    const ulti = ultiGroup.create(x, 30, 'bomb');
+    ulti.anchor.setTo(0.5, 0.5);
+    ulti.scale.setTo(0.27,0.27);
+    console.log("ULTI SPAWN");
+
+
+}
+
+function moveUlti() {
+    
+    var children = ultiGroup.children;
+    var numChildren = children.length;
+    for (var i = 0; i < numChildren; i++) {
+      var ulti = children[i];
+      ulti.y += 2; }
+}
+
+function tiraBomba() {
+
+    
+
+    if (haveUlti == true) {
+
+        //FLASHLIGHT ANIMATION
+        const flashlight = game.add.sprite(0, 0, 'whiteFlash');
+        flashlight.width = game.width;
+        flashlight.height = game.height;
+
+        flashlight.alpha = 0;
+
+
+        const fadeInTween = game.add.tween(flashlight).to({ alpha: 1 }, 1000, Phaser.Easing.Linear.None);
+        const fadeOutTween = game.add.tween(flashlight).to({ alpha: 0 }, 500, Phaser.Easing.Linear.None);
+
+        fadeInTween.chain(fadeOutTween);
+
+
+        // Start the initial fade in
+        fadeInTween.start();
+
+
+        destroyAllEnemies()
+        console.log("Tengo bomba");
+        bombHUD.frame = 0;
+        haveUlti = false;
+
+    }
+
+    else {
+        notBombAvailable(); //Texto en el HUD de que no has cogido una bomba
+    }
+
+}
+
+function destroyAllEnemies() {
+
+    for (let i = 0; i < bugsArray.length; i++) {
+      bugsArray[i].img.destroy();
+    }
+    bugsArray = []; // clear the bugsArray
+}
+
+function deleteUlti(thisShot,thisUlti) {
+    console.log("BORRO DISPARO E ULTI")
+    thisShot.kill();
+    thisUlti.kill();
+}
+
+function gotUlti(thisPlayer,thisUlti) {
+
+    haveUlti = true;
+    BombAvailable();
+    bombHUD.frame = 1;
+    thisUlti.kill();
 }
 
 function updateGame() {
@@ -169,6 +269,12 @@ function updateGame() {
     checkItemCollision();
     checkBulletItemCollision();
 
+    if (ultiGroup && ultiGroup.children) { //si existe el grupo y tiene hijos
+        moveUlti();
+    
+        
+    }
+
     if (itemGroup && itemGroup.children) { //si existe el grupo y tiene hijos
         moveItems();
 
@@ -178,6 +284,9 @@ function updateGame() {
     }
 
     game.physics.arcade.overlap(player,itemGroup, ganoVida, null, this )
+
+    game.physics.arcade.overlap(player,ultiGroup, gotUlti, null, this )
+    game.physics.arcade.overlap( disparo,ultiGroup, deleteUlti, null, this )
 
     //if mouse input is active
     if( !isKeyboradActive) {

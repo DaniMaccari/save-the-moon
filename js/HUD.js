@@ -8,6 +8,8 @@ let lives, livesText;
 let part, levelText;
 var level;
 var lifeIterator = 1;
+var textCreated = false;
+var text2Created = false;
 
 function createHUD() {
 
@@ -99,6 +101,59 @@ function reciboDaño()
    
     
 
+}
+
+function notBombAvailable() {
+
+    if (textCreated==false) {   
+        
+        textCreated = true;
+        var text = game.add.text(game.world.centerX, game.world.centerY, 'NO BOMB', {
+            font: '32px Arial',
+            fill: '#ffffff'
+        });
+
+      text.anchor.setTo(0.5);
+
+      //desaparece a los 2 segundos
+      
+      var delay = 2000; 
+
+      game.time.events.add(delay, function() {
+        text.destroy(); 
+        textCreated = false;
+      }, this);
+
+    }
+      
+      
+}
+
+
+function BombAvailable() {
+
+    if (text2Created==false) {   
+        
+        text2Created = true;
+        var text = game.add.text(game.world.centerX, game.world.centerY, "PRESS E TO THROW THE BOMB", {
+            font: '32px Arial',
+            fill: '#ffffff'
+        });
+
+      text.anchor.setTo(0.5);
+
+      //desaparece a los 2 segundos
+      
+      var delay = 2000; 
+
+      game.time.events.add(delay, function() {
+        text.destroy(); 
+        text2Created = false;
+      }, this);
+
+    }
+      
+      
 }
 
 
