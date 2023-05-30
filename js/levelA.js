@@ -3,6 +3,7 @@ const DISPARO_OFFSET_X = 10;
 const DISPARO_OFFSET_Y = -300;
 const DISPARO_VEL = 350;
 
+var enemyCounter;
 let bugVelocity;
 let threadImg;
 let rndBalaFrame;
@@ -233,6 +234,10 @@ function spawn() {
     if ( itemSpawnCounter >= itemSpawn) {
         spawnLifeItems()
         itemSpawnCounter = 0
+    
+    if (enemyCounter > 5) {
+        spawnUlti();
+    }
 
     } else {
         var randomBugPosition = game.rnd.integerInRange(0, nThreads - 1);
@@ -375,7 +380,7 @@ function hagoDaño(thisShot, thisBug){
     console.log(i)
     bugsArray.splice(i, 1) //si no está los enemigos quitan vida aún borrados
     itemSpawnCounter++
-
+    enemyCounter++;
     score+=10
     
 }
@@ -487,6 +492,7 @@ function updateGame() {
     checkItemCollision();
     checkBulletItemCollision();
     checkScore();
+
 
 
     if (isShooting) {

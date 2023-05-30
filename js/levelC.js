@@ -60,6 +60,7 @@ function displayScreen() {
     part = "C";
     level = 1;
     lives = 5;
+    enemyCounter = 0;
     startTime = game.time.now;
 
     piumSound = game.sound.add("piumSound");
@@ -75,9 +76,9 @@ function displayScreen() {
     timerLifeItems = game.time.create(false);
 
     
-    spawnUltiRnd = game.rnd.integerInRange(1500,10000) //entre 1 y 2'5 segundos
-    timerUlti = game.time.create(false);
-    timerUlti.loop(spawnUltiRnd, spawnUlti);
+    //spawnUltiRnd = game.rnd.integerInRange(1500,10000) //entre 1 y 2'5 segundos
+    //timerUlti = game.time.create(false);
+    //timerUlti.loop(spawnUltiRnd, spawnUlti);
 
     spawnEnemyRnd = game.rnd.integerInRange(1500,2500) //entre 1 y 2'5 segundos
     timerEnemy = game.time.create(false);
@@ -187,6 +188,7 @@ function spawnUlti() {
     ulti.anchor.setTo(0.5, 0.5);
     ulti.scale.setTo(0.27,0.27);
     console.log("ULTI SPAWN");
+    enemyCounter = 0;
 
 
 }
