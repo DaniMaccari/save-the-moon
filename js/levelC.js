@@ -55,7 +55,7 @@ function displayScreen() {
     BG = game.add.image(0, 0, "bg");
     BG.scale.setTo(game.width/BG.width, game.height/BG.height)
 
-    bugVelocity = 5;
+    bugVelocity = 8;
     score = 0;
     part = "C";
     level = 1;
@@ -261,11 +261,55 @@ function gotUlti(thisPlayer,thisUlti) {
     thisUlti.kill();
 }
 
+function checkScoreC() {
+
+    if ( score > 145 ){
+        cambioSound.play();
+        fadeSceneOutBetweenScenes("endScreen");
+
+    } else if ( score > 95 ){
+        cambioSound.play();
+        levelCPhase3();
+
+    } else if ( score > 45 ){
+        cambioSound.play();
+        levelCPhase2();
+
+    } //else: está en la fase 1
+}
+
+
+
+function levelCPhase2() {
+
+    level = 2;
+    spawnEnemyRnd = game.rnd.integerInRange(1500,2000) //entre 1 y 2 segundos
+    //timerEnemy.loop(spawnEnemyRnd, spawn); //actualizar nuevo timer
+    spawnItemRnd = game.rnd.integerInRange(6000,8000) //entre 6 y 8 segundos
+    bugVelocity = 15;
+
+    updateLevel(); //HUD
+    
+}
+
+function levelCPhase3() {
+
+    level = 3;
+    spawnEnemyRnd = game.rnd.integerInRange(1500,2000) //entre 1 y 2 segundos
+    //timerEnemy.loop(spawnEnemyRnd, spawn); //actualizar nuevo timer
+    spawnItemRnd = game.rnd.integerInRange(6000,8000) //entre 6 y 8 segundos
+    bugVelocity = 20;
+
+    updateLevel(); //HUD
+    
+}
+
 function updateGame() {
     
     elapsedTime = game.time.elapsed; //get time between frames
 
     moveBugsLevelB(elapsedTime);
+    checkScoreC();
     updateScore();
     updateTimer();
     checkItemCollision();
@@ -274,7 +318,6 @@ function updateGame() {
     if (ultiGroup && ultiGroup.children) { //si existe el grupo y tiene hijos
         moveUlti();
     
-        
     }
 
     if (itemGroup && itemGroup.children) { //si existe el grupo y tiene hijos

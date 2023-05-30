@@ -45,7 +45,7 @@ function displayScreen() {
     BG = game.add.image(0, 0, "bg");
     BG.scale.setTo(game.width/BG.width, game.height/BG.height)
 
-    bugVelocity = 2;
+    bugVelocity = 8;
     score = 0;
     part = "B";
     level = 1;
@@ -224,9 +224,12 @@ function checkScoreB() {
 function levelBPhase2() {
 
     level = 2;
-    spawnEnemyRnd = game.rnd.integerInRange(1500,2000) //entre 1 y 2 segundos
+    spawnEnemyRnd = game.rnd.integerInRange(1000,1500) //entre 1 y 1,5 segundos
+    //timerEnemy.loop(spawnEnemyRnd, spawn); //actualizar nuevo timer
     spawnItemRnd = game.rnd.integerInRange(6000,8000) //entre 6 y 8 segundos
-    bugVelocity = 3;
+    
+
+    bugVelocity = 15;
 
     updateLevel();
     
@@ -235,9 +238,12 @@ function levelBPhase2() {
 function levelBPhase3() {
 
     level = 3;
-    spawnEnemyRnd = game.rnd.integerInRange(1500,2000) //entre 1 y 2 segundos
+    spawnEnemyRnd = game.rnd.integerInRange(500,1000) //entre 0,5 y 1 segundos
+    //timerEnemy.loop(spawnEnemyRnd, spawn); //actualizar nuevo timer
     spawnItemRnd = game.rnd.integerInRange(6000,8000) //entre 6 y 8 segundos
-    bugVelocity = 4;
+    
+
+    bugVelocity = 20;
 
     updateLevel();
     
@@ -252,7 +258,7 @@ function updateGame() {
     updateTimer();
     checkItemCollision();
     checkBulletItemCollision();
-    checkScoreB()
+    checkScoreB() //lo chekea en cada frame
 
     if (itemGroup && itemGroup.children) { //si existe el grupo y tiene hijos
         moveItems();
