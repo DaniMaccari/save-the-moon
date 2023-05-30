@@ -201,19 +201,19 @@ function moveBugsLevelB(delta) {
 function checkScoreB() {
 
 
-    if (score >= 120 ) {
+    if (level = 3 && score >= 120 ) {
         cambioSound.play();
         fadeSceneOutBetweenScenes("endScreen");
         console.log("aASIDODSIODIOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOS")
     }
 
-    else if (score >= 80) {
+    else if (level = 2 && score >= 80) {
         cambioSound.play();
         levelBPhase3();
         
     }
 
-    else  if (score >=40) {
+    else  if (level == 1 && score >=40) {
         cambioSound.play();
         levelBPhase2();
     }

@@ -263,15 +263,15 @@ function gotUlti(thisPlayer,thisUlti) {
 
 function checkScoreC() {
 
-    if ( score > 145 ){
+    if ( level = 3 && score > 145 ){
         cambioSound.play();
         fadeSceneOutBetweenScenes("endScreen");
 
-    } else if ( score > 95 ){
+    } else if ( level = 2 && score > 95 ){
         cambioSound.play();
         levelCPhase3();
 
-    } else if ( score > 45 ){
+    } else if ( level = 1 && score > 45 ){
         cambioSound.play();
         levelCPhase2();
 

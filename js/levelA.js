@@ -126,7 +126,7 @@ function loadAssets() {
     game.load.audio("piumSound","assets/snds/disparo.mp3");
     game.load.audio("colisionSound","assets/snds/colision.mp3");
     game.load.audio("tocadoSound","assets/snds/tocado.mp3");
-    game.load.audio("cambioSound","assets/snds/cambio.mp3")
+    game.load.audio("cambioSound","assets/snds/cambio.mp3");
 
     
 }
@@ -151,7 +151,7 @@ function displayScreen() {
     score = 0;
     part = "A";
     lives = 5;
-    bugVelocity = 5; //Velocidad de los bugs cuando empieza el juego
+    bugVelocity = 10; //Velocidad de los bugs cuando empieza el juego
 
     piumSound = game.sound.add("piumSound");
     piumSound.volume = 0.5;
@@ -423,20 +423,21 @@ function checkBulletItemCollision() {
 function checkScore() {
 
 
-    if (score >= 80 ) {
+    if (level == 3 && score >= 80 ) {
         cambioSound.play();
         fadeSceneOutBetweenScenes("levelB");
         console.log("aASIDODSIODIOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOS")
     }
 
-    else if (score >= 60) {
-        cambioSound.play();
-        console.log("music played")
+    else if (level == 2 && score >= 60) {
+        cambioSound.play(); // se llama en cada frame
+        console.log("MEOOWWW2")
         levelAPhase3();
         
     }
 
-    else  if (score >=40) {
+    else  if (level == 1 && score >=40) {
+        console.log("MEOOWWW1")
         cambioSound.play();
         levelAPhase2();
     }
@@ -450,9 +451,9 @@ function levelAPhase2() {
     level = 2;
     spawnEnemyRnd = game.rnd.integerInRange(1500,2000) //entre 1 y 2 segundos
     spawnItemRnd = game.rnd.integerInRange(6000,8000) //entre 6 y 8 segundos
-    bugVelocity = 12;
+    bugVelocity = 15;
 
-    cambioSound.play();
+    //cambioSound.play();
     updateLevel();
     
 }
@@ -464,9 +465,9 @@ function levelAPhase3() {
     level = 3;
     spawnEnemyRnd = game.rnd.integerInRange(1500,2000) //entre 1 y 2 segundos
     spawnItemRnd = game.rnd.integerInRange(6000,8000) //entre 6 y 8 segundos
-    bugVelocity = 15;
+    bugVelocity = 20;
 
-    cambioSound.play();
+    //cambioSound.play();
     updateLevel();
     
 }
