@@ -451,6 +451,8 @@ function levelAPhase2() {
     spawnEnemyRnd = game.rnd.integerInRange(1500,2000) //entre 1 y 2 segundos
     spawnItemRnd = game.rnd.integerInRange(6000,8000) //entre 6 y 8 segundos
     bugVelocity = 12;
+
+    cambioSound.play();
     updateLevel();
     
 }
@@ -458,12 +460,13 @@ function levelAPhase2() {
 
 function levelAPhase3() {
 
-    cambioSound.play();
+    
     level = 3;
     spawnEnemyRnd = game.rnd.integerInRange(1500,2000) //entre 1 y 2 segundos
     spawnItemRnd = game.rnd.integerInRange(6000,8000) //entre 6 y 8 segundos
     bugVelocity = 15;
 
+    cambioSound.play();
     updateLevel();
     
 }
