@@ -155,7 +155,7 @@ function displayScreen() {
     score = 0;
     part = "A";
     lives = 5;
-    bugVelocity = 60; //Velocidad de los bugs cuando empieza el juego
+    bugVelocity = 10; //Velocidad de los bugs cuando empieza el juego
 
     piumSound = game.sound.add("piumSound");
     piumSound.volume = 0.5;
