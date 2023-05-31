@@ -62,8 +62,8 @@ class BugEnemy {
         //changes thread/ takes branch
         if(this.isMoving && this.direction){ //izquierda
 
-            this.img.x -= 2 * speed;
-            this.img.y += 1 * speed;
+            this.img.x -= speed;
+            this.img.y += speed / 2;
             if (this.img.x <= threadPosition[this.myThread]) {
                 this.isMoving = false
                 this.checkCollision = true
@@ -72,8 +72,8 @@ class BugEnemy {
             
         }
         else if ( this.isMoving && !this.direction){ //derecha
-            this.img.x += speed/2;
-            this.img.y += speed;
+            this.img.x += speed;
+            this.img.y += speed / 2;
             if (this.img.x >= threadPosition[this.myThread]) {
                 this.isMoving = false
                 this.checkCollision = true
