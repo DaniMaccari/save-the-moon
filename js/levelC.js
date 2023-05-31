@@ -94,7 +94,7 @@ function displayScreenC() {
     //timerUlti = game.time.create(false);
     //timerUlti.loop(spawnUltiRnd, spawnUlti);
 
-    spawnEnemyRnd = game.rnd.integerInRange(1500,2000) //entre 1 y 2'5 segundos
+    spawnEnemyRnd = game.rnd.integerInRange(1000,1300) //entre 1 y 2'5 segundos
     timerEnemy = game.time.create(false);
     timerEnemy.loop(spawnEnemyRnd, spawn);
 
