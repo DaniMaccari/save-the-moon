@@ -11,10 +11,6 @@ var lifeIterator = 1;
 var textCreated = false;
 var text2Created = false;
 
-//---------------------------------------------
-//--- HUD -------------------------------------
-//---------------------------------------------
-
 function createHUD() {
 
 
@@ -88,6 +84,7 @@ function reciboDaño()
     var lifeLost;
     
 
+
     if(lives > 0) {
 
         lives--; 
@@ -97,11 +94,7 @@ function reciboDaño()
         tocadoSound.play();
         console.log("life lost "+lives)
         
-    }
-
-    if(lives == 0){
-
-
+    } if(lives==0) {
         //player.kill();
         switch ( part ){
             case "A":

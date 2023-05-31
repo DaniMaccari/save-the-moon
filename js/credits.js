@@ -20,7 +20,7 @@ function loadCreditAssets(){
         game.load.spritesheet("dani","assets/imgs/CREDITS SCREEN/daniSpritesheet.png", 519,519);
         game.load.spritesheet("maggy","assets/imgs/CREDITS SCREEN/maggySpritesheet.png", 519,519);
         game.load.spritesheet("corvo","assets/imgs/CREDITS SCREEN/corvoSpritesheet.png", 519,519);
-        game.load.image("bg","assets/imgs/START SCREEN/BG-MAIN.png");
+        game.load.image("bg","assets/imgs/CREDITS SCREEN/BGcredits.png");
         game.load.image("pantallaNegra","assets/imgs/Solid_black.png")
         game.load.spritesheet("tvAnim","assets/imgs/TVanim.png", 2050,2050);
 };
