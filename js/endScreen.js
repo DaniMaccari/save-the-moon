@@ -49,7 +49,7 @@ function createEnding() {
 
     if(!gameFinished)
     {
-        let puntacion = game.add.text(0, -400, "you managed to survive a total of " + generalTime + " seconds, try again!",    
+        let puntacion = game.add.text(0, -450, "you managed to survive a total of \n" + generalTime + " seconds, try again!",    
         {font:'25px Alkatra', fill:'#FFFFFF',
         boundsAlignH:'center', boundsAlignV:'bottom'});
        puntacion.setTextBounds(0, game.world.height-80, game.world.width, 40);
@@ -58,7 +58,7 @@ function createEnding() {
     else
     {
         
-        let puntacion = game.add.text(0, -400, "CONGRATULATIONS, you completed the game in " + generalTime + " seconds, want to play again?",    
+        let puntacion = game.add.text(0, -450, "CONGRATULATIONS, you completed the game \n in" + generalTime + " seconds, want to play again?",    
         {font:'25px Alkatra', fill:'#FFFFFF',
         boundsAlignH:'center', boundsAlignV:'bottom'});
        puntacion.setTextBounds(0, game.world.height-80, game.world.width, 40);
@@ -66,7 +66,7 @@ function createEnding() {
     }
 
     //Back button
-    backButton = game.add.button(370, 500, "back", function() {fadeSceneOut("inicio"); },0,1,0,1);
+    backButton = game.add.button(370, 550, "back", function() {fadeSceneOut("inicio"); },0,1,0,1);
     backButton.scale.setTo(0.25, 0.25);
 
     tvForeground = game.add.image(0, 0, "tv")
