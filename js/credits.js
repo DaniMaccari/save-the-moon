@@ -1,8 +1,3 @@
-let creditState = { 
-    preload: loadAssets,
-    create : displayScreen};
-
-
 let btnBack;
 let dani;
 let maggy;
@@ -10,7 +5,16 @@ let corvo;
 let fadeTween;
 let fadeRectangle;
 
-function loadAssets(){
+//---------------------------------------------
+//--- CREDITS ---------------------------------
+//---------------------------------------------
+
+let creditState = { 
+    preload: loadCreditAssets,
+    create : displayCreditScreen
+};
+
+function loadCreditAssets(){
     
         game.load.spritesheet("back","assets/imgs/backSpritesheet.png", 519,519);
         game.load.spritesheet("dani","assets/imgs/CREDITS SCREEN/daniSpritesheet.png", 519,519);
@@ -21,7 +25,7 @@ function loadAssets(){
         game.load.spritesheet("tvAnim","assets/imgs/TVanim.png", 2050,2050);
 };
     
-function displayScreen(){
+function displayCreditScreen(){
 
     
 

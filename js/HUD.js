@@ -11,6 +11,10 @@ var lifeIterator = 1;
 var textCreated = false;
 var text2Created = false;
 
+//---------------------------------------------
+//--- HUD -------------------------------------
+//---------------------------------------------
+
 function createHUD() {
 
 
@@ -94,7 +98,7 @@ function reciboDaño()
         console.log("life lost "+lives)
         
     }
-    
+
     if(lives == 0){
 
 
