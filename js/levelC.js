@@ -266,10 +266,9 @@ function gotUlti(thisPlayer,thisUlti) {
 function checkScoreC() {
 
     if ( level = 3 && score > 145 ){
-        timerC = actualTime
+        timerC  =actualTime
         generalTime += actualTime
         gameFinished = true
-        
         cambioSound.play();
         fadeSceneOutBetweenScenes("endScreen");
 

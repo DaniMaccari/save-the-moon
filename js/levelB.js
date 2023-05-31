@@ -206,9 +206,8 @@ function checkScoreB() {
 
     if (level = 3 && score >= 120 ) {
         cambioSound.play();
-        timerB = actualTime;
         generalTime += actualTime
-        fadeSceneOutBetweenScenes("endScreen");
+        fadeSceneOutBetweenScenes("levelC");
         console.log("aASIDODSIODIOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOS")
     }
 
