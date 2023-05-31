@@ -58,7 +58,7 @@ class BugEnemy {
     }
   
     move(delta) {
-        let speed = bugVelocity / delta
+        let speed = bugVelocity// / delta
         //changes thread/ takes branch
         if(this.isMoving && this.direction){ //izquierda
 

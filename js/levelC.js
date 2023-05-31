@@ -266,7 +266,8 @@ function gotUlti(thisPlayer,thisUlti) {
 function checkScoreC() {
 
     if ( level = 3 && score > 145 ){
-        timerC  =actualTime
+        level = 4;
+        timerC = actualTime
         generalTime += actualTime
         gameFinished = true
         cambioSound.play();

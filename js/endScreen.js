@@ -49,7 +49,7 @@ function createEnding() {
 
     if(!gameFinished)
     {
-        let puntacion = game.add.text(0, -450, "you managed to survive a total of \n" + generalTime + " seconds, try again!",    
+        let puntacion = game.add.text(0, -370, "you managed to survive a total of \n" + generalTime + " seconds, try again!",    
         {font:'25px Alkatra', fill:'#FFFFFF',
         boundsAlignH:'center', boundsAlignV:'bottom'});
        puntacion.setTextBounds(0, game.world.height-80, game.world.width, 40);
@@ -58,7 +58,7 @@ function createEnding() {
     else
     {
         
-        let puntacion = game.add.text(0, -450, "CONGRATULATIONS, you completed the game \n in" + generalTime + " seconds, want to play again?",    
+        let puntacion = game.add.text(0, -370, "CONGRATULATIONS, you completed the game \n in" + generalTime + " seconds, want to play again?",    
         {font:'25px Alkatra', fill:'#FFFFFF',
         boundsAlignH:'center', boundsAlignV:'bottom'});
        puntacion.setTextBounds(0, game.world.height-80, game.world.width, 40);
