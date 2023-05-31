@@ -5,13 +5,17 @@ let arrThreads = []
 let fadeTweenConf;
 let fadeRectangleConf;
 
+//---------------------------------------------
+//--- SETTINGS ------------------------------
+//---------------------------------------------
+
 let settingsState = {
-    preload: preloadAssets,
-    create: initGame
+    preload: preloadSettingsAssets,
+    create: initSettingsGame
 };
 
 // methods for each phase of the state
-function preloadAssets() { 
+function preloadSettingsAssets() { 
     game.load.image("tele","assets/imgs/BG-1.png");
     game.load.image("bg","assets/imgs/SETTINGS SCREEN/settingsBGG.png");
     game.load.spritesheet("back","assets/imgs/backSpritesheet.png", 519,519);
@@ -21,7 +25,7 @@ function preloadAssets() {
     game.load.image("pantallaNegra","assets/imgs/Solid_black.png")
 }
 
-function initGame() {
+function initSettingsGame() {
 
     //BACKGROUND
     BG = game.add.image(0,0,"bg")
