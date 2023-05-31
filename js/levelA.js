@@ -89,12 +89,12 @@ class BugEnemy {
   }
 
 //---------------------------------------------
-//--- START LEVEL -----------------------------
+//--- Level A -----------------------------
 //---------------------------------------------
 let levelAState = {
-    preload: loadAssets,
-    create: displayScreen,
-    update: updateGame,
+    preload: loadAssetsA,
+    create: displayScreenA,
+    update: updateGameA,
 };
 
 let wfConfig = {
@@ -110,7 +110,7 @@ let wfConfig = {
     WebFont.load(wfConfig);
 
 //--- load assets ---------------
-function loadAssets() {
+function loadAssetsA() {
 
 
     game.load.image("enemy", "assets/imgs/enemy.png");
@@ -135,7 +135,7 @@ function loadAssets() {
 
 
 //--- create level --------------
-function displayScreen() {
+function displayScreenA() {
 
     //startgame
     bugsArray = []
@@ -490,7 +490,7 @@ function levelAPhase3() {
 
 
 //--- UPDATE ------------
-function updateGame() {
+function updateGameA() {
     
     elapsedTime = game.time.elapsed; //get time between frames
 

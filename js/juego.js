@@ -1,17 +1,21 @@
-
 let btnLevelA, btnLevelB, btnLevelC, BackButton;
 var timerA, timerB, timerC, generalTime;
 var gameFinished = false;
 var actualPhase;
 
+//---------------------------------------------
+//--- Juego ---------------------------
+//---------------------------------------------
+
+
 let juegoState = {
      
-    preload: loadAssets,
-    create : displayScreen
+    preload: loadJuegoAssets,
+    create : displayJuegoScreen
 };
 
 
-function loadAssets(){
+function loadJuegoAssets(){
 
     game.load.spritesheet("levelA","assets/imgs/partASpritesheet.png", 925,519);
     game.load.spritesheet("levelB", "assets/imgs/partBSpritesheet.png",925,519);
@@ -23,7 +27,7 @@ function loadAssets(){
     
 };
 
-function displayScreen(){
+function displayJuegoScreen(){
     
     timerA = 0
     timerB = 0

@@ -3,12 +3,12 @@ var branchPosition = [], branchDirection = [];
 //START LEVEL B --------------------------------------------
 let levelBState = {
      
-    preload: loadAssets,
-    create : displayScreen,
-    update : updateGame
+    preload: loadAssetsB,
+    create : displayScreenB,
+    update : updateGameB
 };
 
-function loadAssets() {
+function loadAssetsB() {
     
     game.load.image("enemy", "assets/imgs/enemy.png");
     game.load.image("lifeItem", "assets/imgs/lifeItem.png");
@@ -32,7 +32,7 @@ function loadAssets() {
 }
 
 
-function displayScreen() {
+function displayScreenB() {
 
     bugsArray = []
 
@@ -258,7 +258,7 @@ function levelBPhase3() {
     
 }
 
-function updateGame() {
+function updateGameB() {
 
     elapsedTime = game.time.elapsed; //get time between frames
 

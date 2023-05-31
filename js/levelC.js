@@ -4,15 +4,18 @@ let spawnUltiRnd;
 
 let haveUlti = false;
 
+//---------------------------------------------
+//--- Level C -----------------------------
+//---------------------------------------------
 
 let levelCState = {
      
-    preload: loadAssets,
-    create : displayScreen,
-    update : updateGame
+    preload: loadAssetsC,
+    create : displayScreenC,
+    update : updateGameC
 };
 
-function loadAssets() {
+function loadAssetsC() {
     
     game.load.image("enemy", "assets/imgs/enemy.png");
     game.load.image("lifeItem", "assets/imgs/lifeItem.png");
@@ -34,10 +37,11 @@ function loadAssets() {
     game.load.audio("cambioSound","assets/snds/nextLevelMusic.mp3");
     game.load.audio("itemGot","assets/snds/lifeWonMusic.wav");
     game.load.audio("moveSound","assets/snds/playerMoveMusic.wav");
+    
 
 }
 
-function displayScreen() {
+function displayScreenC() {
 
     bugsArray = []
 
@@ -65,7 +69,7 @@ function displayScreen() {
     lives = 5;
     enemyCounter = 0;
     startTime = game.time.now;
-    
+
     piumSound = game.sound.add("piumSound");
     piumSound.volume = 0.5;
     colisionSound = game.sound.add("colisionSound");
@@ -317,7 +321,7 @@ function levelCPhase3() {
     
 }
 
-function updateGame() {
+function updateGameC() {
     
     elapsedTime = game.time.elapsed; //get time between frames
 

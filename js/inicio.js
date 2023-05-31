@@ -1,15 +1,16 @@
-let initialState = {
-    preload: loadAssets,
-    create : displayScreen,
-    update: updateGame,
-};
 
 let btnStart, btnConf, btnCredits;
 let TV, BG;
 var musicPlaying = false;
 let buttonMusic;
 
-function loadAssets(){
+let initialState = {
+    preload: loadInicioAssets,
+    create : displayInicioScreen,
+    update: updateInicioGame,
+};
+
+function loadInicioAssets(){
     
     game.load.spritesheet("start","assets/imgs/START SCREEN/Startspritesheet.png", 925,519);
     game.load.spritesheet("conf","assets/imgs/START SCREEN/ConfSpritesheet.png",519,519);
@@ -22,7 +23,7 @@ function loadAssets(){
     game.load.audio("buttonMusic","assets/imgs/music/ButtonMusic.wav");
 }
 
-function displayScreen(){
+function displayInicioScreen(){
 
     
     game.input.enabled = true;
@@ -81,6 +82,6 @@ function onCreditsButtonPressed(){
     game.state.start("credits");
 }
 
-function updateGame() {
+function updateInicioGame() {
     
 }
