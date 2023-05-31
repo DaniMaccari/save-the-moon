@@ -57,7 +57,7 @@ function displayScreen() {
     BG = game.add.image(0, 0, "bg");
     BG.scale.setTo(game.width/BG.width, game.height/BG.height)
 
-    bugVelocity = 0.2;
+    bugVelocity = 0.1;
     score = 0;
     part = "C";
     level = 1;
@@ -292,7 +292,7 @@ function levelCPhase2() {
     //spawnEnemyRnd = game.rnd.integerInRange(1500,2000) //entre 1 y 2 segundos
     //timerEnemy.loop(17500, spawn); //actualizar nuevo timer
     spawnItemRnd = game.rnd.integerInRange(6000,8000) //entre 6 y 8 segundos
-    bugVelocity = 0.3;
+    bugVelocity = 0.2;
 
     updateLevel(); //HUD
     
@@ -304,7 +304,7 @@ function levelCPhase3() {
     spawnEnemyRnd = game.rnd.integerInRange(1500,2000) //entre 1 y 2 segundos
     //timerEnemy.loop(spawnEnemyRnd, spawn); //actualizar nuevo timer
     spawnItemRnd = game.rnd.integerInRange(6000,8000) //entre 6 y 8 segundos
-    bugVelocity = 0.4;
+    bugVelocity = 0.3;
 
     updateLevel(); //HUD
     
