@@ -202,9 +202,9 @@ function moveBugsLevelB(delta) {
 
 
 function checkScoreB() {
+    console.log(generalTime)
 
-
-    if (level = 3 && score >= 120 ) {
+    if (level == 3 && score >= 120 ) {
         level = 0
         cambioSound.play();
         timerB = actualTime
@@ -213,7 +213,7 @@ function checkScoreB() {
         console.log("aASIDODSIODIOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOS")
     }
 
-    else if (level = 2 && score >= 80) {
+    else if (level == 2 && score >= 80) {
         cambioSound.play();
         levelBPhase3();
         

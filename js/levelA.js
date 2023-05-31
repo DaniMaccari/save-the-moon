@@ -384,7 +384,7 @@ function hagoDaño(thisShot, thisBug){
     console.log(i)
     bugsArray.splice(i, 1) //si no está los enemigos quitan vida aún borrados
     itemSpawnCounter++
-    enemyCounter++;
+    //enemyCounter++;
     score+=10
     
 }

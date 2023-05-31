@@ -265,7 +265,7 @@ function gotUlti(thisPlayer,thisUlti) {
 
 function checkScoreC() {
 
-    if ( level = 3 && score > 145 ){
+    if ( level == 3 && score > 145 ){
         level = 0
         timerC = actualTime
         generalTime += actualTime
@@ -273,11 +273,11 @@ function checkScoreC() {
         cambioSound.play();
         fadeSceneOutBetweenScenes("endScreen");
 
-    } else if ( level = 2 && score > 95 ){
+    } else if ( level == 2 && score > 95 ){
         cambioSound.play();
         levelCPhase3();
 
-    } else if ( level = 1 && score > 45 ){
+    } else if ( level == 1 && score > 45 ){
         cambioSound.play();
         levelCPhase2();
 
@@ -292,7 +292,7 @@ function levelCPhase2() {
     //spawnEnemyRnd = game.rnd.integerInRange(1500,2000) //entre 1 y 2 segundos
     //timerEnemy.loop(17500, spawn); //actualizar nuevo timer
     spawnItemRnd = game.rnd.integerInRange(6000,8000) //entre 6 y 8 segundos
-    bugVelocity = 0.4;
+    bugVelocity = 0.3;
 
     updateLevel(); //HUD
     
@@ -304,7 +304,7 @@ function levelCPhase3() {
     spawnEnemyRnd = game.rnd.integerInRange(1500,2000) //entre 1 y 2 segundos
     //timerEnemy.loop(spawnEnemyRnd, spawn); //actualizar nuevo timer
     spawnItemRnd = game.rnd.integerInRange(6000,8000) //entre 6 y 8 segundos
-    bugVelocity = 0.65;
+    bugVelocity = 0.4;
 
     updateLevel(); //HUD
     
