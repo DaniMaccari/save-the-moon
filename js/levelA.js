@@ -155,7 +155,7 @@ function displayScreen() {
     score = 0;
     part = "A";
     lives = 5;
-    bugVelocity = 0.15; //Velocidad de los bugs cuando empieza el juego
+    bugVelocity = 0.1; //Velocidad de los bugs cuando empieza el juego
 
     piumSound = game.sound.add("piumSound");
     piumSound.volume = 0.5;
@@ -458,7 +458,7 @@ function levelAPhase2() {
     level = 2;
     spawnEnemyRnd = game.rnd.integerInRange(1500,2000) //entre 1 y 2 segundos
     spawnItemRnd = game.rnd.integerInRange(6000,8000) //entre 6 y 8 segundos
-    bugVelocity = 0.30;
+    bugVelocity = 0.2;
 
     //cambioSound.play();
     updateLevel();
@@ -472,7 +472,7 @@ function levelAPhase3() {
     level = 3;
     spawnEnemyRnd = game.rnd.integerInRange(1500,2000) //entre 1 y 2 segundos
     spawnItemRnd = game.rnd.integerInRange(6000,8000) //entre 6 y 8 segundos
-    bugVelocity = 0.45;
+    bugVelocity = 0.3;
 
     //cambioSound.play();
     updateLevel();
