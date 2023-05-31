@@ -66,7 +66,7 @@ function createEnding() {
     }
 
     //Back button
-    backButton = game.add.button(370, 550, "back", function() {fadeSceneOut("inicio"); },0,1,0,1);
+    backButton = game.add.button(340, 510, "back", function() {fadeSceneOut("inicio"); },0,1,0,1);
     backButton.scale.setTo(0.25, 0.25);
 
     tvForeground = game.add.image(0, 0, "tv")

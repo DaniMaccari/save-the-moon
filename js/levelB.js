@@ -48,7 +48,7 @@ function displayScreen() {
     BG = game.add.image(0, 0, "bg");
     BG.scale.setTo(game.width/BG.width, game.height/BG.height)
 
-    bugVelocity = 0.2;
+    bugVelocity = 0.15;
     score = 0;
     part = "B";
     level = 1;
@@ -234,7 +234,7 @@ function levelBPhase2() {
     spawnItemRnd = game.rnd.integerInRange(6000,8000) //entre 6 y 8 segundos
     
 
-    bugVelocity = 0.4;
+    bugVelocity = 0.3;
 
     updateLevel();
     
@@ -248,7 +248,7 @@ function levelBPhase3() {
     spawnItemRnd = game.rnd.integerInRange(6000,8000) //entre 6 y 8 segundos
     
 
-    bugVelocity = 0.6;
+    bugVelocity = 0.4;
 
     updateLevel();
     
