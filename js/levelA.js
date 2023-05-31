@@ -235,15 +235,15 @@ function displayScreen() {
 //--- SPAWN ENEMY -------------------------
 function spawn() {
 
-    if ( itemSpawnCounter == itemSpawn) {
+    if (part == "C" && enemyCounter > 4) {
+        spawnUlti();
+        enemyCounter = 0
+    }
+    else if ( itemSpawnCounter >= itemSpawn) {
         spawnLifeItems()
         itemSpawnCounter = 0
-    
-    if (level == 3 && itemSpawnCounter == 5) {
-        spawnUlti();
     }
-
-    } else {
+    else {
         var randomBugPosition = game.rnd.integerInRange(0, nThreads - 1);
 
         Bug = new BugEnemy(randomBugPosition);
@@ -384,7 +384,7 @@ function hagoDaño(thisShot, thisBug){
     console.log(i)
     bugsArray.splice(i, 1) //si no está los enemigos quitan vida aún borrados
     itemSpawnCounter++
-    //enemyCounter++;
+    enemyCounter++;
     score+=10
     
 }
