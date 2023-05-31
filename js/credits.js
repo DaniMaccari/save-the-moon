@@ -38,19 +38,18 @@ function displayCreditScreen(){
     'back', function() {fadeSceneOut("inicio"); },0,1,0,1);
     btnBack.scale.setTo(0.3, 0.3);
 
-    dani = game.add.button(450,230,"dani", danifunction, 0,1,0,1);
+    dani = game.add.button(450,250,"dani", danifunction, 0,1,0,1);
     dani.scale.setTo(0.5,0.5);
     
-    maggy = game.add.button(285,220,"maggy", maggyfunction, 0,1,0,1);
+    maggy = game.add.button(285,240,"maggy", maggyfunction, 0,1,0,1);
     maggy.scale.setTo(0.47,0.47);
 
-    corvo = game.add.button(120,230,"corvo", corvofunction, 0,1,0,1);
+    corvo = game.add.button(120,250,"corvo", corvofunction, 0,1,0,1);
     corvo.scale.setTo(0.5,0.5);
 
     TV = game.add.sprite(0,0,"tvAnim")
     TV.scale.setTo(game.width/TV.width, game.height/TV.height)
-    TV.animations.add("TVanimation", [0, 1, 2], 15, true)
-    TV.animations.play("TVanimation")
+
 
     createfade();
 };

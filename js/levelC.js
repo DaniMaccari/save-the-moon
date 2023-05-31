@@ -37,6 +37,7 @@ function loadAssetsC() {
     game.load.audio("cambioSound","assets/snds/nextLevelMusic.mp3");
     game.load.audio("itemGot","assets/snds/lifeWonMusic.wav");
     game.load.audio("moveSound","assets/snds/playerMoveMusic.wav");
+    game.load.audio("bombSound","assets/snds/bombFoundMusic.mp3");
     
 
 }
@@ -82,6 +83,8 @@ function displayScreenC() {
     itemSound.volume = 0.5;
     moveSound = game.sound.add("moveSound");
     moveSound.volume = 0.5;
+    bombSound = game.sound.add("bombSound");
+    bombSound.volume = 0.5;
 
 
     timerLifeItems = game.time.create(false);
