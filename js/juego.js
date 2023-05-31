@@ -1,6 +1,8 @@
 
 let btnLevelA, btnLevelB, btnLevelC, BackButton;
-
+var timerA, timerB, timerC, generalTime;
+var gameFinished = false;
+var actualPhase;
 
 let juegoState = {
      
@@ -23,6 +25,12 @@ function loadAssets(){
 
 function displayScreen(){
     
+    timerA = 0
+    timerB = 0
+    timerC = 0
+    generalTime = 0
+    gameFinished = false
+
     game.input.enabled = true;
 
     //set background

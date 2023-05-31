@@ -38,6 +38,8 @@ function loadAssets() {
 
 function displayScreen() {
 
+    bugsArray = []
+
     //LA BOMBA SE ACTIVA CON E
     var keyE = game.input.keyboard.addKey(Phaser.Keyboard.E);
     keyE.onDown.add(tiraBomba, this);
@@ -264,6 +266,10 @@ function gotUlti(thisPlayer,thisUlti) {
 function checkScoreC() {
 
     if ( level = 3 && score > 145 ){
+        timerC = actualTime
+        generalTime += actualTime
+        gameFinished = true
+        
         cambioSound.play();
         fadeSceneOutBetweenScenes("endScreen");
 

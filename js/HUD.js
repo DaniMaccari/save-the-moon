@@ -94,12 +94,26 @@ function reciboDaño()
         
     } else {
         //player.kill();
+        switch ( part ){
+            case "A":
+                timerA = actualTime
+                break
+            case "B":
+                timerB = actualTime
+                break
+            case "C":
+                timerC = actualTime
+                break
+            default:
+                generalTime = actualTime
+                break
+        }
+
+        generalTime += actualTime
+
         fadeSceneOutBetweenScenes("endScreen")
         console.log("He muerto")
     }
-
-   
-    
 
 }
 

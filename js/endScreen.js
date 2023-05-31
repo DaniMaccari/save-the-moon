@@ -11,14 +11,13 @@ function restartPlay() {
 
 function correElTiempo(){
 
-    
     elapsed = game.time.now - startTime;
     actualTime = Math.floor(elapsed / 1000);    
 }
 
 function preloadEnding() {
 
-    game.load.image("bg", "assets/imgs/BG.png");
+    game.load.image("bg", "assets/imgs/START SCREEN/BG-MAIN.png");
     game.load.image("tv", "assets/imgs/BG-1.png");
 }
 
@@ -35,9 +34,22 @@ function createEnding() {
     let enterkey = game.input.keyboard.addKey(Phaser.Keyboard.ENTER);
     enterkey.onDown.addOnce(restartPlay, this);
 
-    if(score >= 20)
+    let finalTime = game.add.text(
+        game.world.centerX, // X position in the center of the game world
+        300, // Y position in the center of the game world
+        "time is A: " + timerA + " time in B: " + timerB + " time in C: " + timerC,
+        {
+          font: '25px Alkatra',
+          fill: '#FFFFFF',
+          boundsAlignH: 'center',
+          boundsAlignV: 'bottom'
+        }
+      );
+      finalTime.anchor.setTo(0.5, 0.5);
+
+    if(!gameFinished)
     {
-        let puntacion = game.add.text(0, -400, "You won! You've arrived to: " + score + " points in just "+ actualTime +" seconds!",    
+        let puntacion = game.add.text(0, -400, "you managed to survive a total of " + generalTime + " seconds, try again!",    
         {font:'25px Alkatra', fill:'#FFFFFF',
         boundsAlignH:'center', boundsAlignV:'bottom'});
        puntacion.setTextBounds(0, game.world.height-80, game.world.width, 40);
@@ -45,12 +57,17 @@ function createEnding() {
 
     else
     {
-        let puntacion = game.add.text(0, -400, "You lost... You've arrived to: " + score + " points in "+ actualTime +" seconds, try again!",    
+        
+        let puntacion = game.add.text(0, -400, "CONGRATULATIONS, you completed the game in " + generalTime + " seconds, want to play again?",    
         {font:'25px Alkatra', fill:'#FFFFFF',
         boundsAlignH:'center', boundsAlignV:'bottom'});
        puntacion.setTextBounds(0, game.world.height-80, game.world.width, 40);
 
     }
+
+    //Back button
+    backButton = game.add.button(370, 530, "back", function() {fadeSceneOut("inicio"); },0,1,0,1);
+    backButton.scale.setTo(0.25, 0.25);
 
     tvForeground = game.add.image(0, 0, "tv")
     tvForeground.scale.setTo(game.width/tvForeground.width, game.height/tvForeground.height)

@@ -134,6 +134,10 @@ function loadAssets() {
 
 //--- create level --------------
 function displayScreen() {
+
+    //startgame
+    bugsArray = []
+    
     game.input.enabled = true;
     if ( isKeyboradActive) {
         game.input.keyboard.onDownCallback = getKeyboardInput
@@ -151,7 +155,7 @@ function displayScreen() {
     score = 0;
     part = "A";
     lives = 5;
-    bugVelocity = 10; //Velocidad de los bugs cuando empieza el juego
+    bugVelocity = 60; //Velocidad de los bugs cuando empieza el juego
 
     piumSound = game.sound.add("piumSound");
     piumSound.volume = 0.5;
@@ -425,6 +429,7 @@ function checkScore() {
 
     if (level == 3 && score >= 80 ) {
         cambioSound.play();
+        generalTime += actualTime
         fadeSceneOutBetweenScenes("levelB");
         console.log("aASIDODSIODIOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOS")
     }
@@ -475,7 +480,7 @@ function levelAPhase3() {
 
 //--- UPDATE ------------
 function updateGame() {
-
+    
     elapsedTime = game.time.elapsed; //get time between frames
 
     //move enemies
@@ -492,11 +497,14 @@ function updateGame() {
     game.physics.arcade.overlap(player,itemGroup, ganoVida, null, this )
 
     //Update HUD
+
     updateScore();
     updateTimer();
     checkItemCollision();
     checkBulletItemCollision();
     checkScore();
+    
+    
 
 
 
