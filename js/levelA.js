@@ -72,8 +72,8 @@ class BugEnemy {
             
         }
         else if ( this.isMoving && !this.direction){ //derecha
-            this.img.x += 2 * speed;
-            this.img.y += 1 * speed;
+            this.img.x += speed/2;
+            this.img.y += speed;
             if (this.img.x >= threadPosition[this.myThread]) {
                 this.isMoving = false
                 this.checkCollision = true
@@ -429,6 +429,7 @@ function checkScore() {
 
     if (level == 3 && score >= 80 ) {
         cambioSound.play();
+        timerA = actualTime
         generalTime += actualTime
         fadeSceneOutBetweenScenes("levelB");
         console.log("aASIDODSIODIOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOS")
