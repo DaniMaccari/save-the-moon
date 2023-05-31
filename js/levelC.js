@@ -1,7 +1,7 @@
 
 
 let spawnUltiRnd;
-var timerUlti;
+
 let haveUlti = false;
 
 
@@ -80,7 +80,7 @@ function displayScreen() {
     //timerUlti = game.time.create(false);
     //timerUlti.loop(spawnUltiRnd, spawnUlti);
 
-    spawnEnemyRnd = game.rnd.integerInRange(1500,2500) //entre 1 y 2'5 segundos
+    spawnEnemyRnd = game.rnd.integerInRange(800,1000) //entre 1 y 2'5 segundos
     timerEnemy = game.time.create(false);
     timerEnemy.loop(spawnEnemyRnd, spawn);
 
@@ -176,7 +176,7 @@ function displayScreen() {
 
     //timerLifeItems.start();
     timerEnemy.start();
-    timerUlti.start();
+
 
 }
 
@@ -283,8 +283,8 @@ function checkScoreC() {
 function levelCPhase2() {
 
     level = 2;
-    spawnEnemyRnd = game.rnd.integerInRange(1500,2000) //entre 1 y 2 segundos
-    //timerEnemy.loop(spawnEnemyRnd, spawn); //actualizar nuevo timer
+    //spawnEnemyRnd = game.rnd.integerInRange(1500,2000) //entre 1 y 2 segundos
+    //timerEnemy.loop(17500, spawn); //actualizar nuevo timer
     spawnItemRnd = game.rnd.integerInRange(6000,8000) //entre 6 y 8 segundos
     bugVelocity = 15;
 
