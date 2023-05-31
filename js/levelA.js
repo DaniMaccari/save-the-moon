@@ -20,7 +20,7 @@ let bugsGroup;
 let disparo;
 let tvForeground
 let itemGroup;
-let itemSpawn = 4, itemSpawnCounter = 0;
+let itemSpawn = 7, itemSpawnCounter = 0;
 
 let spawnEnemyRnd;
 let spawnItemRnd;
@@ -235,11 +235,11 @@ function displayScreen() {
 //--- SPAWN ENEMY -------------------------
 function spawn() {
 
-    if ( itemSpawnCounter >= itemSpawn) {
+    if ( itemSpawnCounter == itemSpawn) {
         spawnLifeItems()
         itemSpawnCounter = 0
     
-    if (enemyCounter > 5) {
+    if (level == 3 && itemSpawnCounter == 5) {
         spawnUlti();
     }
 
