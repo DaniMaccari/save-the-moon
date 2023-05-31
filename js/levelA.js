@@ -123,10 +123,12 @@ function loadAssets() {
     game.load.spritesheet("balas","assets/imgs/balasSpritesheet.png",519,519);
     game.load.image("pantallaNegra","assets/imgs/Solid_black.png")
 
-    game.load.audio("piumSound","assets/snds/disparo.mp3");
-    game.load.audio("colisionSound","assets/snds/colision.mp3");
-    game.load.audio("tocadoSound","assets/snds/tocado.mp3");
-    game.load.audio("cambioSound","assets/snds/cambio.mp3");
+    game.load.audio("piumSound","assets/snds/starMusic.mp3");
+    game.load.audio("colisionSound","assets/snds/collisionMusic.wav");
+    game.load.audio("tocadoSound","assets/snds/LifeLostMusic.mp3");
+    game.load.audio("cambioSound","assets/snds/nextLevelMusic.mp3");
+    game.load.audio("itemGot","assets/snds/lifeWonMusic.wav");
+    game.load.audio("moveSound","assets/snds/playerMoveMusic.wav");
 
     
 }
@@ -165,6 +167,10 @@ function displayScreen() {
     tocadoSound.volume = 0.5;
     cambioSound = game.sound.add("cambioSound");
     cambioSound.volume = 0.5;
+    itemSound = game.sound.add("itemGot");
+    itemSound.volume = 0.5;
+    moveSound = game.sound.add("moveSound");
+    moveSound.volume = 0.5;
 
     spawnEnemyRnd = game.rnd.integerInRange(1500,3000) //entre 1 y 3 segundos
     //spawnItemRnd = game.rnd.integerInRange(5000,8000) //entre 5 y 3 segundos
@@ -270,12 +276,14 @@ function getKeyboardInput(e) {
     //lateral move
     if (e.keyCode == Phaser.Keyboard.A || e.keyCode == Phaser.Keyboard.LEFT) {
         if (actualThread > 0) {
+            
             actualThread = actualThread - 1;
 
         }
     }
 
     else if (e.keyCode == Phaser.Keyboard.D || e.keyCode == Phaser.Keyboard.RIGHT) {
+        
         if (actualThread < nThreads - 1) {
             actualThread = actualThread + 1;
 
@@ -283,7 +291,7 @@ function getKeyboardInput(e) {
     }
 
     player.x = threadPosition[actualThread] - player.width / 2;
-
+    moveSound.play()
     //shoot imput
     if (e.keyCode == Phaser.Keyboard.SPACEBAR) {
         fireDisparos();
@@ -392,6 +400,7 @@ function hagoDaño(thisShot, thisBug){
 
 function deleteItem(thisShot,thisItem) {
     console.log("BORRO DISPARO E ITEM")
+    colisionSound.play();
     thisShot.kill();
     thisItem.kill();
 }
@@ -525,6 +534,7 @@ function updateGame() {
         for ( let i=0; i < threadPosition.length; i++){
             if(threadPosition[i] -35 < mousePos && threadPosition[i] +35 > mousePos){
                 player.x = threadPosition [i] - player.width / 2
+                
             }
         }
         

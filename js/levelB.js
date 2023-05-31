@@ -22,11 +22,12 @@ function loadAssets() {
     game.load.spritesheet("balas","assets/imgs/balasSpritesheet.png",519,519);
     game.load.image("pantallaNegra","assets/imgs/Solid_black.png")
 
-    game.load.audio("piumSound","assets/snds/disparo.mp3");
-    game.load.audio("colisionSound","assets/snds/colision.mp3");
-    game.load.audio("tocadoSound","assets/snds/tocado.mp3");
-    game.load.audio("cambioSound","assets/snds/cambio.mp3")
-
+    game.load.audio("piumSound","assets/snds/starMusic.mp3");
+    game.load.audio("colisionSound","assets/snds/collisionMusic.wav");
+    game.load.audio("tocadoSound","assets/snds/LifeLostMusic.mp3");
+    game.load.audio("cambioSound","assets/snds/nextLevelMusic.mp3");
+    game.load.audio("itemGot","assets/snds/lifeWonMusic.wav");
+    game.load.audio("moveSound","assets/snds/playerMoveMusic.wav");
 
 }
 
@@ -44,6 +45,18 @@ function displayScreen() {
         game.input.onDown.add(onMouseDown, this);
     }
     
+    piumSound = game.sound.add("piumSound");
+    piumSound.volume = 0.5;
+    colisionSound = game.sound.add("colisionSound");
+    colisionSound.volume = 0.7;
+    tocadoSound = game.sound.add("tocadoSound");
+    tocadoSound.volume = 0.5;
+    cambioSound = game.sound.add("cambioSound");
+    cambioSound.volume = 0.5;
+    itemSound = game.sound.add("itemGot");
+    itemSound.volume = 0.5;
+    moveSound = game.sound.add("moveSound");
+    moveSound.volume = 0.5;
 
     BG = game.add.image(0, 0, "bg");
     BG.scale.setTo(game.width/BG.width, game.height/BG.height)
@@ -55,16 +68,7 @@ function displayScreen() {
     lives = 5;
     startTime = game.time.now;
 
-    piumSound = game.sound.add("piumSound");
-    piumSound.volume = 0.5;
-    colisionSound = game.sound.add("colisionSound");
-    colisionSound.volume = 0.7;
-    tocadoSound = game.sound.add("tocadoSound");
-    tocadoSound.volume = 0.5;
-    cambioSound = game.sound.add("cambioSound");
-    cambioSound.volume = 0.5;
 
-    
 
     timerLifeItems = game.time.create(false);
     //timerLifeItems.loop(spawnItemRnd,spawnLifeItems);

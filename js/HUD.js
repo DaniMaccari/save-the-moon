@@ -64,9 +64,10 @@ function updateTimer() {
 
 function ganoVida(player, thisItem) {
 
+    itemSound.play();
     var lifeGained;
     thisItem.kill()
-
+    
     if(lives > 0 && lives < 5) {
 
         lives ++;

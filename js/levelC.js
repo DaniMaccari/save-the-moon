@@ -27,12 +27,13 @@ function loadAssets() {
     game.load.spritesheet("balas","assets/imgs/balasSpritesheet.png",519,519);
     game.load.image("pantallaNegra","assets/imgs/Solid_black.png")
     game.load.image("whiteFlash","assets/imgs/PARTC/whiteFlashBomb.png")
-
-    game.load.audio("piumSound","assets/snds/disparo.mp3");
-    game.load.audio("colisionSound","assets/snds/colision.mp3");
-    game.load.audio("tocadoSound","assets/snds/tocado.mp3");
-    game.load.audio("cambioSound","assets/snds/cambio.mp3")
-
+    
+    game.load.audio("piumSound","assets/snds/starMusic.mp3");
+    game.load.audio("colisionSound","assets/snds/collisionMusic.wav");
+    game.load.audio("tocadoSound","assets/snds/LifeLostMusic.mp3");
+    game.load.audio("cambioSound","assets/snds/nextLevelMusic.mp3");
+    game.load.audio("itemGot","assets/snds/lifeWonMusic.wav");
+    game.load.audio("moveSound","assets/snds/playerMoveMusic.wav");
 
 }
 
@@ -64,7 +65,7 @@ function displayScreen() {
     lives = 5;
     enemyCounter = 0;
     startTime = game.time.now;
-
+    
     piumSound = game.sound.add("piumSound");
     piumSound.volume = 0.5;
     colisionSound = game.sound.add("colisionSound");
@@ -73,7 +74,11 @@ function displayScreen() {
     tocadoSound.volume = 0.5;
     cambioSound = game.sound.add("cambioSound");
     cambioSound.volume = 0.5;
-    
+    itemSound = game.sound.add("itemGot");
+    itemSound.volume = 0.5;
+    moveSound = game.sound.add("moveSound");
+    moveSound.volume = 0.5;
+
 
     timerLifeItems = game.time.create(false);
 
@@ -210,6 +215,7 @@ function tiraBomba() {
 
     if (haveUlti == true) {
 
+        bombSound.play();
         //FLASHLIGHT ANIMATION
         const flashlight = game.add.sprite(0, 0, 'whiteFlash');
         flashlight.width = game.width;
@@ -260,6 +266,7 @@ function gotUlti(thisPlayer,thisUlti) {
     haveUlti = true;
     BombAvailable();
     bombHUD.frame = 1;
+    itemSound.play();
     thisUlti.kill();
 }
 
