@@ -1,3 +1,6 @@
+//---------------------------------------------
+//--- FADE IN FADE OUT ------------------------
+//---------------------------------------------
 
 function createfade() {
     fadeRectangle = game.add.sprite(0,0, "pantallaNegra");
