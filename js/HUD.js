@@ -93,7 +93,11 @@ function reciboDaño()
         tocadoSound.play();
         console.log("life lost "+lives)
         
-    } else {
+    }
+    
+    if(lives == 0){
+
+
         //player.kill();
         switch ( part ){
             case "A":
