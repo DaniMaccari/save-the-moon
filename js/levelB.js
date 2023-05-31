@@ -202,7 +202,6 @@ function moveBugsLevelB(delta) {
 
 
 function checkScoreB() {
-    console.log(generalTime)
 
     if (level == 3 && score >= 120 ) {
         level = 0
