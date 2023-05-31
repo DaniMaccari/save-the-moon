@@ -58,7 +58,7 @@ class BugEnemy {
     }
   
     move(delta) {
-        let speed = bugVelocity// / delta
+        let speed = bugVelocity * delta
         //changes thread/ takes branch
         if(this.isMoving && this.direction){ //izquierda
 
@@ -155,7 +155,7 @@ function displayScreen() {
     score = 0;
     part = "A";
     lives = 5;
-    bugVelocity = 10; //Velocidad de los bugs cuando empieza el juego
+    bugVelocity = 0.15; //Velocidad de los bugs cuando empieza el juego
 
     piumSound = game.sound.add("piumSound");
     piumSound.volume = 0.5;
@@ -428,6 +428,7 @@ function checkScore() {
 
 
     if (level == 3 && score >= 80 ) {
+        level = 0
         cambioSound.play();
         timerA = actualTime
         generalTime += actualTime
@@ -457,7 +458,7 @@ function levelAPhase2() {
     level = 2;
     spawnEnemyRnd = game.rnd.integerInRange(1500,2000) //entre 1 y 2 segundos
     spawnItemRnd = game.rnd.integerInRange(6000,8000) //entre 6 y 8 segundos
-    bugVelocity = 15;
+    bugVelocity = 0.30;
 
     //cambioSound.play();
     updateLevel();
@@ -471,7 +472,7 @@ function levelAPhase3() {
     level = 3;
     spawnEnemyRnd = game.rnd.integerInRange(1500,2000) //entre 1 y 2 segundos
     spawnItemRnd = game.rnd.integerInRange(6000,8000) //entre 6 y 8 segundos
-    bugVelocity = 20;
+    bugVelocity = 0.45;
 
     //cambioSound.play();
     updateLevel();
