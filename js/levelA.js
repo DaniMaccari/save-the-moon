@@ -442,24 +442,26 @@ function checkScore() {
         timerA = actualTime
         generalTime += actualTime
         fadeSceneOutBetweenScenes("levelB");
-        console.log("aASIDODSIODIOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOS")
+ 
     }
 
     else if (level == 2 && score >= 60) {
-        cambioSound.play(); // se llama en cada frame
-        console.log("MEOOWWW2")
+        cambioSound.play(); 
+
         levelAPhase3();
         
     }
 
     else  if (level == 1 && score >=40) {
-        console.log("MEOOWWW1")
+
         cambioSound.play();
         levelAPhase2();
     }
 
 
 }
+
+//CAMBIO DE NIVEL EN PARTE A
 
 function levelAPhase2() {
 
@@ -469,7 +471,7 @@ function levelAPhase2() {
     spawnItemRnd = game.rnd.integerInRange(6000,8000) //entre 6 y 8 segundos
     bugVelocity = 0.2;
 
-    //cambioSound.play();
+
     updateLevel();
     
 }
@@ -483,7 +485,7 @@ function levelAPhase3() {
     spawnItemRnd = game.rnd.integerInRange(6000,8000) //entre 6 y 8 segundos
     bugVelocity = 0.3;
 
-    //cambioSound.play();
+
     updateLevel();
     
 }

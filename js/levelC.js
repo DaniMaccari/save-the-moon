@@ -303,8 +303,6 @@ function checkScoreC() {
 function levelCPhase2() {
 
     level = 2;
-    //spawnEnemyRnd = game.rnd.integerInRange(1500,2000) //entre 1 y 2 segundos
-    //timerEnemy.loop(17500, spawn); //actualizar nuevo timer
     spawnItemRnd = game.rnd.integerInRange(6000,8000) //entre 6 y 8 segundos
     bugVelocity = 0.2;
 
@@ -316,7 +314,7 @@ function levelCPhase3() {
 
     level = 3;
     spawnEnemyRnd = game.rnd.integerInRange(1500,2000) //entre 1 y 2 segundos
-    //timerEnemy.loop(spawnEnemyRnd, spawn); //actualizar nuevo timer
+
     spawnItemRnd = game.rnd.integerInRange(6000,8000) //entre 6 y 8 segundos
     bugVelocity = 0.3;
 

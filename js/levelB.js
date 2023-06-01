@@ -74,17 +74,16 @@ function displayScreenB() {
 
 
     timerLifeItems = game.time.create(false);
-    //timerLifeItems.loop(spawnItemRnd,spawnLifeItems);
+
 
     spawnEnemyRnd = game.rnd.integerInRange(1500,2500) //entre 1 y 2'5 segundos
-    //spawnItemRnd = game.rnd.integerInRange(5000,8000) //entre 5 y 3 segundos
+
     
     
     timerEnemy = game.time.create(false);
     timerEnemy.loop(spawnEnemyRnd, spawn);
 
-    //timerLifeItems = game.time.create(false);
-    //timerLifeItems.loop(spawnItemRnd,spawnLifeItems);
+ 
 
 
     //--- num of threads ---
@@ -216,7 +215,7 @@ function checkScoreB() {
         timerB = actualTime
         generalTime += actualTime
         fadeSceneOutBetweenScenes("levelC");
-        console.log("aASIDODSIODIOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOS")
+
     }
 
     else if (level == 2 && score >= 80) {
