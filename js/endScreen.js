@@ -76,6 +76,12 @@ function createEnding() {
     tvForeground.scale.setTo(game.width/tvForeground.width, game.height/tvForeground.height)
 
 
+    //reset timers
+    timerA = 0
+    timerB = 0
+    timerC = 0
+    generalTime = 0
+
     startTime = game.time.now;
 
 }
